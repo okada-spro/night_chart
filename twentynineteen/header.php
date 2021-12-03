@@ -16,7 +16,7 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
-	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/my-style.css?<?php echo date('Ymd-Hi'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/my-style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/my-mail.css?<?php echo date('Ymd-Hi'); ?>" type="text/css" />
 		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/zoom-style.css?<?php echo date('Ymd-Hi'); ?>" type="text/css" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
