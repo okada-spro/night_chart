@@ -42,6 +42,18 @@ ul.header-dropmenu {
   display: table;
   table-layout: fixed;
 }
+@media screen and (max-width: 1024px){
+    /* 12/3 sp対応 作業中*/
+    ul.header-dropmenu {
+        width: 95%;
+    }
+}
+@media screen and (max-width: 560px){
+    /* 12/3 sp対応 作業中*/
+    ul.header-dropmenu {
+        width: 100%;
+    }
+}
 ul.header-dropmenu > li {
   position: relative;
   display: table-cell;
@@ -85,6 +97,23 @@ ul.header-dropmenu li:hover ul li:hover {
   background: #f8f8f8;
 }
 -->
+
+/* 12/6 sp対応 */
+.mode-pc{
+	display:block;
+}
+.mode-sp{
+	display:none;
+}
+@media screen and (max-width: 1024px){
+    .mode-pc,
+	ul.header-dropmenu li a.mode-pc{
+		display:none;
+	}
+	.mode-sp{
+		display:block;
+	}
+}
 </style>
 
 <script>
@@ -126,7 +155,8 @@ $(function(){
 			<ul class="header-dropmenu">
 
 				<li>
-					<a href="#">▼生徒&成績</a>
+					<a href="#" class="mode-pc">▼生徒&成績</a>
+					<a href="#" class="mode-sp">▼成績</a>
 					<ul>
 						<li>----生徒----</li>
 						<li><a href="<?php $id = 11; echo get_page_link( $id );?>">生徒一覧（管理者）</a></li>
@@ -138,7 +168,7 @@ $(function(){
 					</ul>
 				</li>
 				<li>
-					<a href="#">▼動画</a>
+					<a href="#" >▼動画</a>
 					<ul>
 						<li><a href="<?php $id = 129; echo get_page_link( $id );?>">登録（管理者）</a></li>
 						<li><a href="<?php $id = 54; echo get_page_link( $id );?>">一覧（管理者）</a></li>
@@ -147,7 +177,8 @@ $(function(){
 					</ul>
 				</li>
 				<li>
-					<a href="#">▼ザラ場指導・講義</a>
+					<a href="#" class="mode-pc">▼ザラ場指導・講義</a>
+					<a href="#" class="mode-sp">▼講義</a>
 					<ul>
 						<li>----レポート----</li>
 						<li><a href="<?php $id = 482; echo get_page_link( $id );?>">提出作成（管理者）</a></li>

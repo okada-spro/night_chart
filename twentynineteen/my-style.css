@@ -38,7 +38,7 @@
 @media screen and (max-width: 560px){
     /* 12/3 sp対応 */
     .page_div_box {
-        margin-top: 60%;
+        margin-top: 85%;
     }
 }
 
@@ -272,14 +272,6 @@ table.top-table {
     margin-top: 50px;
     margin-bottom: 50px;
 }
-@media screen and (max-width: 1024px){
-}
-@media screen and (max-width: 560px){
-    /* 12/3 sp対応 作業中*/
-    ul.header-dropmenu {
-        width: 100%;
-    }
-}
 
 table.header_table {
     margin: auto;
@@ -437,7 +429,7 @@ table.video-top-table td, th {
     .histroy-list-table_sarch{
         display: block;
         position: absolute;
-        top: 35%;
+        top: 200px;
         left: 5%;
     }
 
@@ -452,9 +444,9 @@ table.video-top-table td, th {
     }
 }
 @media screen and (max-width: 560px){
-    /* 12/3 tab対応 */
+    /* 12/6 sp対応 */
     .histroy-list-table_sarch{
-        top: 50%;
+        top: 300px;
         left: 5%;
     }
 }
@@ -463,6 +455,22 @@ table.video-top-table td, th {
 .pager{
     position: absolute;
     margin-left: 30%;
+}
+@media screen and (max-width: 1024px){
+    /* 12/6 tab対応 */
+    .pager button {
+        padding: 0.76rem 0.9rem;
+    }
+}
+@media screen and (max-width: 560px){
+    /* 12/6 sp対応 */
+    .pager{
+        margin-left: 20%;
+    }
+
+    .pager button {
+        padding: 0.76rem 0.5rem;
+    }
 }
 
 table.histroy-list-table {
@@ -473,12 +481,13 @@ table.histroy-list-table {
     width: 90%;
     font-weight: 900;
 }
+table.histroy-list-table .fixed_th_3 {
+    display: table-cell;
+}
 @media screen and (max-width: 1024px){
     /* 12/3 tab対応 */
     table.histroy-list-table {
         table-layout: fixed;
-        /* margin-left: 2%;
-        margin-right: 2%; */
     }
     table.histroy-list-table .fixed_th_1 {
         position: sticky;
@@ -493,9 +502,45 @@ table.histroy-list-table {
         position: sticky;
         left: calc(106px + 100px + 2px);
     }
+    table.histroy-list-table .fixed_th_3.mode-sp{
+        height: 78px;
+    }
     table.histroy-list-table .fixed_th_4 {
         position: sticky;
         left: calc(208px + 100px + 2px);
+    }
+}
+@media screen and (max-width: 560px){
+    /* 12/6 sp対応 */
+    table.histroy-list-table .fixed_th_1 {
+        position: sticky;
+        left: 4px;
+        width: 50px;
+    }
+    table.histroy-list-table .fixed_th_1 input{
+        width: 40px;
+        padding: 1.5rem 0;
+    }
+    table.histroy-list-table .fixed_th_2 {
+        position: sticky;
+        /* 先頭からセル幅＋ボーダー幅 */
+        left: calc(52px + 4px);
+        width: 31px;
+        /* 87px */
+    }
+    table.histroy-list-table .fixed_th_3 {
+        position: sticky;
+        left: calc(85px + 4px);
+        width: 100px;
+        /* 189px */
+    }
+        table.histroy-list-table .fixed_th_3.mode-sp{
+            height: 101px;
+        }
+    table.histroy-list-table .fixed_th_4 {
+        position: sticky;
+        left: calc(189px + 2px);
+        width: 65px;
     }
 }
 
@@ -506,6 +551,12 @@ table.histroy-list-table {
         /* 12/3 tab対応 */
         table.histroy-list-table td, th {
             width:100px;
+        }
+    }
+    @media screen and (max-width: 560px){
+        /* 12/6 sp対応 */
+        table.histroy-list-table td, th {
+            width:80px;
         }
     }
 
@@ -560,6 +611,13 @@ table.histroy-list-table {
     .same-user-select {
         width: 50%;
         margin-top: 5px;
+    }
+}
+@media screen and (max-width: 560px){
+    /* 12/3 tab対応 */
+    .same-user-select {
+        width: 80%;
+        height: 45px;
     }
 }
 
@@ -1001,3 +1059,9 @@ table.history-lsit-kougi-table {
         border-collapse: collapse;
     }
 
+@media screen and (max-width: 560px){
+    /* 12/6 sp対応 */
+    .site-footer{
+        margin-top: 50px;
+    }
+}

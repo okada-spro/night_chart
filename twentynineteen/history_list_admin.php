@@ -310,13 +310,20 @@ $(document).ready(function() {
             
                     <td class="fixed_th_2"><?php echo $key;?> </td>
                 
-                    <td class="fixed_th_3"><p><?php echo $user_info->last_name ;?>　<?php echo $user_info->first_name;?>(<?php echo $user_info->user_login;?>)</p></td>
+                    <td class="fixed_th_3 mode-pc"><p><?php echo $user_info->last_name ;?>　<?php echo $user_info->first_name;?>(<?php echo $user_info->user_login;?>)</p></td>
+                    <td class="fixed_th_3 mode-sp"><p><?php echo $user_info->last_name ;?>　<?php echo $user_info->first_name;?></p></td>
                     
                     <td class="fixed_th_4">
                         <?php if( $member_level == 0 && $member_type > 0){ //訓練生 ?>
                             <?php echo $users_data->checkMemberTypeStr($member_type);?>
                         <?php } ?>
-                        <?php echo $users_data->checkLevelStr($member_level);?>(<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
+                        <div class="mode-pc">
+                            <?php echo $users_data->checkLevelStr($member_level);?>(<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
+                        </div>
+                        <div class="mode-sp">
+                        <?php echo $users_data->checkLevelStr($member_level);?><br>
+                        (<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
+                        </div>
                     </td>
 
                     <?php for($i=$start_calendar;$i<=$end_calendar;$i++) {?>
