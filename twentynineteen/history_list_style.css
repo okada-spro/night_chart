@@ -6,7 +6,7 @@
         display: block;
         overflow-x: scroll;
         width: 95%;
-        table-layout: fixed;
+        /* table-layout: fixed; */
     }
         table.user-table .fixed_th_1{
             position: sticky;
@@ -35,22 +35,17 @@
     }
 
     /* テーブル幅変更 */
-    table.user-table {
-        table-layout: fixed;
+    .table.user-table {
+        display: table;
     }
-    table.user-table th.fixed_th_1,
-    table.user-table td.fixed_th_1{
-        position: sticky;
-        left: 4px;
-        width: 50px;
+    table.user-table .fixed_th_1{
+        position: unset;
     }
-    /* table.user-table .fixed_th_2{
-        position: sticky;
-        left: 110px;
-    } */
-    /* table.user-table .fixed_th_3{
-        position: sticky;
-        left: calc(220px - 3px);
-    } */
+    table.user-table .fixed_th_2{
+        position: unset;
+    }
+    table.user-table .fixed_th_3{
+        left: 0px;
+    }
 
 }
