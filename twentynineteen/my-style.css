@@ -484,8 +484,13 @@ table.histroy-list-table {
 table.histroy-list-table .fixed_th_3 {
     display: table-cell;
 }
+
+/* sp版名前 */
+td.fixed_th_3.mode-sp{
+    display: none;
+}
 @media screen and (max-width: 1024px){
-    /* 12/3 tab対応 */
+    /* 12/6 tab対応 */
     table.histroy-list-table {
         table-layout: fixed;
     }
@@ -509,9 +514,14 @@ table.histroy-list-table .fixed_th_3 {
         position: sticky;
         left: calc(208px + 100px + 2px);
     }
+
 }
 @media screen and (max-width: 560px){
     /* 12/6 sp対応 */
+    ul.header-dropmenu li a.mode-pc{
+        display: none;
+    }
+
     table.histroy-list-table .fixed_th_1 {
         position: sticky;
         left: 4px;

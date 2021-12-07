@@ -320,7 +320,7 @@ $(document).ready(function() {
                         <div class="mode-pc">
                             <?php echo $users_data->checkLevelStr($member_level);?>(<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
                         </div>
-                        <div class="mode-sp">
+                        <div class="mode-tab">
                         <?php echo $users_data->checkLevelStr($member_level);?><br>
                         (<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
                         </div>

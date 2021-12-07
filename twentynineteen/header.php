@@ -110,6 +110,11 @@ ul.header-dropmenu li:hover ul li:hover {
 	ul.header-dropmenu li a.mode-pc{
 		display:none;
 	}
+	.mode-tab{
+		display:block;
+	}
+}
+@media screen and (max-width: 560px){
 	.mode-sp{
 		display:block;
 	}
@@ -156,7 +161,7 @@ $(function(){
 
 				<li>
 					<a href="#" class="mode-pc">▼生徒&成績</a>
-					<a href="#" class="mode-sp">▼成績</a>
+					<a href="#" class="mode-tab">▼成績</a>
 					<ul>
 						<li>----生徒----</li>
 						<li><a href="<?php $id = 11; echo get_page_link( $id );?>">生徒一覧（管理者）</a></li>
@@ -178,7 +183,7 @@ $(function(){
 				</li>
 				<li>
 					<a href="#" class="mode-pc">▼ザラ場指導・講義</a>
-					<a href="#" class="mode-sp">▼講義</a>
+					<a href="#" class="mode-tab">▼講義</a>
 					<ul>
 						<li>----レポート----</li>
 						<li><a href="<?php $id = 482; echo get_page_link( $id );?>">提出作成（管理者）</a></li>
