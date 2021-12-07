@@ -17,6 +17,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/my-style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	
+	<?php // 追加スタイル?>
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/history_list_admin_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/history_list_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+
+
+
+
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/my-mail.css?<?php echo date('Ymd-Hi'); ?>" type="text/css" />
 		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/zoom-style.css?<?php echo date('Ymd-Hi'); ?>" type="text/css" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -102,7 +110,9 @@ ul.header-dropmenu li:hover ul li:hover {
 .mode-pc{
 	display:block;
 }
-.mode-sp{
+.mode-tab,
+.mode-sp,
+ul.header-dropmenu li a.mode-tab{
 	display:none;
 }
 @media screen and (max-width: 1024px){
@@ -110,7 +120,8 @@ ul.header-dropmenu li:hover ul li:hover {
 	ul.header-dropmenu li a.mode-pc{
 		display:none;
 	}
-	.mode-tab{
+	.mode-tab,
+	ul.header-dropmenu li a.mode-tab{
 		display:block;
 	}
 }

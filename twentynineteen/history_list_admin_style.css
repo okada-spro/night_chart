@@ -1,0 +1,194 @@
+/* 検索ボックス調整 */
+@media screen and (max-width: 1024px){
+    /* 12/3 tab対応 */
+
+    /* 成績管理者ステージング対応 */
+    .page-id-43 div.page_div_box {
+        margin-top: 350px;
+        overflow:scroll;
+    }
+}
+@media screen and (max-width: 560px){
+    /* 12/3 sp対応 */
+
+    /* 成績管理者ステージング対応 */
+    .page-id-43 .page_div_box {
+        margin-top: 85%;
+    }
+}
+
+
+
+
+/**************************
+ * 
+ *成績用
+ *
+ ****************************/
+ /* 12/3 テーブルヘッダ背景色追加 */
+ .tablesorter-header-inner{
+    background-color: white;
+}
+
+/* 検索ボックス */
+.histroy-list-table_sarch{
+    display:inline-flex
+}
+@media screen and (max-width: 1024px){
+    /* 12/3 tab対応 */
+    .histroy-list-table_sarch{
+        display: block;
+        position: absolute;
+        top: 200px;
+        left: 5%;
+    }
+
+    .histroy-list-table_sarch input[name='input_serch']{
+        width: 50%;
+        margin-top:30px;
+        margin-left: -10px;
+    }
+
+    input.same-user-select{
+        /* margin-bottom:30px; */
+    }
+}
+@media screen and (max-width: 560px){
+    /* 12/6 sp対応 */
+    .histroy-list-table_sarch{
+        top: 300px;
+        left: 5%;
+    }
+}
+
+/* ページ移動 */
+.pager{
+    position: absolute;
+    margin-left: 30%;
+}
+@media screen and (max-width: 1024px){
+    /* 12/6 tab対応 */
+    .pager button {
+        padding: 0.76rem 0.9rem;
+    }
+}
+@media screen and (max-width: 560px){
+    /* 12/6 sp対応 */
+    .pager{
+        margin-left: 20%;
+    }
+
+    .pager button {
+        padding: 0.76rem 0.5rem;
+    }
+}
+
+table.histroy-list-table {
+    margin: auto;
+    border: 2px #808080 solid;
+    text-align: center;
+    font-size: 0.6em;
+    width: 90%;
+    font-weight: 900;
+}
+table.histroy-list-table .fixed_th_3 {
+    display: table-cell;
+}
+
+/* sp版名前 */
+td.fixed_th_3.mode-sp{
+    display: none;
+}
+@media screen and (max-width: 1024px){
+    /* 12/6 tab対応 */
+    table.histroy-list-table {
+        table-layout: fixed;
+    }
+    table.histroy-list-table .fixed_th_1 {
+        position: sticky;
+        left: 4px;
+    }
+    table.histroy-list-table .fixed_th_2 {
+        position: sticky;
+        /* 先頭からセル幅＋ボーダー幅 */
+        left: calc(4px + 100px + 2px);
+    }
+    table.histroy-list-table .fixed_th_3 {
+        position: sticky;
+        left: calc(106px + 100px + 2px);
+    }
+    table.histroy-list-table .fixed_th_3.mode-sp{
+        height: 78px;
+    }
+    table.histroy-list-table .fixed_th_4 {
+        position: sticky;
+        left: calc(208px + 100px + 2px);
+    }
+
+}
+@media screen and (max-width: 560px){
+    /* 12/6 sp対応 */
+    ul.header-dropmenu li a.mode-pc{
+        display: none;
+    }
+
+    table.histroy-list-table .fixed_th_1 {
+        position: sticky;
+        left: 4px;
+        width: 50px;
+    }
+    table.histroy-list-table .fixed_th_1 input{
+        width: 40px;
+        padding: 1.5rem 0;
+    }
+    table.histroy-list-table .fixed_th_2 {
+        position: sticky;
+        /* 先頭からセル幅＋ボーダー幅 */
+        left: calc(52px + 4px);
+        width: 31px;
+        /* 87px */
+    }
+    table.histroy-list-table .fixed_th_3 {
+        position: sticky;
+        left: calc(85px + 4px);
+        width: 100px;
+        /* 189px */
+    }
+        table.histroy-list-table .fixed_th_3.mode-sp{
+            height: 101px;
+        }
+    table.histroy-list-table .fixed_th_4 {
+        position: sticky;
+        left: calc(189px + 2px);
+        width: 65px;
+    }
+}
+
+    table.histroy-list-table td, th {
+        border: 1px #808080 solid;
+    }
+    @media screen and (max-width: 1024px){
+        /* 12/3 tab対応 */
+        table.histroy-list-table td, th {
+            width:100px;
+        }
+    }
+    @media screen and (max-width: 560px){
+        /* 12/6 sp対応 */
+        table.histroy-list-table td, th {
+            width:80px;
+        }
+    }
+
+    table.histroy-list-table th {
+        text-align: center;
+      
+    }
+
+    table.histroy-list-table tr:nth-child(odd) td {
+        background: #DDFFFF;
+    }
+    /* 12/3 セル色追加 */
+    table.histroy-list-table tr:nth-child(even) td {
+        background: white;
+    }
