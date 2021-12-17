@@ -216,7 +216,7 @@ $(document).ready(function() {
 
 <div class="page_div_box">
     <p>
-    <div class="histroy-list-table_sarch" style="">
+    <div style="display:inline-flex">
         <form action="<?php  $id = 43; echo get_page_link( $id )."?years=" .$_GET["years"]; ?>" method="post">
             <select name="level_table"  class="same-user-select">
                 <?php foreach ($users_data->disp_only_level_array_data as $key => $value) {?>

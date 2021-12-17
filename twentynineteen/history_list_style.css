@@ -49,3 +49,14 @@
     }
 
 }
+
+/* 該当ユーザー以外のボタン表示　12/16追加 */
+.fixed_th_1 .no_push,
+.fixed_th_2 .no_push{
+    background-color: #bfdcea;
+}
+
+.fixed_th_1 input[type="button"]:hover ,
+.fixed_th_2 input[type="button"]:hover{
+    background-color: #bfdcea;
+}

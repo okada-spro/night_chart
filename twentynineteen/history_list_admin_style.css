@@ -4,7 +4,7 @@
 
     /* 成績管理者ステージング対応 */
     .page-id-43 div.page_div_box {
-        margin-top: 350px;
+        margin-top: 400px;
         overflow:scroll;
     }
 }
@@ -39,7 +39,7 @@
     .histroy-list-table_sarch{
         display: block;
         position: absolute;
-        top: 200px;
+        top: 300px;
         left: 5%;
     }
 
@@ -101,6 +101,14 @@ td.fixed_th_3.mode-sp{
 }
 @media screen and (max-width: 1024px){
     /* 12/6 tab対応 */
+    td.fixed_th_3.mode-pc{
+        display: none;          /* 12/16 表示修正 */
+    }
+
+    td.fixed_th_3.mode-sp{
+        display: block;
+    }
+
     table.histroy-list-table {
         table-layout: fixed;
     }
@@ -191,4 +199,19 @@ td.fixed_th_3.mode-sp{
     /* 12/3 セル色追加 */
     table.histroy-list-table tr:nth-child(even) td {
         background: white;
+    }
+
+
+    /* 12/17 タイトル */
+    @media screen and (max-width: 1024px){
+        /* 12/3 tab対応 */
+        .history_list_admin_title_area{
+            margin-top: -10px;
+        }
+    }
+    @media screen and (max-width: 560px){
+        /* 12/3 tab対応 */
+        .history_list_admin_title{
+            margin-left: 25%;
+        }
     }

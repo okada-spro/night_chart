@@ -126,10 +126,11 @@ function delete_check(){
      <table class="user-table">
         <colgroup span="11"></colgroup>
         <tr>
-            <?php if($user_id == $user->ID){?>
+            <?php //ユーザー以外でもボタン見えるように変更?>
+            <?php //if($user_id == $user->ID){?>
                 <th class="fixed_th_1">編集</th>
                 <th class="fixed_th_2">削除</th>
-            <?php } ?>
+            <?php //} ?>
             <th class="fixed_th_3">登録月</th>
             <th>月分益</th>
             <th>月分損</th>
@@ -191,6 +192,13 @@ function delete_check(){
                                 <input type="submit" value="削除">
                             </form>
                         </td>
+                        <?php }else{ ?>
+                            <td class="fixed_th_1">
+                                <input type="button" value="編集" class="no_push" disabled="disabled" >
+                            </td>
+                            <td class="fixed_th_2">
+                            <input type="button" value="削除" class="no_push">
+                            </td>
                         <?php } ?>
                         <td class="fixed_th_3"><?php echo $row["post_trade_year"];?>年<?php echo $row["post_trade_month"];?>月 </td>
                         <td><?php echo $row["post_profit"];?> 円 </td>
