@@ -1,0 +1,10 @@
+
+/* 12/23 テーブル調整 */
+@media screen and (max-width: 560px){
+    table.c-table th{
+        width: 150px;
+    }
+    table.c-table input{
+        width: 230px;
+    }
+}

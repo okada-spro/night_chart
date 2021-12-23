@@ -60,3 +60,16 @@
 .fixed_th_2 input[type="button"]:hover{
     background-color: #bfdcea;
 }
+
+/* 12/23 ザラバ回数欄調整 */
+@media screen and (max-width: 1024px){
+    .history-lsit-kougi-table{
+        width: 95.5%;
+    }
+}
+@media screen and (max-width: 560px){
+    .history-lsit-kougi-table{
+        overflow-x: scroll;
+        display: block;
+    }
+}
