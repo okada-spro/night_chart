@@ -4,19 +4,9 @@
 
     /* 成績管理者ステージング対応 */
     .page-id-43 div.page_div_box {
-        margin-top: 400px;
         overflow:scroll;
     }
 }
-@media screen and (max-width: 560px){
-    /* 12/3 sp対応 */
-
-    /* 成績管理者ステージング対応 */
-    .page-id-43 .page_div_box {
-        margin-top: 85%;
-    }
-}
-
 
 
 
@@ -32,39 +22,22 @@
 
 /* 検索ボックス */
 .histroy-list-table_sarch{
-    display:inline-flex
+    display:inline-flex;
+    position: sticky;
+    left: 0px;
 }
 @media screen and (max-width: 1024px){
-    /* 12/3 tab対応 */
+    /* 3/8 tab対応 */
     .histroy-list-table_sarch{
         display: block;
-        position: absolute;
-        top: 300px;
-        left: 5%;
-    }
-
-    .histroy-list-table_sarch input[name='input_serch']{
-        width: 50%;
-        margin-top:30px;
-        margin-left: -10px;
-    }
-
-    input.same-user-select{
-        /* margin-bottom:30px; */
     }
 }
-@media screen and (max-width: 560px){
-    /* 12/6 sp対応 */
-    .histroy-list-table_sarch{
-        top: 300px;
-        left: 5%;
-    }
-}
+
 
 /* ページ移動 */
 .pager{
     position: absolute;
-    margin-left: 30%;
+    margin-left: 35%;
 }
 @media screen and (max-width: 1024px){
     /* 12/6 tab対応 */

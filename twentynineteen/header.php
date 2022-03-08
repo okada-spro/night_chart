@@ -22,6 +22,8 @@
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/history_list_admin_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/history_list_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/input_history_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/user_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/header_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 
 
 
@@ -40,98 +42,6 @@
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<style type="text/css">
-<!--
-ul.header-dropmenu {
-  list-style: none;
-  width: 70%;
-  height: 40px;
-  margin: 0 auto;
-  padding: 0;
-  display: table;
-  table-layout: fixed;
-}
-@media screen and (max-width: 1024px){
-    /* 12/3 sp対応 作業中*/
-    ul.header-dropmenu {
-        width: 95%;
-    }
-}
-@media screen and (max-width: 560px){
-    /* 12/3 sp対応 作業中*/
-    ul.header-dropmenu {
-        width: 100%;
-    }
-}
-ul.header-dropmenu > li {
-  position: relative;
-  display: table-cell;
-  vertical-align: middle;
-  border: 1px solid #f8f8f8;
-  background: #CCCCCC; /* 背景色*/
-}
-ul.header-dropmenu li a {
-  display: block;
-  text-align: center;
-  line-height: 40px;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 14px;
-}
-ul.header-dropmenu li ul {
-  visibility: hidden;
-  width: 100%;
-  list-style: none;
-  position: absolute;
-  top: 100%;
-  left: -1px;
-  margin: 0;
-  padding: 0;
-  border: 1px solid #222; /* マウスオーバー時の枠線 */
-  border-top: none;
-}
-ul.header-dropmenu li:hover ul {
-  visibility: visible;
-}
-ul.header-dropmenu li ul li {
-  background: #fff;
-  transition: all .2s ease;
-}
-ul.header-dropmenu > li:hover {
-  background: #fff;
-  border: 1px solid #222; /* マウスオーバー時の枠線 */
-  border-bottom: none;
-}
-ul.header-dropmenu li:hover ul li:hover {
-  background: #f8f8f8;
-}
--->
-
-/* 12/6 sp対応 */
-.mode-pc{
-	display:block;
-}
-.mode-tab,
-.mode-sp,
-ul.header-dropmenu li a.mode-tab{
-	display:none;
-}
-@media screen and (max-width: 1024px){
-    .mode-pc,
-	ul.header-dropmenu li a.mode-pc{
-		display:none;
-	}
-	.mode-tab,
-	ul.header-dropmenu li a.mode-tab{
-		display:block;
-	}
-}
-@media screen and (max-width: 560px){
-	.mode-sp{
-		display:block;
-	}
-}
-</style>
 
 <script>
 $(function(){
@@ -205,6 +115,8 @@ $(function(){
 						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=1">ザラ場 登録</a></li>
 						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=2">株 講義登録</a></li>
 						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=3">FX 講義登録</a></li>
+						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=4">株 作業会登録</a></li>
+						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=5">FX 作業会登録</a></li>
 						<li><a href="<?php $id = 46; echo get_page_link( $id );?>">講義一覧（管理者）</a></li>
 						<li><a href="<?php $id = 185; echo get_page_link( $id );?>?category=1">講義管理</a></li>
 					</ul>
@@ -249,47 +161,84 @@ $(function(){
 
 
 
-			<table class="header_table">
+			<div class="mode-pc mode-tab">
+				<table class="header_table">
+						<?php if($member_level ==  UserClass::DOGA  && !$login_ban){ //動画会員?>
+							<tr>
+							<td><a class="header_link" href="<?php  echo esc_url( home_url( '/' ) );?>">TOP</a></td>
+							<td><a class="header_link" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
+							<td><a class="header_link" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></td>
+							<td><a class="header_link" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></td>
+							<td><a class="header_link" href="<?php echo wp_logout_url();?>">ログアウト</a></td>
+						</tr>
+						<tr>
+		
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td><div class="heder-disp-username"><p>ユーザー名(<?php echo $user->user_login; ?>)</p></div></td>
+		
+						</tr>
+		
+						<?php }else if(!$login_ban){ ?>
+		
+						<tr>
+							<td><a class="header_link" href="<?php  echo esc_url( home_url( '/' ) );?>">TOP</a></td>
+							<td><a class="header_link" href="<?php $id = 35; echo get_page_link( $id );?>">成績入力</a></td>
+							<td><a class="header_link" href="<?php $id = 37; echo get_page_link( $id );?>">成績一覧</a></td>
+							<td><a class="header_link" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
+							<td><a class="header_link" href="<?php $id = 463; echo get_page_link( $id );?>">レポート提出</a></td>
+						</tr>
+						<tr>
+		
+							<td><a class="header_link" href="<?php $id = 185; echo get_page_link( $id );?>">講義管理</a></td>
+							<td><a class="header_link" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></td>
+							<td><a class="header_link" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></td>
+							<td><a class="header_link" href="<?php echo wp_logout_url();?>">ログアウト</a></td>
+							<td><div class="heder-disp-username"><p>ユーザー名(<?php echo $user->user_login; ?>)</p></div></td>
+		
+						</tr>
+		
+						<?php } ?>
+				</table>
+				<?php //}?>
+			</div>
 
+			<?php //SP用?>
+			<div class="mode-sp">
+				<ul class="header-dropmenu">
 				<?php if($member_level ==  UserClass::DOGA  && !$login_ban){ //動画会員?>
-					<tr>
-					<td><a class="header_link" href="<?php  echo esc_url( home_url( '/' ) );?>">TOP</a></td>
-					<td><a class="header_link" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
-					<td><a class="header_link" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></td>
-					<td><a class="header_link" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></td>
-					<td><a class="header_link" href="<?php echo wp_logout_url();?>">ログアウト</a></td>
-				</tr>
-				<tr>
-
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td><div class="heder-disp-username"><p>ユーザー名(<?php echo $user->user_login; ?>)</p></div></td>
-
-				</tr>
-
+					<li>
+						<a href="#">▼メニュー</a>
+						<ul>
+							<li><a class="header_link" href="<?php  echo esc_url( home_url( '/' ) );?>">TOP</a></li>
+							<li><a class="header_link" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></li>
+							<li><a class="header_link" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></li>
+							<li><a class="header_link" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></li>
+							<li><a class="header_link" href="<?php echo wp_logout_url();?>">ログアウト</a></li>
+							<li><div class="heder-disp-username"><p>ユーザー名(<?php echo $user->user_login; ?>)</p></div></li>
+						</ul>
+					</li>
 				<?php }else if(!$login_ban){ ?>
-
-				<tr>
-					<td><a class="header_link" href="<?php  echo esc_url( home_url( '/' ) );?>">TOP</a></td>
-					<td><a class="header_link" href="<?php $id = 35; echo get_page_link( $id );?>">成績入力</a></td>
-					<td><a class="header_link" href="<?php $id = 37; echo get_page_link( $id );?>">成績一覧</a></td>
-					<td><a class="header_link" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
-					<td><a class="header_link" href="<?php $id = 463; echo get_page_link( $id );?>">レポート提出</a></td>
-				</tr>
-				<tr>
-
-					<td><a class="header_link" href="<?php $id = 185; echo get_page_link( $id );?>">講義管理</a></td>
-					<td><a class="header_link" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></td>
-					<td><a class="header_link" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></td>
-					<td><a class="header_link" href="<?php echo wp_logout_url();?>">ログアウト</a></td>
-					<td><div class="heder-disp-username"><p>ユーザー名(<?php echo $user->user_login; ?>)</p></div></td>
-
-				</tr>
-
+					<li>
+						<a href="#">▼メニュー</a>
+						<ul>
+							<li><a class="header_link" href="<?php  echo esc_url( home_url( '/' ) );?>">TOP</a></li>
+							<li><a class="header_link" href="<?php $id = 35; echo get_page_link( $id );?>">成績入力</a></li>
+							<li><a class="header_link" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></li>
+							<li><a class="header_link" href="<?php $id = 463; echo get_page_link( $id );?>">レポート提出</a></li>
+							<li><a class="header_link" href="<?php $id = 185; echo get_page_link( $id );?>">講義管理</a></li>
+							<li><a class="header_link" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></li>
+							<li><a class="header_link" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></li>
+							<li><a class="header_link" href="<?php echo wp_logout_url();?>">ログアウト</a></li>
+							<li><div class="heder-disp-username"><p>ユーザー名(<?php echo $user->user_login; ?>)</p></div></li>
+						</ul>
+					</li>
+				</ul>
 				<?php } ?>
-			</table>
+
+
 			<?php }?>
 		</div>
 
