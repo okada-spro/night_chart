@@ -17,7 +17,7 @@
  ****************************/
  /* 12/3 テーブルヘッダ背景色追加 */
  .tablesorter-header-inner{
-    background-color: white;
+    /* background-color: white; */
 }
 
 /* 検索ボックス */
