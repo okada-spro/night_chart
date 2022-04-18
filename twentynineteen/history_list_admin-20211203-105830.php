@@ -19,15 +19,15 @@ if(current_user_can('administrator'))
 
 
     //ユーザーの全データを取得
-	$users = get_users( array('orderby'=>'ID','order'=>'ASC') );
+	$users = get_users( array('orderby'=>'ID','order'=>'ASC') ); 
 
     //年選択
     if(!isset($_GET["years"])){
 
 ?>
 
-    <?php
-
+    <?php 
+        
         // データ取得クエリ実行(全データ取得)
         $input_data->getTradeHistoryRowAll();
 
@@ -65,8 +65,8 @@ if(current_user_can('administrator'))
 ?>
 
 
-         <?php
-
+         <?php 
+        
             // データ取得クエリ実行(全データ取得)
             $input_data->getTradeHistoryRowYear();
 
@@ -87,8 +87,8 @@ if(current_user_can('administrator'))
                 $input_disp_table = $_POST['disp_table'];
 
                 update_user_meta($user->ID, 'grades-most-page-disp', $input_disp_table);
-            }
-
+            } 
+          
 
              //生存or離脱
             if(isset($_POST['arrive_table']) )
@@ -97,7 +97,7 @@ if(current_user_can('administrator'))
 
                 update_user_meta($user->ID, 'grades-status-page-disp', $input_arrive_table);
             }
-
+           
 
             //訓練生or門下生
             if(isset($_POST['level_table']) )
@@ -106,8 +106,8 @@ if(current_user_can('administrator'))
 
                 update_user_meta($user->ID, 'grades-level-page-disp', $disp_level_table);
             }
-
-
+            
+            
              //提出者、未提出
             if(isset($_POST['is_trade_table']) )
             {
@@ -115,7 +115,7 @@ if(current_user_can('administrator'))
 
                 update_user_meta($user->ID, 'trade-submission-disp', $disp_submission_table);
             }
-
+           
 
 
             //表示配列から実際の表示用の変数に入れ返る
@@ -190,7 +190,7 @@ if(current_user_can('administrator'))
                 //優先はPOST
                 $serch_str =  $_POST["input_serch"];
             }
-
+   
            // var_dump($trade_array);
 
         ?>
@@ -202,7 +202,7 @@ $(document).ready(function() {
         .tablesorter({})
         .tablesorterPager({
             container: $(".pager"),
-            size: 200,
+            size: 100,
     });
 });
 </script>
@@ -210,13 +210,13 @@ $(document).ready(function() {
 
 <div class="history_list_admin_title_area">
     <div class="history_list_admin_title">
-        <div class="history_list_admin_title_str"><?php echo  $_GET["years"];?>年度　成績一覧</div><div class="history_list_admin_title_year_str">(<a href="<?php $id = 43; echo get_page_link( $id );?>">別の年を選択</a>)</div>
+        <div class="history_list_admin_title_str">成績一覧</div><div class="history_list_admin_title_year_str">(<a href="<?php $id = 43; echo get_page_link( $id );?>">別の年を選択</a>)</div>
     </div>
 </div>
 
 <div class="page_div_box">
     <p>
-    <div class="histroy-list-table_sarch" style="">
+    <div style="display:inline-flex">
         <form action="<?php  $id = 43; echo get_page_link( $id )."?years=" .$_GET["years"]; ?>" method="post">
             <select name="level_table"  class="same-user-select">
                 <?php foreach ($users_data->disp_only_level_array_data as $key => $value) {?>
@@ -260,26 +260,24 @@ $(document).ready(function() {
     <table class="histroy-list-table">
         <thead>
         <tr>
-            <th class="fixed_th_1" width="70">履歴</th>
-            <th class="fixed_th_2" width="70">ID</th>
-            <th class="fixed_th_3">ユーザー名</th>
-            <th width="150" class="fixed_th_4">会員</th>
+            <th width="70">履歴</th>
+            <th width="70">ID</th>
+            <th>ユーザー名</th>
+            <th width="150" class="fixed_th">会員</th>
             <?php for($i=$start_calendar;$i<=$end_calendar;$i++) {?>
                 <th style="min-width:100px"><?php echo $i;?>月</th>
             <?php } ?>
             <th width="70">詳細</th>
         </tr>
         </thead>
-
-        <?php //var_dump($trade_array); ?>
         <?php foreach ($trade_array  as $key => $value) {?>
 
             <?php $user_info = get_userdata( $key ); //var_dump($user_info); echo "<br/><br/>";?>
 
-
+         
             <?php $total_profit = 0;$total_interest = 0; ?>
 
-            <?php
+            <?php  
                 $member_level = get_the_author_meta('member_level',$key);
                 $member_type = get_the_author_meta('member_type',$key);
             ?>
@@ -289,8 +287,8 @@ $(document).ready(function() {
             <?php  if($Withdrawal == "" || $Withdrawal == NULL){$Withdrawal = 0;}?>
 
 
-            <?php $disp_row = false;
-
+            <?php $disp_row = false; 
+            
                   //全て表示
                  if(  $disp_level_table == 99  && $input_level_table == UserClass::ALL_DISP_CONST){
                      $disp_row = true;
@@ -311,7 +309,7 @@ $(document).ready(function() {
                         $disp_row = true; //動画会員を非表示
                  }
                  else if( $disp_level_table == 6 && $member_level != UserClass::DOGA && $member_type != 2){ //株のみ表示
-                        $disp_row = true;
+                        $disp_row = true; 
                  }
                  else if( $disp_level_table == 7 && $member_level != UserClass::DOGA && $member_type != 1){ //FXのみ表示
                         $disp_row = true;
@@ -339,17 +337,13 @@ $(document).ready(function() {
                         $disp_row = false;
                     }
                  }
-                 else  if($disp_submission_table == 2 ) //全表示
-                 {
-                   
-                 }
-
+            
             ?>
+            
 
+            <?php 
 
-            <?php
-
-
+         
                 //最後にユーザー名を検索
                 if($serch_str !="")
                 {
@@ -371,7 +365,7 @@ $(document).ready(function() {
             <?php if($disp_row){?>
 
                 <tr>
-                    <td class="fixed_th_1">
+                    <td>
                         <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post" target="_blank">
                             <input type="hidden" name="years" value="<?php echo $_GET["years"];?>">
                             <input type="hidden" name="id" value="<?php echo $key;?>">
@@ -380,28 +374,21 @@ $(document).ready(function() {
                             <input type="submit" value="確認">
                         </form>
                     </td>
-
-                    <td class="fixed_th_2"><?php echo $key;?> </td>
-
-                    <td class="fixed_th_3 mode-pc"><p><?php echo $user_info->last_name ;?>　<?php echo $user_info->first_name;?>(<?php echo $user_info->user_login;?>)</p></td>
-                    <td class="fixed_th_3 mode-sp"><p><?php echo $user_info->last_name ;?>　<?php echo $user_info->first_name;?></p></td>
-
-                    <td class="fixed_th_4">
+            
+                    <td><?php echo $key;?> </td>
+                
+                    <td><p><?php echo $user_info->last_name ;?>　<?php echo $user_info->first_name;?>(<?php echo $user_info->user_login;?>)</p></td>
+                    
+                    <td>
                         <?php if( $member_level == 0 && $member_type > 0){ //訓練生 ?>
                             <?php echo $users_data->checkMemberTypeStr($member_type);?>
                         <?php } ?>
-                        <div class="mode-pc">
-                            <?php echo $users_data->checkLevelStr($member_level);?>(<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
-                        </div>
-                        <div class="mode-tab">
-                        <?php echo $users_data->checkLevelStr($member_level);?><br>
-                        (<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
-                        </div>
+                        <?php echo $users_data->checkLevelStr($member_level);?>(<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
                     </td>
 
-                    <?php  for($i=$start_calendar;$i<=$end_calendar;$i++) {?>
+                    <?php for($i=$start_calendar;$i<=$end_calendar;$i++) {?>
                         <?php if(array_key_exists($i,$value["days"])){?>
-                        <?php
+                        <?php 
                             $balance = $value["days"][$i]["balance"];
 
                             if($balance != 0)
@@ -425,7 +412,7 @@ $(document).ready(function() {
                                     <?php if($interest < 0){?>
                                         <font color="red"><?php echo $interest;?> </font>％
                                     <?php }else{ ?>
-                                        <?php echo $interest;?> ％
+                                        <?php echo $interest;?> ％ 
                                     <?php } ?>
                                 )
                             </p>
@@ -452,7 +439,7 @@ $(document).ready(function() {
             <button type='button' class='prev'>&lt;</button>
 
             <span class="pagedisplay" ></span>
-
+          
 
             <button type='button' class='next'>&gt;</button>
             <button type='button' class='last'>&gt;&gt;</button>

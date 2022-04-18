@@ -18,6 +18,8 @@ if(current_user_can('administrator'))
     $input_data->init();
 
 
+    //ユーザーの全データを取得
+	$users = get_users( array('orderby'=>'ID','order'=>'ASC') ); 
 
     //年選択
     if(!isset($_GET["years"])){
@@ -73,9 +75,11 @@ if(current_user_can('administrator'))
                $trade_array = $input_data->setUserTradeData($_GET["years"]);
             }
 
-            $input_disp_table =  get_user_meta($user->ID, 'grades-most-page-disp',true );;
-            $input_arrive_table =  get_user_meta($user->ID, 'grades-status-page-disp',true );;
-            $disp_level_table =  get_user_meta($user->ID, 'grades-level-page-disp',true );;
+            $input_disp_table =  get_user_meta($user->ID, 'grades-most-page-disp',true );
+            $input_arrive_table =  get_user_meta($user->ID, 'grades-status-page-disp',true );
+            $disp_level_table =  get_user_meta($user->ID, 'grades-level-page-disp',true );
+            $disp_submission_table =  get_user_meta($user->ID, 'trade-submission-disp',true );;
+
 
              //直近表示
             if(isset($_POST['disp_table']) )
@@ -103,7 +107,17 @@ if(current_user_can('administrator'))
                 update_user_meta($user->ID, 'grades-level-page-disp', $disp_level_table);
             }
             
-             
+            
+             //提出者、未提出
+            if(isset($_POST['is_trade_table']) )
+            {
+                $disp_submission_table = $_POST['is_trade_table'];
+
+                update_user_meta($user->ID, 'trade-submission-disp', $disp_submission_table);
+            }
+           
+
+
             //表示配列から実際の表示用の変数に入れ返る
             if($disp_level_table <= 2){ //訓練生
                 $input_level_table = UserClass::KUNRENSEI;
@@ -128,36 +142,43 @@ if(current_user_can('administrator'))
             $end_calendar = 12;
 
             //今月
+            $now_year = date('Y');
+
+            //今月
             $now_month = date('m');
 
-            if($input_disp_table == 0)
+            if( $_GET["years"] == $now_year )
             {
-                //3ヶ月
-                $end_calendar = $now_month;
 
-                $start_calendar = ($end_calendar - 3);
-
-
-                if($start_calendar < 0)
+                if($input_disp_table == 0)
                 {
-                    $end_calendar += $start_calendar *-1;
+                    //3ヶ月
+                    $end_calendar = $now_month;
 
-                    $start_calendar = 1;
+                    $start_calendar = ($end_calendar - 3);
+
+
+                    if($start_calendar < 0)
+                    {
+                        $end_calendar += $start_calendar *-1;
+
+                        $start_calendar = 1;
+                    }
                 }
-            }
-            else if($input_disp_table == 1)
-            {
-                //6ヶ月
-                $end_calendar = $now_month;
-
-                $start_calendar = ($end_calendar - 6);
-
-
-                if($start_calendar < 0)
+                else if($input_disp_table == 1)
                 {
-                    $end_calendar += $start_calendar *-1;
+                    //6ヶ月
+                    $end_calendar = $now_month;
 
-                    $start_calendar = 1;
+                    $start_calendar = ($end_calendar - 6);
+
+
+                    if($start_calendar < 0)
+                    {
+                        $end_calendar += $start_calendar *-1;
+
+                        $start_calendar = 1;
+                    }
                 }
             }
 
@@ -170,7 +191,7 @@ if(current_user_can('administrator'))
                 $serch_str =  $_POST["input_serch"];
             }
    
-            //var_dump($trade_array);
+           // var_dump($trade_array);
 
         ?>
 
@@ -184,11 +205,19 @@ $(document).ready(function() {
             size: 100,
     });
 });
+
 </script>
+
+
+<div class="history_list_admin_title_area">
+    <div class="history_list_admin_title">
+        <div class="history_list_admin_title_str">成績一覧</div><div class="history_list_admin_title_year_str">(<a href="<?php $id = 43; echo get_page_link( $id );?>">別の年を選択</a>)</div>
+    </div>
+</div>
 
 <div class="page_div_box">
     <p>
-    <div class="histroy-list-table_sarch" style="">
+    <div class="histroy-list-table_sarch">
         <form action="<?php  $id = 43; echo get_page_link( $id )."?years=" .$_GET["years"]; ?>" method="post">
             <select name="level_table"  class="same-user-select">
                 <?php foreach ($users_data->disp_only_level_array_data as $key => $value) {?>
@@ -202,11 +231,23 @@ $(document).ready(function() {
                 <?php } ?>
             </select>
 
-            <select name="disp_table"  class="same-user-select">
-                <?php foreach ($input_data->disp_array_data as $key => $value) {?>
-                   <option value="<?php echo $key;?>" <?php if($input_disp_table == $key){ echo "selected";}?>>　<?php echo $_GET["years"]."年 " .$value;?></option>
+            <?php if( $_GET["years"] == $now_year ){ //今年以外は全部表示 ?>
+                <select name="disp_table"  class="same-user-select">
+                    <?php foreach ($input_data->disp_array_data as $key => $value) {?>
+                        <option value="<?php echo $key;?>" <?php if($input_disp_table == $key){ echo "selected";}?>>　<?php echo $_GET["years"]."年 " .$value;?></option>
+                    <?php } ?>
+                </select>
+             <?php }else{  ?>
+                 <input type="hidden"  name="disp_table" value="<?php echo 2;?>"></input>
+             <?php }  ?>
+
+
+             <select name="is_trade_table"  class="same-user-select">
+                <?php foreach ($input_data->is_trade_array_data as $key => $value) {?>
+                   <option value="<?php echo $key;?>" <?php if($disp_submission_table == $key){ echo "selected";}?>><?php echo $value;?></option>
                 <?php } ?>
             </select>
+
             <input type="submit" value="表示変更"   class="same-user-select">
         </form>
 
@@ -250,7 +291,7 @@ $(document).ready(function() {
             <?php $disp_row = false; 
             
                   //全て表示
-                 if(  $disp_level_table != 5  &&  $input_level_table == UserClass::ALL_DISP_CONST){
+                 if(  $disp_level_table == 99  && $input_level_table == UserClass::ALL_DISP_CONST){
                      $disp_row = true;
                  }
                  else if( $input_level_table == $member_level && $input_level_table == UserClass::MONKASEI  ){ //門下生の時
@@ -266,10 +307,36 @@ $(document).ready(function() {
                      $disp_row = true;
                  }
                  else if( $disp_level_table == 5 && $member_level != UserClass::DOGA ){ //動画会員を非表示
-                        $is_disp = true; //動画会員を非表示
+                        $disp_row = true; //動画会員を非表示
                  }
+                 else if( $disp_level_table == 6 && $member_level != UserClass::DOGA && $member_type != 2){ //株のみ表示
+                        $disp_row = true; 
+                 }
+                 else if( $disp_level_table == 7 && $member_level != UserClass::DOGA && $member_type != 1){ //FXのみ表示
+                        $disp_row = true;
+                 }
+
                  else if( $input_level_table == UserClass::DOGA && $member_level == UserClass::DOGA ){ //動画会員
-                        $is_disp = true;
+                        $disp_row = true;
+                 }
+                 else{
+                      //echo $key;
+                 }
+
+                 //提出未提出
+                 if($disp_submission_table == 0 && !$value["disp"]) //提出者表示（未提出非表示)
+                 {
+                    if($disp_row)
+                    {
+                        $disp_row = false;
+                    }
+                 }
+                 else  if($disp_submission_table == 1 && $value["disp"]) //未提出者表示（提出非表示)
+                 {
+                    if($disp_row)
+                    {
+                        $disp_row = false;
+                    }
                  }
             
             ?>
@@ -300,7 +367,7 @@ $(document).ready(function() {
 
                 <tr>
                     <td class="fixed_th_1">
-                        <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post">
+                        <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post" target="_blank">
                             <input type="hidden" name="years" value="<?php echo $_GET["years"];?>">
                             <input type="hidden" name="id" value="<?php echo $key;?>">
                             <input type="hidden" name="is_list" value="checklist">
@@ -328,9 +395,9 @@ $(document).ready(function() {
                     </td>
 
                     <?php for($i=$start_calendar;$i<=$end_calendar;$i++) {?>
-                        <?php if(array_key_exists($i,$value)){?>
+                        <?php if(array_key_exists($i,$value["days"])){?>
                         <?php 
-                            $balance = $value[$i]["balance"];
+                            $balance = $value["days"][$i]["balance"];
 
                             if($balance != 0)
                             {
@@ -338,7 +405,7 @@ $(document).ready(function() {
 
                             }
 
-                            $interest = $value[$i]["interest"];
+                            $interest = $value["days"][$i]["interest"];
                             $total_profit += $balance;
                             $total_interest += $interest;
                         ?>
@@ -362,7 +429,7 @@ $(document).ready(function() {
                             <td>0</td>
                         <?php } ?>
                     <?php } ?>
-                    <td>
+                     <td>
                         <form action="<?php  $id = 11; echo get_page_link( $id );?>" method="post" target="_blank">
                             <input type="hidden" name="id" value="<?php echo $key;?>">
                             <input type="hidden" name="is_details" value="details">

@@ -22,7 +22,8 @@
 
 /* 検索ボックス */
 .histroy-list-table_sarch{
-    display:inline-flex;
+    /* display:inline-flex; */
+    display: block;
     position: sticky;
     left: 0px;
 }
