@@ -1,0 +1,17 @@
+@media screen and (max-width: 1024px){
+    /* 4/19 tab対応 */
+    .videoviewing_list .fixed_th_1{
+        position: sticky;
+    }
+
+    .videoviewing_list .index_button{
+        margin-top: 100px;
+    }
+}
+@media screen and (max-width: 560px){
+    .videoviewing_list .fixed_th_1{
+        position: sticky;
+        left: 4px;
+    }
+
+}

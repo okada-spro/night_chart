@@ -123,7 +123,7 @@ function delete_check(){
        
         
     
-     <table class="user-table">
+     <table class="user-table history_list">
         <colgroup span="11"></colgroup>
         <tr>
             <?php //ユーザー以外でもボタン見えるように変更?>

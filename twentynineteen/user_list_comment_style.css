@@ -24,27 +24,4 @@
         min-height: 150px;
         display: block;
     }
-
-
-
-    /* .index_button{
-        width: 350px;
-        height: 75px;
-        padding: 20px;
-    } */
-
-    /* テーブル幅変更 */
-    /* .table.lecture-comment-table  {
-        display: table;
-    }
-    table.lecture-comment-table  .fixed_th_1{
-        position: unset;
-    }
-    table.lecture-comment-table  .fixed_th_2{
-        left: 0px;
-    }
-    table.lecture-comment-table  .fixed_th_3{
-        left: calc(84px + 4px);
-    } */
-
 }
