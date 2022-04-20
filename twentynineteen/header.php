@@ -29,6 +29,7 @@
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/videoviewing_input_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/videoviewing_list_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/videoviewing_make_category_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/videoviewing_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 
 
 

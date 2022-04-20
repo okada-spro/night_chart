@@ -1,0 +1,23 @@
+@media screen and (max-width: 1024px){
+    /* 4/20 */
+    .calendar-container{
+        width: 90%;
+    }
+
+    .vimeo-top-table-container{
+        width: 45%;
+        margin: 0 auto;
+    }
+
+
+}
+@media screen and (max-width: 560px){
+    .vimeo-top-table-container{
+        width: 80%;
+        margin: 0 auto;
+    }
+    .calendar-container table.calendar{
+        width: auto;
+    }
+}
+
