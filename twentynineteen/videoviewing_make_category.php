@@ -109,7 +109,7 @@ function delete_check(){
    
 <?php }?>
 
-<div class="page_div_box">
+<div class="page_div_box  videoviewing_make_category">
     
 
      <p>
@@ -169,15 +169,15 @@ function delete_check(){
     <table class="user-table-two">
         <colgroup span="3"></colgroup>
         <tr>
-            <th>編集</th>
-            <th>削除</th>
+            <th class="fixed_th_1">編集</th>
+            <th class="fixed_th_2">削除</th>
             <th>ID</th>
             <th>カテゴリー名</th>
             <th>タイプ</th>
         </tr>
         <?php foreach ($input_data->view_category_row as $row) { ?>
         <tr>
-            <td>
+            <td  class="fixed_th_1">
                 <?php if(($row->ID > 1 && $row->ID != 7)){ ?>
                     <form action="<?php  $id = 209; echo get_page_link( $id );?>" method="post">
                         <input type="hidden" name="id" value="<?php echo $row->ID;?>">
@@ -188,7 +188,7 @@ function delete_check(){
                     </form>
                 <?php } ?>
             </td>
-             <td>
+             <td class="fixed_th_2">
                 <?php if($row->ID > 1 && $row->ID != 7){ ?>
                     <form action="<?php  $id = 209; echo get_page_link( $id );?>" method="post"  onSubmit="return delete_check()">
                         <input type="hidden" name="id" value="<?php echo $row->ID;?>">

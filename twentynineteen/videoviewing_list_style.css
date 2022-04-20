@@ -13,5 +13,7 @@
         position: sticky;
         left: 4px;
     }
-
+    .videoviewing_list .index_button{
+        margin-top: 150px;
+    }
 }
