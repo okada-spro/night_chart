@@ -150,7 +150,8 @@ function clickBtn1(){
             </tr>
             <tr>
                 <th><font color="red">講義締切時間</font></th>
-                <td><input type="datetime-local" name="input_zoom_deadline"  id="input_zoom_deadline" value="<?php echo $input_data->changeSetData($input_data->getZoomData("input_zoom_deadline"));?>" ></input>*締切時刻です</td>
+                <td><input type="datetime-local" name="input_zoom_deadline"  id="input_zoom_deadline" value="<?php echo $input_data->changeSetData($input_data->getZoomData("input_zoom_deadline"));?>" ></input>
+                <br>*締切時刻です</td>
             </tr>
             <tr>
                 <th>講義開始予定時間</th>
