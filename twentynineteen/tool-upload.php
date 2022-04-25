@@ -332,7 +332,7 @@ $(document).ready(function() {
     });
 });
 </script>
-<div class="page_div_box">
+<div class="page_div_box tool-upload">
     <p>
         <form action="<?php  $id = 537; echo get_page_link( $id );?>" method="post">
             <select name="sort_table"  class="same-user-select">
@@ -349,8 +349,8 @@ $(document).ready(function() {
     <table class="user-table-two">
         <thead>
         <tr>
-            <th>編集</th>
-            <th>削除</th>
+            <th class="fixed_th_1">編集</th>
+            <th class="fixed_th_2">削除</th>
             <th>ID</th>
             <th>表示名</th>
             <th>カテゴリ</th>
@@ -362,14 +362,14 @@ $(document).ready(function() {
        
 
         <tr >
-            <td>
+            <td class="fixed_th_1">
                 <form  action="<?php  $id = 537; echo get_page_link( $id );?>?type=upload" method="POST">
                     <input type="hidden" name="input_id" value="<?php echo $value["input_id"]; ?>" />
                     <input type="hidden" name="edit" value="edit" />
                     <input type="submit" value="編集" />
                 </form>
             </td>
-            <td>
+            <td class="fixed_th_2">
                  <form  action="<?php  $id = 537; echo get_page_link( $id );?>" method="POST"   onSubmit="return delete_check()">
                     <input type="hidden" name="input_id" value="<?php echo $value["input_id"]; ?>" />
                     <input type="hidden" name="delete" value="delete" />
