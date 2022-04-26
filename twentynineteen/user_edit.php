@@ -133,125 +133,124 @@ function Check(){
   
 <?php }?>
 
-<form action="<?php  $id = 24; echo get_page_link( $id );?>" method="post"  name="input_form"  onsubmit="return Check()">
+<div class="user-edit-area">
 
- <input type="hidden" name="data_updata" value="data_updata">
-
-<table  class="user_edit_table">
-<tr>
-	<td  colspan="2">
-		<p>
-		<div class="user_edit_title">
-			登録情報の編集
-		</div>
-		</p>
-	</td>
+	<form action="<?php  $id = 24; echo get_page_link( $id );?>" method="post"  name="input_form"  onsubmit="return Check()">
 	
-</tr>
-<tr>
-	<td>
-		<div>苗字<font color="red">＊</font>：
-		<div><input type="text"  name="last_name" value="<?php echo $last_name;?>"></input>	</div>
-	</td>
-	<td>
+	 <input type="hidden" name="data_updata" value="data_updata">
+	
+	<table  class="user_edit_table">
+	<tr>
+		<td  colspan="2">
+			<p>
+			<div class="user_edit_title">
+				登録情報の編集
+			</div>
+			</p>
+		</td>
 		
-		<div>名前<font color="red">＊</font>：</div>
-		<div><input type="text"  name="first_name" value="<?php echo $first_name;?>"></input></div>
-	</td>
-</tr>
-
-<tr>
-	<td>
-		<div>苗字(フリガナ)<font color="red">＊</font>：</div>
-		<div>	<input type="text"  name="last_name_furi" value="<?php echo $last_name_furi;?>"></input></div>
-	</td>
-	<td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div>苗字<font color="red">＊</font>：
+			<div><input type="text"  name="last_name" value="<?php echo $last_name;?>"></input>	</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<div>名前<font color="red">＊</font>：</div>
+			<div><input type="text"  name="first_name" value="<?php echo $first_name;?>"></input></div>
+		</td>
+	</tr>
 	
-		<div>名前（フリガナ）<font color="red">＊</font>：</div>
-		<div><input type="text"  name="first_name_furi" value="<?php echo $first_name_furi;?>"></input></div>
-	</td>
-</tr>
-
-
-<tr>
-	<td>
-		<div>郵便番号<font color="red">＊</font>：</div>
-		<div><input type="text"  name="billing_postcode" value="<?php echo $billing_postcode;?>"></input></div>
-	</td>
-	<td>
+	<tr>
+		<td  colspan="2">
+			<div>苗字(フリガナ)<font color="red">＊</font>：</div>
+			<div>	<input type="text"  name="last_name_furi" value="<?php echo $last_name_furi;?>"></input></div>
+		</td>
+	</tr>
+	<tr>
+		<td  colspan="2">
+			<div>名前（フリガナ）<font color="red">＊</font>：</div>
+			<div><input type="text"  name="first_name_furi" value="<?php echo $first_name_furi;?>"></input></div>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td  colspan="2">
+			<div>郵便番号<font color="red">＊</font>：</div>
+			<div><input type="text"  name="billing_postcode" value="<?php echo $billing_postcode;?>"></input></div>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td  colspan="2">
+			<div>住所<font color="red">＊</font>：</div>
+			<div><input type="text"  name="billing_address_1" value="<?php echo $billing_address_1;?>" style="width:100%;"></input></div>
+		</td>
 		
-	</td>
-</tr>
-
-
-<tr>
-	<td  colspan="2">
-		<div>住所<font color="red">＊</font>：</div>
-		<div><input type="text"  name="billing_address_1" value="<?php echo $billing_address_1;?>" style="width:100%;"></input></div>
-	</td>
+	</tr>
 	
-</tr>
-
-<tr>
-	<td  colspan="2">
-		<div>マンション名、部屋番号等：</div>
-		<div><input type="text"  name="billing_address_2" value="<?php echo $billing_address_2;?>" style="width:100%;"></input></div>
-	</td>
-	
-</tr>
-
-<tr>
-	<td>
-		<div>電話番号<font color="red">＊</font>：</div>
-		<div><input type="text"  name="billing_phone" value="<?php echo $billing_phone;?>"></input></div>
-	</td>
-	<td>
+	<tr>
+		<td  colspan="2">
+			<div>マンション名、部屋番号等：</div>
+			<div><input type="text"  name="billing_address_2" value="<?php echo $billing_address_2;?>" style="width:100%;"></input></div>
+		</td>
 		
-	</td>
-</tr>
-
-
-<tr>
-	<td colspan="2">
-		<div>メール<font color="red">＊</font>：</div>
-		<div><input type="text"  name="user_email" value="<?php echo $user_email;?>" style="width:100%;"></input></div>
-	</td>
+	</tr>
 	
-</tr>
-
-
-<tr>
-	<td  colspan="2">
-		<div>メールアドレス確認<font color="red">＊</font>：</div>
-		<div><input type="text"  name="confirm_email" value="<?php echo $confirm_email;?>" onpaste="return false" style="width:100%;"></input></div>
-	</td>
+	<tr>
+		<td colspan="2">
+			<div>電話番号<font color="red">＊</font>：</div>
+			<div><input type="text"  name="billing_phone" value="<?php echo $billing_phone;?>"></input></div>
+		</td>
+	</tr>
 	
-</tr>
-
-
-
-
-<tr>
-	<td colspan="2">
-		<div>メッセージ</div>
-		<div><textarea cols="20" rows="5" name="message" id="message" class="textarea"><?php echo $message;?></textarea></div>
-	</td>
 	
-
-<tr>
-	<td  colspan="2">
-		<p>
-		<div><input type="submit" value="プロフィール更新"   class="same-user-select"> <font color="red">＊</font>必須項目</div>
-		</p>
-	</td>
+	<tr>
+		<td colspan="2">
+			<div>メール<font color="red">＊</font>：</div>
+			<div><input type="text"  name="user_email" value="<?php echo $user_email;?>" style="width:100%;"></input></div>
+		</td>
+		
+	</tr>
 	
-</tr>
-</table>
-
-
- 
-
-</form>
+	
+	<tr>
+		<td  colspan="2">
+			<div>メールアドレス確認<font color="red">＊</font>：</div>
+			<div><input type="text"  name="confirm_email" value="<?php echo $confirm_email;?>" onpaste="return false" style="width:100%;"></input></div>
+		</td>
+		
+	</tr>
+	
+	
+	
+	
+	<tr>
+		<td colspan="2">
+			<div>メッセージ</div>
+			<div><textarea cols="20" rows="5" name="message" id="message" class="textarea"><?php echo $message;?></textarea></div>
+		</td>
+		
+	
+	<tr>
+		<td  colspan="2">
+			<p>
+			<div><input type="submit" value="プロフィール更新"   class="same-user-select"> <font color="red">＊</font>必須項目</div>
+			</p>
+		</td>
+		
+	</tr>
+	</table>
+	
+	
+	 
+	
+	</form>
+</div>
 
 
 

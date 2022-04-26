@@ -1,0 +1,21 @@
+/* .home .mode-pc{
+    display: block;
+} */
+@media screen and (max-width: 560px){
+    /* .mode-sp{
+        display: block;
+    } */
+    .home .mode-pc{
+        display: none;
+    }
+    .home .site-main{
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    table.top-table{
+        width: 100%;
+        table-layout: fixed;
+    }
+}
+

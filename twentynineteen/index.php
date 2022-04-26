@@ -95,76 +95,155 @@ get_header();
 
 		<?php if(current_user_can('administrator')){ ?>
 
-			<table class="top-table">
-				<tr>
-					<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 11; echo get_page_link( $id );?>">生徒一覧（管理者）</a></td>
-					<td><a class="index_top_button index_top_button_grades_color" href="<?php $id = 43; echo get_page_link( $id );?>?years=<?php echo date('Y');?>">成績一覧（管理者）</a></td>
-				</tr>
-				<tr>
-					<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 694; echo get_page_link( $id );?>">コメント一覧（管理者）</a></td>
-					<td></td>
-
-				</tr>
-			</table>
-
-			<p>
-			<table class="top-table">
-				<tr>
-					<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 129; echo get_page_link( $id );?>">動画登録（管理者）</a></td>
-					<td><a class="index_top_button index_top_button_report_color" href="<?php $id = 482; echo get_page_link( $id );?>">レポート提出作成（管理者）</a></td>
-				</tr>
-				<tr>
-					<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 54; echo get_page_link( $id );?>">動画一覧（管理者）</a></td>
-					<td><a class="index_top_button index_top_button_report_color" href="<?php $id = 487; echo get_page_link( $id );?>">レポート提出一覧（管理者）</a></td>
-				</tr>
-				<tr>
-					<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 209; echo get_page_link( $id );?>">動画カテゴリ作成・編集</a></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
-					<td></td>
-				</tr>
-			</table>
-			</p>
-
-			<p>
-			<table class="top-table">
-				<tr>
+			<div class="mode-pc mode-tab">
+				<table class="top-table">
+					<tr>
+						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 11; echo get_page_link( $id );?>">生徒一覧（管理者）</a></td>
+						<td><a class="index_top_button index_top_button_grades_color" href="<?php $id = 43; echo get_page_link( $id );?>?years=<?php echo date('Y');?>">成績一覧（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 694; echo get_page_link( $id );?>">コメント一覧（管理者）</a></td>
+						<td></td>
+	
+					</tr>
+				</table>
+	
+				<p>
+				<table class="top-table">
+					<tr>
+						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 129; echo get_page_link( $id );?>">動画登録（管理者）</a></td>
+						<td><a class="index_top_button index_top_button_report_color" href="<?php $id = 482; echo get_page_link( $id );?>">レポート提出作成（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 54; echo get_page_link( $id );?>">動画一覧（管理者）</a></td>
+						<td><a class="index_top_button index_top_button_report_color" href="<?php $id = 487; echo get_page_link( $id );?>">レポート提出一覧（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 209; echo get_page_link( $id );?>">動画カテゴリ作成・編集</a></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
+						<td></td>
+					</tr>
+				</table>
+				</p>
+	
+				<p>
+				<table class="top-table">
+					<tr>
+						
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=1">ザラ場 登録（管理者）</a></td>
+						<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 808; echo get_page_link( $id );?>">メールメニュー</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=2">株 講義登録（管理者）</a></td>
+						
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=3">FX 講義登録（管理者）</a></td>
+						<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 537; echo get_page_link( $id );?>">ツールアップロード</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 46; echo get_page_link( $id );?>">ZOOM登録一覧（管理者）</a></td>
+						<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 539; echo get_page_link( $id );?>">ツールダウンロード</a></td>
+						
+					</tr>
 					
-					<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=1">ザラ場 登録（管理者）</a></td>
-					<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 808; echo get_page_link( $id );?>">メールメニュー</a></td>
-				</tr>
-				<tr>
-					<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=2">株 講義登録（管理者）</a></td>
+				</table>
+				</p>
+	
+				<p>
+				<table class="top-table">
+					<tr>
+						<td><a class="index_top_button index_top_button_setting_color" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></td>
+						<td><a class="index_top_button index_top_button_news_color" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></td>
 					
-				</tr>
-				<tr>
-					<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=3">FX 講義登録（管理者）</a></td>
-					<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 537; echo get_page_link( $id );?>">ツールアップロード</a></td>
-				</tr>
-				<tr>
-					<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 46; echo get_page_link( $id );?>">ZOOM登録一覧（管理者）</a></td>
-					<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 539; echo get_page_link( $id );?>">ツールダウンロード</a></td>
-					
-				</tr>
-				
-			</table>
-			</p>
+					</tr>
+					<tr>
+						<td></td>
+						<td><a class="index_top_button index_top_button_logout_color" href="<?php echo wp_logout_url();?>">ログアウト</a></td>
+					</tr>
+				</table>
+				</p>
+			</div>
 
-			<p>
+			<div class="mode-sp">
 			<table class="top-table">
-				<tr>
-					<td><a class="index_top_button index_top_button_setting_color" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></td>
-					<td><a class="index_top_button index_top_button_news_color" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></td>
-				
-				</tr>
-				<tr>
-					<td></td>
-					<td><a class="index_top_button index_top_button_logout_color" href="<?php echo wp_logout_url();?>">ログアウト</a></td>
-				</tr>
-			</table>
-			</p>
+					<tr>
+						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 11; echo get_page_link( $id );?>">生徒一覧（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 694; echo get_page_link( $id );?>">コメント一覧（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_grades_color" href="<?php $id = 43; echo get_page_link( $id );?>?years=<?php echo date('Y');?>">成績一覧（管理者）</a></td>
+					</tr>
+				</table>
+	
+				<p>
+				<table class="top-table">
+					<tr>
+						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 129; echo get_page_link( $id );?>">動画登録（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 54; echo get_page_link( $id );?>">動画一覧（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 209; echo get_page_link( $id );?>">動画カテゴリ作成・編集</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_report_color" href="<?php $id = 482; echo get_page_link( $id );?>">レポート提出作成（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_report_color" href="<?php $id = 487; echo get_page_link( $id );?>">レポート提出一覧（管理者）</a></td>
+					</tr>
+				</table>
+				</p>
+	
+				<p>
+				<table class="top-table">
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=1">ザラ場 登録（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=2">株 講義登録（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=3">FX 講義登録（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 46; echo get_page_link( $id );?>">ZOOM登録一覧（管理者）</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 808; echo get_page_link( $id );?>">メールメニュー</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 537; echo get_page_link( $id );?>">ツールアップロード</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 539; echo get_page_link( $id );?>">ツールダウンロード</a></td>
+					</tr>
+				</table>
+				</p>
+	
+				<p>
+				<table class="top-table">
+					<tr>
+						<td><a class="index_top_button index_top_button_setting_color" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></td>					
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_news_color" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></td>
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_logout_color" href="<?php echo wp_logout_url();?>">ログアウト</a></td>
+					</tr>
+				</table>
+				</p>
+			</div>
 
 		<?php } ?>
 

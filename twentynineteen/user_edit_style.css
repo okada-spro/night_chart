@@ -1,0 +1,14 @@
+.user-edit-area table.user_edit_table input{
+    width: 100%;
+}
+
+@media screen and (max-width: 1024px){
+    .user-edit-area table.user_edit_table{
+        width: 95%;
+        margin: 0 auto;
+        table-layout: fixed;
+    }
+}
+@media screen and (max-width: 560px){
+}
+

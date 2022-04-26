@@ -34,6 +34,9 @@
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/zoom_list_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/tool_upload_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/tool_download_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/user_edit_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/news_list_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/top_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 
 
 
@@ -171,7 +174,7 @@ $(function(){
 
 
 
-			<div class="mode-pc mode-tab">
+			<div class="mode-pc">
 				<table class="header_table">
 						<?php if($member_level ==  UserClass::DOGA  && !$login_ban){ //動画会員?>
 							<tr>
@@ -216,7 +219,7 @@ $(function(){
 			</div>
 
 			<?php //SP用?>
-			<div class="mode-sp">
+			<div class="mode-sp mode-tab">
 				<ul class="header-dropmenu">
 				<?php if($member_level ==  UserClass::DOGA  && !$login_ban){ //動画会員?>
 					<li>
