@@ -37,6 +37,8 @@
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/user_edit_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/news_list_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/top_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/zoom_registration_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/contactus_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 
 
 

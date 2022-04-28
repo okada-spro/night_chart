@@ -10,5 +10,8 @@
     }
 }
 @media screen and (max-width: 560px){
+    table.user_edit_table{
+        width: 95%;
+    }
 }
 
