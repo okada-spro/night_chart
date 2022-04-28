@@ -36,7 +36,7 @@
         $input_data->getListZoomRow($user->ID);
     }
 
-
+    //echo $user->ID;
 
 if(isset($_POST["viewing_url"]))
 {
@@ -196,6 +196,12 @@ function add_check_kougi(){
             {
                  continue;
             }
+
+            //作業会
+            if($key == ZoomClass::ZOOM_KABU_SAGYOU_CATEGORY)
+            {
+                 continue;
+            }
         }
 
         //株訓練生
@@ -205,7 +211,37 @@ function add_check_kougi(){
             {
                  continue;
             }
+            //作業会
+            if($key == ZoomClass::ZOOM_FX_SAGYOU_CATEGORY)
+            {
+                 continue;
+            }
         }
+
+         //動画会員が基本的に参加できない
+        if(  $member_level == UserClass::DOGA )
+        {
+            continue;
+        }
+
+        //特別セミナー会員は特別セミナーとZOOM座談会だけ参加できる
+        if(  $member_level == UserClass::SPECIAL_SEMINAR  &&  $key !=  ZoomClass::ZOOM_SPECIAL_SEMINAR &&  $key !=  ZoomClass::ZOOM_ZADANKAI)
+        {
+            continue;
+        }
+
+        /*
+         if($key == ZoomClass::ZOOM_KABU_SAGYOU_CATEGORY &&   $user->ID != 19)
+         {
+            continue;
+         }
+
+         if($key == ZoomClass::ZOOM_FX_SAGYOU_CATEGORY &&   $user->ID != 19)
+         {
+            continue;
+         }
+         */
+      
 
  ?>
 
@@ -244,8 +280,8 @@ function add_check_kougi(){
         </tr>
 
         <tr style="background-color:lemonchiffon;">
-            <td class="fixed_th_1" style="background-color:lemonchiffon;"><?php echo "申込"; ?></td>
-            <td class="fixed_th_2" style="background-color:lemonchiffon;"><?php echo "タイトル"; ?></td>
+            <td><?php echo "申込"; ?></td>
+            <td><?php echo "タイトル"; ?></td>
             <td><?php echo "募集"; ?>　/ <font color="red"><?php echo "締切"; ?></font><?php echo "時間"; ?></td>
             <td><?php echo "講義時間"; ?></td>
             <?php /*<td><?php echo "講義時間"; ?></td>*/ ?>
@@ -291,12 +327,8 @@ function add_check_kougi(){
                         continue;
                     }
 
-                     //動画閲覧は見れない
-                    if( $row->post_zoom_jointype == ZoomClass::ZOOM_JOIN_NO_DOUGA && $member_level == UserClass::DOGA)
-                    {
-                        continue;
-                    }
-
+                   
+                    
 
 
 
@@ -335,10 +367,7 @@ function add_check_kougi(){
                         if($zoom_time < $now_time)
                         {
                             $table_color = 'bgcolor="darkgray"';
-                            $back_table_color = 'style="background-color:darkgray"';
                             $join_now = "締切";
-                        }else{
-                            $back_table_color = 'style="background-color:white"';
                         }
 
                         if($plan_input_value == 1)
@@ -357,11 +386,11 @@ function add_check_kougi(){
 
                              <?php  if($zoom_time < $now_time){  ?>
 
-                                <td class="fixed_th_1" <?php echo $back_table_color;?>><?php echo "締切"; ?></td>
+                                <td><?php echo "締切"; ?></td>
 
                             <?php }else{ ?>
 
-                                <td class="fixed_th_1" <?php echo $back_table_color;?>>
+                                <td>
                                     <?php if($plan_input_value == 0){?>
                                          <form action="<?php  $id = 185; echo get_page_link( $id );?>" method="post">
                                              <input type="hidden" name="id" value="<?php echo $row->ID;?>">
@@ -370,7 +399,7 @@ function add_check_kougi(){
                                          </form>
                                     <?php }else{ ?>
                                         <?php if($enable_num + $add_mtg_num > 0 || $key ==  ZoomClass::ZOOM_KOUGI_CATEGORY){?>
-                                            <?php if( $key ==  ZoomClass::ZOOM_KOUGI_CATEGORY){ ?>
+                                            <?php if( $key ==  ZoomClass::ZOOM_KOUGI_CATEGORY || $key ==  ZoomClass::ZOOM_KABU_SAGYOU_CATEGORY || $key ==  ZoomClass::ZOOM_FX_SAGYOU_CATEGORY){ ?>
                                                 <form action="<?php  $id = 185; echo get_page_link( $id );?>" method="post"  onSubmit="return add_check_kougi()">
                                             <?php }else{ ?>
                                                 <form action="<?php  $id = 185; echo get_page_link( $id );?>" method="post"  onSubmit="return add_check()">
@@ -387,7 +416,7 @@ function add_check_kougi(){
                             <?php } ?>
 
 
-                            <td class="fixed_th_2" <?php echo $back_table_color;?>><?php echo $row->post_zoom_title; ?></td>
+                            <td><?php echo $row->post_zoom_title; ?></td>
                             <td><?php echo date('Y/m/d H:i',  strtotime($row->post_zoom_day)); ?>　/　<font color="red"><?php echo date('H:i',  strtotime($row->post_zoom_deadline)); ?></font></td>
                             <td><?php echo date('Y/m/d H:i',  strtotime($row->post_zoom_start_day)); ?></td>
                             <?php /*<td><?php echo date('Y年m月d日 H時i分',  strtotime($row->post_zoom_start_day)); ?></td>

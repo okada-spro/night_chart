@@ -1,7 +1,7 @@
 <?php
 
 
-   
+
 
 class HistoryClass
 {
@@ -51,7 +51,7 @@ class HistoryClass
     }
 
 
-    
+
     public  $disp_array_data = array(
             0=>"直近４ヶ月を表示",
             1=>"直近６ヶ月を表示",
@@ -61,6 +61,7 @@ class HistoryClass
      public  $is_trade_array_data = array(
             0=>"期間内の提出者",
             1=>"期間内の未出者",
+            2=>"全て表示",
      );
 
 
@@ -70,7 +71,7 @@ class HistoryClass
          // wpdbオブジェクト
         global $wpdb;
 
-        $query ="SELECT * FROM wp_user_trade_data  WHERE post_author = %d"; 
+        $query ="SELECT * FROM wp_user_trade_data  WHERE post_author = %d";
         $sql = $wpdb->prepare($query,$user_id);
         //sql = $wpdb->prepare("SELECT * FROM wp_user_trade_data  WHERE post_author=".$user_id );
         $row = $wpdb->get_results($sql);
@@ -134,13 +135,13 @@ class HistoryClass
        $this->input_data[$input_str] = $set_data;
     }
 
-    
+
     //POSTデータの設置
     public  function setPostData($postData)
     {
-    
+
         //var_dump($postData);
-        
+
         if(isset($postData['input_id']) )
         {
             $this->input_data["input_id"] = $postData['input_id'];
@@ -185,7 +186,7 @@ class HistoryClass
     //これは上書きする情報かどうか ture:新規 false；上書き
     public function checkIsUpdata()
     {
-        if(!$this->history_row) 
+        if(!$this->history_row)
         {
             return true;
         }
@@ -194,7 +195,7 @@ class HistoryClass
             //被ってる場合は上書き
             $is_same = false; //この状態だと新規
 
-            foreach ($this->history_row as $row) 
+            foreach ($this->history_row as $row)
             {
                 if($row->post_trade_year == $this->input_data["input_year"] && $row->post_trade_month == $this->input_data["input_month"])
                 {
@@ -217,7 +218,7 @@ class HistoryClass
     //入力画面等編集データのセット
     public function setEditData($postData)
     {
-        foreach ($this->history_row as $row) 
+        foreach ($this->history_row as $row)
         {
             if($row->ID == $postData['id'])
             {
@@ -253,7 +254,7 @@ class HistoryClass
         //echo $years;
 
         //前月のを入れる
-        foreach ($this->history_row as $row) 
+        foreach ($this->history_row as $row)
         {
             if($this->input_data["post_author"] == $row->post_author && $month == $row->post_trade_month && $years == $row->post_trade_year)
             {
@@ -281,7 +282,7 @@ class HistoryClass
         //echo $years;
 
         //前月のを入れる
-        foreach ($this->history_row as $row) 
+        foreach ($this->history_row as $row)
         {
             if($user_id == $row->post_author && $month == $row->post_trade_month && $years == $row->post_trade_year)
             {
@@ -299,14 +300,14 @@ class HistoryClass
         // wpdbオブジェクト
         global $wpdb;
 
-       
+
 
           $insert = array(
-            'post_author'=>$user_id, 
+            'post_author'=>$user_id,
             'post_date' => date("Y-m-d H:i:s"),
             'post_trade_unixtime' => intval($this->input_data["unixdate"]->format('U')),
             'post_trade_year'  =>  $this->input_data["input_year"],
-            'post_trade_month' => $this->input_data["input_month"], 
+            'post_trade_month' => $this->input_data["input_month"],
             'post_profit' => intval($this->input_data["input_profit"]),
             'post_loss' =>  intval($this->input_data["input_loss"]),
             'post_increase' =>  intval($this->input_data["input_increase"]),
@@ -325,7 +326,7 @@ class HistoryClass
          $dataFormat = array('%d','%s','%d','%d','%d','%d','%d','%d','%d','%d','%d','%d','%f','%d','%d','%s');
 
 
-         $sql_rsl = $wpdb->insert('wp_user_trade_data', $insert, $dataFormat); 
+         $sql_rsl = $wpdb->insert('wp_user_trade_data', $insert, $dataFormat);
 
          if ( $sql_rsl == false ) {
             //登録失敗
@@ -349,7 +350,7 @@ class HistoryClass
             'post_date' => date("Y-m-d H:i:s"),
             'post_trade_unixtime' => $this->input_data["unixdate"]->format('U'),
             'post_trade_year'  =>  $this->input_data["input_year"],
-            'post_trade_month' => $this->input_data["input_month"], 
+            'post_trade_month' => $this->input_data["input_month"],
             'post_profit' => $this->input_data["input_profit"],
             'post_loss' => $this->input_data["input_loss"],
             'post_increase' => $this->input_data["input_increase"],
@@ -370,9 +371,9 @@ class HistoryClass
 
            $dataFormat = array('%s','%d','%d','%d','%d','%d','%d','%d','%d','%d','%d','%f','%d','%d','%s');
            $conditionsFormat = array('%d');
-           $sql_rsl = $wpdb->update('wp_user_trade_data', $updata, $condition,$dataFormat,$conditionsFormat); 
+           $sql_rsl = $wpdb->update('wp_user_trade_data', $updata, $condition,$dataFormat,$conditionsFormat);
 
-            
+
            if ( $sql_rsl == false ) {
 	            //更新失敗
                 return false;
@@ -385,7 +386,7 @@ class HistoryClass
     //同じ日付が登録されているかどうか
     public function checkRegistrationDate()
     {
-        foreach ($this->history_row as $row) 
+        foreach ($this->history_row as $row)
         {
             if($row->ID != $this->input_data["input_id"] &&  $row->post_trade_year == $this->input_data["input_year"] &&  $row->post_trade_month == $this->input_data["input_month"])
             {
@@ -409,9 +410,9 @@ class HistoryClass
            );
 
            $conditionsFormat = array('%d');
-           $sql_rsl = $wpdb->delete('wp_user_trade_data', $condition,$conditionsFormat); 
+           $sql_rsl = $wpdb->delete('wp_user_trade_data', $condition,$conditionsFormat);
 
-            
+
            if ( $sql_rsl == false ) {
 	            //削除失敗
                 return false;
@@ -437,12 +438,12 @@ class HistoryClass
 
         $row_count = 0;
 
-        foreach ($rows as $row) 
+        foreach ($rows as $row)
         {
             if($row)
             {
                 $is_data = true;
-            
+
 
                 if($row_count == 0)
                 {
@@ -476,7 +477,7 @@ class HistoryClass
 	                $interest = 0;
                 }
 
-           
+
 
                 $set_array = array(
                 "ID"=>$row->ID,
@@ -499,7 +500,7 @@ class HistoryClass
                 "increase"=>$Increase,
                 "interest"=>$interest,
                 "balance"=>$balance,
-                );        
+                );
 
                 array_unshift($new_array,$set_array);
             }
@@ -513,7 +514,7 @@ class HistoryClass
         }
 
         return $new_array;
-        
+
     }
 
 
@@ -545,11 +546,11 @@ class HistoryClass
     public function setUserTradeData($years)
     {
         //ユーザーの全データを取得
-	    $users = get_users( array('orderby'=>'ID','order'=>'ASC') ); 
+	    $users = get_users( array('orderby'=>'ID','order'=>'ASC') );
 
         //ユニックスデータを作成
         $unix_array = array();
-        
+
 
         $now_year = date('Y');
         $est_unix = 0;
@@ -560,7 +561,7 @@ class HistoryClass
              {
                 $unixdate = new DateTime($i.'-' .$j .'-01 00:00:00');
 
-                array_push($unix_array , $unixdate->format('U') ); 
+                array_push($unix_array , $unixdate->format('U') );
              }
 
         }
@@ -577,11 +578,11 @@ class HistoryClass
              }
         }
 
-              
+
        //  var_dump($unix_array);
 
-       
-      
+
+
 
        // var_dump($this->history_row);
 
@@ -594,10 +595,10 @@ class HistoryClass
                 $trade_array[$row->post_author][$row->post_trade_unixtime] = $row;
             }
         }
-        
 
-     
-       
+
+
+
         //新規配列
         $new_array = array();
 
@@ -632,6 +633,10 @@ class HistoryClass
                 else{
                      $new_array[$key]["disp"] = false;
                 }
+
+                if(!isset($new_array[$key]["days"])){
+                   $new_array[$key]["days"][13] = "";
+                }
              }
              else{
                $new_array[$key]["days"][13] = "";
@@ -649,7 +654,7 @@ class HistoryClass
              echo "<br />";
              echo "<br />";
         */
-       
+
 
 
 

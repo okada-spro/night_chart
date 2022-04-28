@@ -59,7 +59,7 @@ $(document).ready(function() {
 </script>
 
 
-    <div class="page_div_box videoviewing_list">
+    <div class="page_div_box">
         <p>
             <form action="<?php  $id = 54; echo get_page_link( $id );?>" method="post">
                 <select name="disp_table_category"  class="same-user-select">
@@ -77,8 +77,8 @@ $(document).ready(function() {
         <table class="user-table">
              <thead>
             <tr>
-                <th class="fixed_th_1">編集</th>
-                <th class="fixed_th_2">視聴</th>
+                <th>編集</th>
+                <th>視聴</th>
                 <th>タイトル</th>
                 <th>カテゴリ</th>
                 <th>埋め込み番号</th>
@@ -96,14 +96,14 @@ $(document).ready(function() {
                 ?>
 
             <tr <?php echo $table_color;?>>
-                <td class="fixed_th_1">
+                <td>
                     <form action="<?php  $id = 129; echo get_page_link( $id );?>" method="post">
                         <input type="hidden" name="id" value="<?php echo $row["input_id"];?>">
                         <input type="hidden" name="viewing_edit" value="viewing_edit">
                         <input type="submit" value="編集">
                     </form>
                 </td>
-                <td class="fixed_th_2">
+                <td>
                     <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
                         <input type="hidden" name="id" value="<?php echo $row["input_id"];?>">
                         <input type="hidden" name="category_id" value="<?php echo $row["input_category"];?>">

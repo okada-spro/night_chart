@@ -42,17 +42,17 @@ if(!isset($_GET["category"])){
      $category_array = $input_data->get_dl_array();
 ?>
 
-    <table class="user-table-two tool-download">
+    <table class="user-table-two">
         <colgroup span="6"></colgroup>
         <tr>
-            <th class="fixed_th_1">ツール名</th>
+            <th>ツール名</th>
             <th>更新日</th>
             <th>DL</th>
         </tr>
         <?php foreach ($category_array as $key =>$value) { ?>
             <?php if( $_GET["category"] == $value["input_category"] && $users_data->checkLevelTypeMatch($_GET["category"],$member_level,$member_type) ){ ?>
             <tr >
-                <td class="fixed_th_1"><?php echo $value["input_title"]; ?></td>
+                <td><?php echo $value["input_title"]; ?></td>
                 <td><?php echo $value["input_update"]; ?></td>
                 <td><a href="<?php echo $value["input_url"]; ?>" download="<?php echo $value["input_file_name"]; ?>">ダウンロード</a></td>
             </tr>

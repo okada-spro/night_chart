@@ -428,17 +428,17 @@ $(function(){
 
  ?>
 
-    <table class="user-table-two video_list_table">
+    <table class="user-table-two">
         <colgroup span="3"></colgroup>
         <tr>
-            <th class="fixed_th_1">ボタン</th>
+            <th>ボタン</th>
             <th>カテゴリー名</th>
             <th>本数</th>
         </tr>
        <?php foreach ($input_data->view_category_row as $row) { ?>
             <?php if($input_data->view_category_number[$row->ID] > 0){?>
                 <tr>
-                    <td class="fixed_th_1">
+                    <td>
                         <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
                             <input type="hidden" name="category_id" value="<?php echo  $row->ID;?>">
                             <input type="hidden" name="viewing_category" value="viewing_category">

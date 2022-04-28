@@ -63,14 +63,14 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="page_div_box report_list">
+<div class="page_div_box">
 
      <table class="user-table-two">
         <thead>
         <tr>
-            <th class="fixed_th_1">編集</th>
-            <th class="fixed_th_2">削除</th>
-            <th class="fixed_th_3">提出</th>
+            <th>編集</th>
+            <th>削除</th>
+            <th>提出</th>
             <th>ID</th>
             <th>講義日</th>
             <th>講義名</th>
@@ -80,21 +80,21 @@ $(document).ready(function() {
         </thead>
         <?php foreach ($table_array as $key =>$value) { ?>
         <tr>
-            <td class="fixed_th_1">
+            <td>
                 <form action="<?php  $id = 482; echo get_page_link( $id );?>" method="post">
                     <input type="hidden" name="input_id" value="<?php echo $value["input_id"];?>">
                     <input type="hidden" name="edit" value="edit">
                     <input type="submit" value="編集">
                 </form>
             </td>
-            <td class="fixed_th_2">
+            <td>
                 <form action="<?php  $id = 487; echo get_page_link( $id );?>" method="post"  onSubmit="return delete_check()">
                     <input type="hidden" name="delete_id" value="<?php echo $value["input_id"];?>">
                     <input type="hidden" name="is_delete" value="delete">
                     <input type="submit" value="削除">
                 </form>
             </td>
-             <td class="fixed_th_3">
+             <td>
                 <?php if( $value["input_is_submission_num"] > 0) {?>
                     <form action="<?php  $id = 487; echo get_page_link( $id );?>" method="post">
                         <input type="hidden" name="input_id" value="<?php echo $value["input_id"];?>">
@@ -168,18 +168,18 @@ $(document).ready(function() {
             </div>
         </p>
 
-        <table class="user-table-two report_list">
+        <table class="user-table-two">
             <colgroup span="3"></colgroup>
             
             <tr>
-                <th class="fixed_th_1">ID</th>
+                <th>ID</th>
                 <th>名前</th>
                 <th>OPEN</th>
                 <th>DL</th>
             </tr>
             <?php foreach ($report_membar as $row){?>
                 <tr>
-                <td class="fixed_th_1"><?php echo $row["user_id"]; ?></td>
+                <td><?php echo $row["user_id"]; ?></td>
                 <td><?php echo get_the_author_meta('last_name',$row["user_id"]);?>　<?php echo get_the_author_meta('first_name',$row["user_id"]);?>(<?php echo get_the_author_meta('user_login',$row["user_id"]);?>)</td>
                 <td><a href="<?php echo $row["file_url"]; ?>" target="_blank" ?>開く</a></td>
                 <td><a href="<?php echo $row["file_url"]; ?>" download="<?php echo $row["file_name"]; ?>">ダウンロード</a></td>

@@ -115,6 +115,12 @@
     else if($disp_level_table == 5){ //動画会員を非表示
         $input_level_table = $disp_level_table;
     }
+    else if($disp_level_table == 8){ //特別セミナー
+        $input_level_table = UserClass::SPECIAL_SEMINAR;
+    }
+    else if($disp_level_table == 9){ //特別セミナーを非表示
+        $input_level_table = $disp_level_table;
+    }
     else{
         $input_level_table = $disp_level_table;
     }
@@ -124,28 +130,28 @@
 
 
 
-    if(!isset($_POST['is_details']) ){
+if(!isset($_POST['is_details']) ){
 
-        $serch_str = "";
+    $serch_str = "";
 
-        if( isset( $_POST["input_serch"]) )
-        {
-            //優先はPOST
-            $serch_str =  $_POST["input_serch"];
-        }
-        elseif( isset( $_GET["serch_word"]))
-        {
-            $serch_str =  $_GET["serch_word"];
-        }
+    if( isset( $_POST["input_serch"]) )
+    {
+        //優先はPOST
+        $serch_str =  $_POST["input_serch"];
+    }
+    elseif( isset( $_GET["serch_word"]))
+    {
+        $serch_str =  $_GET["serch_word"];
+    }
 
-        $disp_user_data = $users;
+    $disp_user_data = $users;
 
-        //検索のものに変更
-        if($serch_str !="")
-        {
-            $disp_user_data = $users_data->serchUserData($serch_str,$disp_user_data);
-        }
-    
+    //検索のものに変更
+    if($serch_str !="")
+    {
+         $disp_user_data = $users_data->serchUserData($serch_str,$disp_user_data);
+    }
+  
 
 ?>
 
@@ -177,28 +183,6 @@ function submitCheckMailFnc( id ){
 }
 
 // -->
-
-
-
-    window.addEventListener('scroll', ()=> {
-        var Yposi = window.pageYOffset;
-        console.log(Yposi);
-        if(Yposi >= 650){
-            $(".tablesorter-headerRow").css("position","sticky");
-            $(".tablesorter-headerRow").css("top",(Yposi - 650) + "px");
-            $(".fixed_th_1.tablesorter-header").css("top",(Yposi - 650) + "px");
-            $(".fixed_th_1.tablesorter-header").css("z-index","1");
-            $(".fixed_th_2.tablesorter-header").css("top",(Yposi - 650) + "px");
-            $(".fixed_th_2.tablesorter-header").css("z-index","1");
-            $(".fixed_th_3.tablesorter-header").css("top",(Yposi - 650) + "px");
-            $(".fixed_th_3.tablesorter-header").css("z-index","1");
-        }else{
-            $(".tablesorter-headerRow").css("position","unset");
-            $(".fixed_th_1.tablesorter-header").css("top","0");
-            $(".fixed_th_2.tablesorter-header").css("top","0");
-            $(".fixed_th_3.tablesorter-header").css("top","0");
-        }
-    });
 </script>
 
 
@@ -211,7 +195,7 @@ function submitCheckMailFnc( id ){
 
 <div class="page_div_box">
     <p>
-    <div class="user-list-table_sarch">
+    <div style="display:inline-flex">
         <form action="<?php  $id = 11; echo get_page_link( $id );?>" method="post">
             <select name="level_table"  class="same-user-select">
             <?php foreach ($users_data->disp_only_level_array_data as $key => $value) {?>
@@ -228,7 +212,7 @@ function submitCheckMailFnc( id ){
         </form>
 
         <form action="<?php  $id = 11; echo get_page_link( $id );?>" method="post">
-            <input type="text"  name="input_serch" value="<?php echo $serch_str;?>"  style="height:50px;display: block;margin: 50px auto 0 auto;"></input>
+            <input type="text"  name="input_serch" value="<?php echo $serch_str;?>"  style="height:50px;"></input>
             <input type="submit" value="検索・更新"   class="same-user-select">
         </form>
     </div>
@@ -242,9 +226,9 @@ function submitCheckMailFnc( id ){
             <table class="lecture-table" id="userTable">
                <thead>
                 <tr>
-                    <th class="fixed_th_1">ID</th>
-                    <th class="fixed_th_2 mode-tab">ユーザー名</th>
-                    <th class="fixed_th_3">名前</th>
+                    <th >ID</th>
+                    <th >ユーザー名</th>
+                    <th>名前</th>
                     <th>会員</th>
                     
                     <th>生存</th>
@@ -265,12 +249,16 @@ function submitCheckMailFnc( id ){
         
                 $Withdrawal =get_the_author_meta('member_withdrawal',$row->ID);
 
+                 $member_ban = get_the_author_meta('login_ban',$row->ID);
+
+               
+
                 if($Withdrawal == "" || $Withdrawal == NULL)
                 {
                     $Withdrawal = 0;
                 }
 
-                if(($input_disp_table == 2) || ($input_disp_table == $Withdrawal) )
+                if(($input_disp_table == 2) || ($input_disp_table == 1 && $member_ban == true)|| ($input_disp_table == 0 && $Withdrawal == 0)|| ($input_disp_table == 4 && $Withdrawal == 0 && $member_ban == false)   )
                 {
                     $member_level = get_the_author_meta('member_level',$row->ID);
                     $member_type = get_the_author_meta('member_type',$row->ID);
@@ -303,10 +291,16 @@ function submitCheckMailFnc( id ){
                     else if( $disp_level_table == 5 && $member_level != UserClass::DOGA ){ //動画会員を非表示
                         $is_disp = true; //動画会員を非表示
                     }
-                    else if( $disp_level_table == 6 && $member_level != UserClass::DOGA && $member_type != 2){ //株のみ表示
+                    else if( $disp_level_table == 8 && $member_level == UserClass::SPECIAL_SEMINAR ){ //特別セミナーだけを表示
                         $is_disp = true; 
                     }
-                    else if( $disp_level_table == 7 && $member_level != UserClass::DOGA && $member_type != 1){ //FXのみ表示
+                    else if( $disp_level_table == 9 && $member_level != UserClass::SPECIAL_SEMINAR ){ //特別セミナーを非表示
+                        $is_disp = true; 
+                    }
+                    else if( $disp_level_table == 6 && $member_level != UserClass::DOGA  && $member_level != UserClass::SPECIAL_SEMINAR && $member_type != 2){ //株のみ表示
+                        $is_disp = true; 
+                    }
+                    else if( $disp_level_table == 7 && $member_level != UserClass::DOGA  && $member_level != UserClass::SPECIAL_SEMINAR && $member_type != 1){ //FXのみ表示
                         $is_disp = true;
                     }
 
@@ -345,15 +339,15 @@ function submitCheckMailFnc( id ){
                      </form>
                         
                     
-                        <td class="fixed_th_1">
+                        <td>
                             <a href="javaScript:submitCheckFnc(<?php echo  $row->ID;?>)" >
                                 <?php echo $row->ID;?>
                             </a>
                         </td>
                     
 
-                    <td class="fixed_th_2 mode-tab user-data"><?php echo $row->user_login;?></td>
-                    <td  class="fixed_th_3">
+                    <td ><?php echo $row->user_login;?></td>
+                    <td>
                         <?php echo get_the_author_meta('last_name',$row->ID);?>　<?php echo get_the_author_meta('first_name',$row->ID);?>
                     </td>
                     <td>

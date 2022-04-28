@@ -64,10 +64,10 @@ function delete_check(){
         <table class="user-table">
             <colgroup span="6"></colgroup>
             <tr>
-                <th class="fixed_th_1" style="text-align: center">詳細</th>
+                <th style="text-align: center">詳細</th>
                 <?php /*<th>出席</th>*/ ?>
-                <th class="fixed_th_2" style="text-align: center">開始予定時間</th>
-                <th class="fixed_th_3" style="text-align: center">カテゴリ</th>
+                <th style="text-align: center">開始予定時間</th>
+                <th style="text-align: center">カテゴリ</th>
                 <th style="text-align: center">タイトル</th>
                 <th style="text-align: center">URL</th>
                 <?php /*<th>予定人数</th>*/ ?>
@@ -86,15 +86,12 @@ function delete_check(){
 
                     if( strtotime($today) > strtotime($target_day) ){
                         $table_color = 'bgcolor="darkgray"';
-                        $back_table_color = 'style="background-color:darkgray"';
                         $url_link = $row->post_zoom_url;
-                    }else{
-                        $back_table_color = 'style="background-color:white"';
                     }
             ?>
 
-            <tr <?php echo $table_color;?>>
-                <td class="fixed_th_1" <?php echo $back_table_color;?>>
+            <tr <?php echo $table_color;?> >
+                <td>
                     <form action="<?php  $id = 51; echo get_page_link( $id );?>" method="post">
                         <input type="hidden" name="id" value="<?php echo $row->ID;?>">
                         <input type="hidden" name="is_edit" value="edit">
@@ -119,8 +116,8 @@ function delete_check(){
                 </td>
                   */ ?>
 
-                <td class="fixed_th_2" <?php echo $back_table_color;?>><?php echo $row->post_zoom_start_day;?> </td>
-                <td class="fixed_th_3" <?php echo $back_table_color;?>><?php echo $input_data->zoom_catagory_array_data[$row->post_zoom_category];?> </td>
+                <td><?php echo $row->post_zoom_start_day;?> </td>
+                <td><?php echo $input_data->zoom_catagory_array_data[$row->post_zoom_category];?> </td>
                 <td><?php echo $row->post_zoom_title;?> </td>
                 <td><?php echo $url_link;?> </td>
                 <?php /*<td><?php echo $input_data->getParticNum($row->post_zoom_participant);?>人 </td>*/ ?>
@@ -248,7 +245,7 @@ function delete_check(){
 
                             if($zoom_plan_data)
                             {
-                                if(count($zoom_plan_data) > 1)
+                                if(count($zoom_plan_data) >= 1 && $zoom_plan_data[0] != "")
                                 {
                                     for($i=0;$i<count($zoom_plan_data);$i++){
                                         if( $row->ID == $zoom_plan_data[$i]){

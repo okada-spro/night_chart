@@ -1,0 +1,904 @@
+﻿.logn-ban-area {
+}
+
+.logn-ban-str {
+}
+
+.ban-keikoku-main {
+   
+   
+}
+
+
+.ban-keikoku-str {
+    font-size: 48px;
+    color: red;
+}
+
+.ban-keikoku-main-area {
+    margin-top: 2%;
+    font-size: 32px;
+}
+
+
+.index_center {
+    text-align: center;
+}
+
+.page_div_box {
+    text-align: center;
+}
+
+.inline_brock_css {
+    display: flex; /*横並び*/
+    margin: 0 auto;
+}
+
+.top-index-txt {
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: 0em 0;
+    font-weight: bold;
+    border: solid 2px #0000ff;
+    border-radius: 10px; /*角の丸み*/
+}
+
+    .top-index-txt p {
+        margin: 0;
+        padding: 0;
+    }
+
+.index_updata_center {
+      padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    text-align: center;
+    color: #ff7d6e; /*文字色*/
+    background: #FFF;
+    border: solid 3px #ff7d6e; /*線*/
+    border-radius: 10px; /*角の丸み*/
+}
+
+    .index_updata_center p {
+        margin: 0;
+        padding: 0;
+    }
+
+.index_updata_button {
+    display: block;
+    width: 650px;
+    height: 60px;
+    padding: 20px;
+    margin: 0 auto; /* 中央寄せになります。 */
+    text-align: center;
+    color: #666;
+    line-height: 60px;
+    text-decoration: none;
+    background-color: #efefef;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+
+
+
+
+
+
+.index_new_reg_button {
+    display: block;
+    width: 650px;
+    height: 60px;
+    padding: 30px;
+    margin: 0 auto; /* 中央寄せになります。 */
+    text-align: center;
+    color: #666;
+    line-height: 36px;
+    text-decoration: none;
+    background-color: #efefef;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.index_button {
+    display: block;
+    width: 650px;
+     height: 30px;
+    padding: 15px;
+    margin: 0 auto; /* 中央寄せになります。 */
+    text-align: center;
+    color: #666;
+    line-height: 36px;
+    text-decoration: none;
+    background-color: #efefef;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+/**************************
+ * 
+ * ヘッダー関連
+ * 
+ * ************************/
+.heder-disp-username {
+    text-align: right;
+    font-size: 0.5em;
+    display: inline-block;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    border: solid 2px #0000ff;
+}
+
+    .heder-disp-username p {
+        margin: 0;
+        padding: 0;
+    }
+
+
+/**************************
+ * 
+ * TOPページのテーブル
+ * 
+ * ************************/
+table.top-table {
+    width: 50%;
+    border: 0px;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    table.top-table td, th {
+        border: 0px #808080 solid;
+        border-collapse: collapse;
+    }
+/**************************
+ * 
+ * TOPページのボタン
+ * 
+ * ************************/
+.index_top_button {
+    display: block;
+    width: 350px;
+     height: 30px;
+    padding: 15px;
+    margin: 0 auto; /* 中央寄せになります。 */
+    text-align: center;
+    color: #666;
+    line-height: 36px;
+    text-decoration: none;
+    /*background-color: #efefef;*/
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+
+/*生徒一覧色*/
+.index_top_button_st_color {
+    background-color: #efefef;
+}
+/*成績一覧色*/
+.index_top_button_grades_color {
+    background-color: #fffacd;
+}
+
+
+
+/*動画関連色*/
+.index_top_button_video_color {
+    background-color: #add8e6;
+}
+
+/*レポート関連色*/
+.index_top_button_report_color {
+    background-color: #fffacd;
+}
+
+/*ZOOM関連色*/
+.index_top_button_zoom_color {
+    background-color: #add8e6;
+}
+
+/*ツールアップロード関連色*/
+.index_top_button_tool_color {
+    background-color: #66CC33;
+}
+
+/*ツールアップロード関連色*/
+.index_top_button_logout_color {
+    background-color: #ffa07a;
+}
+/*設定色*/
+.index_top_button_setting_color {
+    background-color: #efefef;
+}
+
+/*ニュース色*/
+.index_top_button_news_color {
+    background-color: #ffd700;
+}
+
+
+/*TOPページのユーザーのボタン*/
+.index_user_button {
+    display: block;
+    width: 550px;
+   /* height: 15px;*/
+    padding: 15px;
+    margin: 0 auto; /* 中央寄せになります。 */
+    text-align: center;
+    color: #666;
+    line-height: 36px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+/*横並び用のボタン*/
+.index_flex_button {
+    display: block;
+    width: 300px;
+    height: 60px;
+    padding: 15px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #666;
+    line-height: 36px;
+    text-decoration: none;
+    background-color: #efefef;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+.header_div {
+    text-align: center;
+    letter-spacing: 0.3em;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+table.header_table {
+    margin: auto;
+    width: 60%;
+    border: none;
+    font-size: medium;
+}
+
+    table.header_table td, th {
+        border: none;
+    }
+
+.header_link {
+}
+
+
+.index_history_button {
+    display: block;
+    width: 650px;
+    height: 60px;
+    padding: 30px;
+    margin: 0 auto; /* 中央寄せになります。 */
+    text-align: center;
+    color: #666;
+    line-height: 36px;
+    text-decoration: none;
+    background-color: #efefef;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.index_table_button {
+    display: block;
+    width: 100%;
+    height: 60px;
+    padding: 30px;
+    margin: 0 auto; /* 中央寄せになります。 */
+    text-align: center;
+    color: #666;
+    line-height: 36px;
+    text-decoration: none;
+    background-color: #efefef;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+.c-table-container {
+}
+
+
+
+
+
+table.c-table {
+    margin: auto;
+    width: 40%;
+}
+
+    table.c-table th {
+        width: 300px;
+        padding: 10px;
+        font-weight: bold;
+        vertical-align: top;
+        background: #3f3f3f;
+        color: #ffffff;
+    }
+
+    table.c-table td, th {
+    }
+
+    table.c-table td {
+    }
+
+
+
+.user-table-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+table.user-table {
+    margin: auto;
+    border: 2px #808080 solid;
+    text-align: center;
+    width: 90%;
+}
+
+    table.user-table td, th {
+        border: 1px #808080 solid;
+        white-space: nowrap;
+    }
+
+    table.user-table th {
+        text-align: center;
+        background: #3f3f3f;
+        color: #ffffff;
+    }
+
+    table.user-table td {
+        padding: 2px 10px;
+    }
+
+
+/*２列用*/
+table.user-table-two {
+    margin: auto;
+    border: 2px #808080 solid;
+    text-align: center;
+    width: 40%;
+}
+
+    table.user-table-two td, th {
+        border: 1px #808080 solid;
+        white-space: nowrap;
+    }
+
+    table.user-table-two th {
+        background: #3f3f3f;
+        color: #ffffff;
+        text-align: center;
+    }
+
+    table.user-table-two td {
+        padding: 2px 10px;
+    }
+
+table.video-top-table td, th {
+    border: none;
+    text-align: center;
+}
+
+.vimeo-top-table-container {
+    margin-left: 15%;
+}
+
+
+/**************************
+ * 
+ *成績用
+ *
+ ****************************/
+table.histroy-list-table {
+    margin: auto;
+    border: 2px #808080 solid;
+    text-align: center;
+    font-size: 0.6em;
+    width: 90%;
+    font-weight: 900;
+}
+@media screen and (max-width: 1024px){
+    table.histroy-list-table {
+        overflow-x:auto;
+    }
+}
+
+    table.histroy-list-table td, th {
+        border: 1px #808080 solid;
+    }
+
+    table.histroy-list-table th {
+        text-align: center;
+      
+    }
+
+    table.histroy-list-table tr:nth-child(odd) td {
+        background: #DDFFFF;
+    }
+
+.viewing_div {
+    text-align: center;
+}
+
+.type-page h1,
+.type-page
+.post-meta {
+    display: none;
+}
+
+.index_login {
+    text-align: center;
+}
+
+
+.zoom_title {
+    text-align: center;
+}
+
+.same-width-list {
+    width: 200px;
+    height: 50px;
+}
+
+.level-width-list {
+    width: 150px;
+    height: 50px;
+}
+
+.same-user-select {
+    height: 50px;
+    margin-right: 10px;
+}
+
+
+.vimeo-thumbnail-container {
+    /* width: calc(100% + 1.25rem);*/
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    display: flex;
+    padding: 0px;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.vimeo-thumbnail-list {
+    flex: 1 1 25%;
+    max-width: 25%;
+}
+
+
+
+.js-vimeo-thumbnail-title {
+    font-size: 14px;
+}
+
+.js-vimeo-thumbnail-release {
+    font-size: 14px;
+}
+
+.vimeo-thumbnail-img {
+    box-sizing: border-box;
+    max-width: 100%;
+    width: 100%;
+}
+
+.vimeo-thumbnail-list-img {
+    width: 50px;
+}
+
+
+.ileUep {
+    cursor: pointer;
+    position: relative;
+    border-width: medium;
+    border-color: #000000;
+    border-style: solid;
+}
+
+.table_page_nation li {
+    display: inline;
+    padding: 10px 15px;
+    border: 1px #ccc solid;
+    color: #000053;
+    border-radius: 5px / 5px;
+}
+
+.table_page_nation_this {
+    background-color: #777;
+    color: #fff;
+}
+
+.calendar-container {
+    width: 500px;
+    margin: 0 auto;
+    border-radius: 5px;
+    background: #f6f5f4;
+    color: #1a1a1a;
+}
+
+.calendar {
+    padding: 0 30px 30px 30px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.day *:first-child {
+    color: #ff838b;
+    text-align: center;
+    padding: 10px;
+}
+
+.day *:last-child {
+    text-align: center;
+}
+
+.calendar-h1 {
+    display: inline-block;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    font-size: 24px;
+    margin: 0;
+    font-size: xx-large;
+}
+
+.calendar-th {
+    font-weight: normal;
+    font-size: 14px;
+    text-align: center;
+}
+
+.calendar-td {
+    font-weight: bold;
+    text-align: center;
+}
+
+.calendar-form {
+}
+
+.calendar-a {
+    box-sizing: content-box;
+}
+
+
+
+.maru {
+    border-radius: 50%;
+    border: 1px solid #F90;
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    text-align: center;
+    font-weight: bold;
+    background: #f66;
+}
+
+input#submit_month {
+    width: 90px;
+}
+
+table.video_list_table {
+    margin: auto;
+    width: 60%;
+    border-collapse: collapse;
+}
+
+    table.video_list_table td, th {
+        border: none;
+        border-bottom: 1px solid black;
+    }
+
+table.news_list_table {
+    margin: auto;
+    width: 60%;
+    border-collapse: collapse;
+}
+
+    table.news_list_table td, th {
+        border: none;
+        border-bottom: 1px solid black;
+        text-align: left;
+    }
+
+/***************************************
+ * 
+ * ユーザーの一覧
+ *
+************************************/
+.user-table-container {
+    overflow-x: scroll;
+}
+
+.lecture_center {
+      padding: 1em 1em 1em 1em;
+    margin: 2em 2em 3em 2em;
+       font-weight: lighter;
+    text-align: center;
+    background: #FFF;
+    border: solid 3px #87cefa; /*線*/
+    border-radius: 10px; /*角の丸み*/
+}
+
+table.lecture-table {
+    margin: 1em auto;
+    border: 2px #808080 solid;
+    text-align: center;
+    width: 90%;
+}
+
+    table.lecture-table td, th {
+        border: 1px #808080 solid;
+        white-space: nowrap;
+    }
+
+    table.lecture-table th {
+        text-align: center;
+        background: #3f3f3f;
+        color: #ffffff;
+    }
+
+    table.lecture-table td {
+        padding: 2px 10px;
+    }
+
+
+        table.lecture-table td a {
+            display: block; /* リンクをブロックレベル化して表示 */
+            padding: 0.6em 0.5em; /* 内側の余白量を上下に0.6文字分＆左右に1文字分にする */
+        }
+
+.fixed01 {
+    position: sticky;
+    left: 0;
+    color: #fff;
+    background: #333;
+    &:before
+
+{
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+}
+
+}
+
+.fixed02 {
+    position: sticky;
+    left: 0;
+    color: #fff;
+    background: #808000;
+    &:before
+
+{
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+}
+
+}
+
+.user-nowrap {
+    white-space: nowrap;
+}
+
+.user-list-message {
+    white-space: pre-line;
+    width: 5000;
+}
+
+/***************************************
+ * 
+ * ユーザーの詳細
+ *
+************************************/
+.user-tabclose-button {
+    display: block;
+    width: 650px;
+     height: 30px;
+    padding: 15px;
+    margin: 0 auto; /* 中央寄せになります。 */
+    text-align: center;
+    color: #666;
+    line-height: 36px;
+    text-decoration: none;
+    background-color: #efefef;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+/***************************************
+ * 
+ * ユーザーのコメント一覧
+ *
+************************************/
+.user-table-comment-container {
+}
+
+table.lecture-comment-table {
+    margin: 1em auto;
+    border: 2px #808080 solid;
+    text-align: center;
+    width: 100%;
+}
+
+    table.lecture-comment-table td, th {
+        border: 1px #808080 solid;
+    }
+
+    table.lecture-comment-table th {
+        text-align: center;
+        background: #3f3f3f;
+        color: #ffffff;
+        white-space: nowrap;
+    }
+
+    table.lecture-comment-table td {
+        padding: 2px 10px;
+    }
+
+.lecture-comment-message {
+    text-align: left;
+}
+
+
+
+/**************************
+ * 
+ * ユーザー情報編集
+ * 
+ * ************************/
+.user_edit_title {
+    font-weight: bold;
+    text-align: center;
+    font-size: 40px;
+}
+
+table.user_edit_table {
+    width: 50%;
+    border: 0px;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    table.user_edit_table td, th {
+        border: 0px #808080 solid;
+        border-collapse: collapse;
+    }
+/**************************
+ * 
+ * 新規登録画面
+ * 
+ * ************************/
+.my_wpmem_reg_css {
+    margin: 0 30%;
+}
+
+.name_inline_block {
+    display: inline-block; /* インラインブロック要素にする */
+    padding: 0 1em 0 0;
+}
+
+.button_div {
+    padding: 2em 0 0 0;
+}
+/**************************
+ * 
+ * レポート
+ * 
+ * ************************/
+
+/**************************
+ * 
+ * ZOOM
+ * 
+ * ************************/
+.zoom-minute-btn {
+    margin: 0 1em 0 1em;
+}
+
+/**************************
+ * 
+ * 動画カテゴリ入力
+ * 
+ * ************************/
+table.videoviewing_input_category_table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/**************************
+ * 
+ * 問い合わせ
+ * 
+ * ************************/
+
+.contus-css {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+/**************************
+ * 
+ * 成績一覧
+ * 
+ * ************************/
+.history_list_name_area {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+    text-align: center;
+    border-bottom: 1px solid;
+    padding-bottom: 1%;
+}
+
+.history_list_name_str {
+    font-size: 32px;
+}
+
+.history_list_admin_title_area {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2%;
+}
+
+.history_list_admin_title_str {
+    font-size: 35px;
+    font-weight: bolder;
+}
+.history_list_admin_title_year_str {
+    font-size: 15px;
+    padding-top: 4%;
+    margin-left: 1%;
+}
+.history_list_admin_title {
+    display: flex;
+    margin-left: 40%;
+}
+
+table.history-lsit-kougi-table {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 1%;
+}
+
+
+    table.history-lsit-kougi-table th {
+        text-align: center;
+        background-color: #3f3f3f;
+        color: white;
+        border: 0px #808080 solid;
+        border-collapse: collapse;
+    }
+
+
+    table.history-lsit-kougi-table td {
+        border: 1px #808080 solid;
+        border-collapse: collapse;
+    }
+

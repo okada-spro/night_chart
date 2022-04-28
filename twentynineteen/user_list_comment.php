@@ -137,7 +137,7 @@ $(document).ready(function() {
 
 <div class="page_div_box">
     <p>
-    <div class="histroy-list-comment-table_sarch">
+    <div style="display:inline-flex">
         <form action="<?php  $id = 694; echo get_page_link( $id );?>" method="post">
             <select name="level_table"  class="same-user-select">
             <?php foreach ($users_data->disp_only_level_array_data as $key => $value) {?>
@@ -168,12 +168,12 @@ $(document).ready(function() {
             <table class="lecture-comment-table" id="userTable">
                <thead>
                 <tr>
-                    <th class="fixed_th_1" >ID</th>
-                    <th >ユーザー名</th>
-                    <th >名前</th>
-                    <th >会員</th>
-                    <th >生存</th>
-                    <th  class="lecture-comment-message">コメント</th>
+                    <th width="70">ID</th>
+                    <th width="70">ユーザー名</th>
+                    <th width="70">名前</th>
+                    <th width="70">会員</th>
+                    <th width="70">生存</th>
+                    <th>コメント</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -237,10 +237,10 @@ $(document).ready(function() {
                         $zoom_plans_num =  $users_data->checkUserZoomPlans($row->ID);
         ?>
                 <tr>
-                    <td class="fixed_th_1" ><?php echo $row->ID;?></td>
-                    <td><?php echo $row->user_login;?></td>
-                    <td class="fixed_th_2"><?php echo get_the_author_meta('last_name',$row->ID);?>　<?php echo get_the_author_meta('first_name',$row->ID);?></td>
-                     <td class="fixed_th_3">
+                    <td><?php echo $row->ID;?></td>
+                    <td width="70"><?php echo $row->user_login;?></td>
+                    <td width="200px"><?php echo get_the_author_meta('last_name',$row->ID);?>　<?php echo get_the_author_meta('first_name',$row->ID);?></td>
+                     <td width="100px">
                        
                         
                         <?php if( $member_level == 0 && $member_type > 0){ //訓練生 ?>
@@ -252,7 +252,7 @@ $(document).ready(function() {
 
 
                     <td><?php echo $users_data->checkWithdrawalStr($Withdrawal);?></td>
-                    <td class="lecture-comment-message">
+                    <td  class="lecture-comment-message">
                         <?php echo get_the_author_meta('message',$row->ID);?>
                     </td>
                 </tr>

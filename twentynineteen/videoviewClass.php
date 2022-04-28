@@ -616,7 +616,15 @@ class VideoViewClass
                         $is_disp = false;
                     }
                 }
+                else if( $level  == UserClass::SPECIAL_SEMINAR){//特別セミナー
 
+                  
+
+                    if($rows->post_categorys != 21)
+                    {
+                        $is_disp = false;
+                    }
+                }
 
                 //非表示は入らない
                 if($rows->post_disp > 0 && $is_disp)

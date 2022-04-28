@@ -13,19 +13,22 @@ class UserClass
 
     public  $disp_array_data = array(
             0=>"生存者だけを表示",
-            1=>"脱落者だけを表示",
-            2=>"生存・脱落を表示",
+            4=>"生存者だけを表示(BAN非表示)",
+            1=>"BANだけを表示",
+            2=>"全てを表示",
      );
 
      public  $disp_level_array_data = array(
             0=>"訓練生だけを表示",
             1=>"門下生だけを表示",
             2=>"動画会員だけを表示",
+            3=>"特別セミナーだけを表示",
             99=>"全てを表示",
      );
 
 
-       public  $disp_only_level_array_data = array(
+     //一覧リスト用
+      public  $disp_only_level_array_data = array(
             0=>"訓練生だけを表示",
             1=>"株 訓練生だけを表示",
             2=>"FX 訓練生だけを表示",
@@ -34,15 +37,36 @@ class UserClass
             3=>"門下生だけを表示",
             4=>"動画会員だけを表示",
             5=>"動画会員だけを非表示",
+            8=>"特別セミナーだけを表示",
+            9=>"特別セミナーだけを非表示",
            99=>"全てを表示",
      );
 
+
+      //一覧リスト用(訓練生用)
+      public  $disp_only_kunren_level_array_data = array(
+            0=>"全てを表示",
+            1=>"株 訓練生だけを表示",
+            2=>"FX 訓練生だけを表示",
+     );
+
+      //成績一覧用
+      public  $disp_only_level_array_seiseki_data = array(
+            0=>"訓練生だけを表示",
+            1=>"株 訓練生だけを表示",
+            2=>"FX 訓練生だけを表示",
+            6=>"株だけを表示",
+            7=>"FXだけを表示",
+            3=>"門下生だけを表示",
+           99=>"全てを表示",
+     );
 
 
     public  $level_array_data = array(
             0=>"動画会員",
             1=>"訓練生",
             2=>"門下生",
+            3=>"特別セミナー",
            
      );
 
@@ -66,7 +90,7 @@ class UserClass
      public const KUNRENSEI = 1;//訓練生
      public const MONKASEI = 2;//門下生
      public const DOGA = 0;//動画会員
-
+     public const SPECIAL_SEMINAR = 3;//特別セミナー
 
       /*定義*/
      public const KABU = 1;//株

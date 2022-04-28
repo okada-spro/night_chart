@@ -42,6 +42,7 @@ get_header();
 					"21"=>  array("mail_make",true,true),
 					"22"=>  array("mail_menu",true,true),
 					"23"=>  array("mail_list",true,true),
+					"24"=>  array("trainee_list",true,true),
 
 				);
 
@@ -95,7 +96,7 @@ get_header();
 
 							//echo $login;
 
-							if($login_ban)
+							if($login_ban && !is_page("contact") )
 							{
 								include("logn-ban.php");
 								break;
