@@ -1,0 +1,23 @@
+@media screen and (max-width: 1024px){
+    /* 4/25 */
+    .tool-upload .pager{
+        margin-top: 100px;
+    }
+
+    .tool-upload table.user-table-two.tablesorter th.fixed_th_1,
+    .tool-upload table.user-table-two.tablesorter td.fixed_th_1{
+        position: sticky;
+        left:4px;
+    }
+    .tool-upload table.user-table-two.tablesorter th.fixed_th_2,
+    .tool-upload table.user-table-two.tablesorter td.fixed_th_2{
+        position: sticky;
+        left: 110px;
+    }
+
+
+
+}
+@media screen and (max-width: 560px){
+}
+

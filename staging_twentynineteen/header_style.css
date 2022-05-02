@@ -1,0 +1,126 @@
+ul.header-dropmenu {
+  list-style: none;
+  width: 70%;
+  height: 40px;
+  margin: 0 auto;
+  padding: 0;
+  display: table;
+  table-layout: fixed;
+}
+@media screen and (max-width: 1024px){
+    /* 12/3 sp対応 作業中*/
+    ul.header-dropmenu {
+        width: 95%;
+    }
+}
+@media screen and (max-width: 560px){
+    /* 12/3 sp対応 作業中*/
+    ul.header-dropmenu {
+        width: 100%;
+    }
+}
+ul.header-dropmenu > li {
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  border: 1px solid #f8f8f8;
+  background: #CCCCCC; /* 背景色*/
+}
+ul.header-dropmenu li a {
+  display: block;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 14px;
+}
+ul.header-dropmenu li ul {
+  visibility: hidden;
+  width: 100%;
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #222; /* マウスオーバー時の枠線 */
+  border-top: none;
+}
+ul.header-dropmenu li:hover ul {
+  visibility: visible;
+  z-index: 1;
+}
+ul.header-dropmenu li ul li {
+  background: #fff;
+  transition: all .2s ease;
+}
+ul.header-dropmenu > li:hover {
+  background: #fff;
+  border: 1px solid #222; /* マウスオーバー時の枠線 */
+  border-bottom: none;
+}
+ul.header-dropmenu li:hover ul li:hover {
+  background: #f8f8f8;
+}
+
+/* 12/6 sp対応 */
+/* .mode-pc{
+	display:block;
+}
+*/
+.mode-tab,
+.mode-sp,
+ul.header-dropmenu li a.mode-tab{
+	display:none;
+}
+.mode-sp{
+    display: none;
+}
+
+@media screen and (max-width: 1024px){
+    .mode-pc,
+	ul.header-dropmenu li a.mode-pc{
+		display:none;
+	}
+	.mode-tab,
+	ul.header-dropmenu li a.mode-tab{
+		display:block;
+	}
+}
+@media screen and (max-width: 560px){
+    /* 通常ヘッダーメニュー非表示 */
+    .mode-pc.mode-tab table.header_table{
+        display: none;
+    }
+    
+	.mode-sp{
+		display:block;
+	}
+    .mode-sp .header_table tr{
+        height: 50px;
+    }
+
+    /* sp用ハンバーガーメニュー */
+    ul.header-dropmenu ul {
+        visibility: hidden;
+        width: 100%;
+        list-style: none;
+        position: absolute;
+        top: 100%;
+        left: -1px;
+        margin: 0;
+        padding: 0;
+        border: 1px solid #222; /* マウスオーバー時の枠線 */
+        border-top: none;
+    }
+
+    ul.header-dropmenu li:hover ul {
+        visibility: visible;
+        z-index: 1;
+    }
+
+    .index_user_button{
+        width: 90%;
+    }
+}
+

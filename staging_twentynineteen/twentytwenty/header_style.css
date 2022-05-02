@@ -1,0 +1,184 @@
+/* ヘッダー */
+	.site-header{
+		height: 75px;
+	}
+
+	.clearfix{
+		display: flex;
+        justify-content: space-between;
+	}
+	.clearfix a{
+		text-decoration: none;
+	}
+	
+	.cart{
+		float: right;
+		display: inline-block;
+		padding: 15px 15px 10px 15px;
+		background-color: #9A0200;
+	}
+	li.cart a{
+		width: 30px;
+        display: block;
+	}
+	li.cart img{
+		height: 30px;
+	}
+
+
+
+	.site-logo{
+		margin-top: 20px;
+	}
+	.site-logo img{
+		height: 50px;
+	}
+
+	.crim{
+		margin-left:55%;
+		font: normal normal normal 20px Times New Roman;
+	}
+
+	li.header-item{
+		display: inline-block;
+		margin-left:20px;
+		margin-right:20px;
+		margin-top:20px;
+	}
+
+	.hamburger-menu{
+		display: none;
+	}
+
+
+	@media screen and (max-width: 1024px){
+		.site-header {
+			height: 100px;
+			width: 100%;
+			background-color: white;
+			position: fixed;
+			top: 30px;
+			left: 0px;
+		}
+
+		.sb-site{
+			position: fixed;
+			top: 25px;
+		}
+
+		.clearfix{
+			display: unset;
+		}
+
+		.cart{
+			position: fixed;
+			top: 30px;
+			right: 0px;
+		}
+
+		.home .cart{
+			padding: 13px 15px;
+		}
+		
+		li.header-item{
+			display: none;
+		}
+
+		.hamburger-menu{
+			display: block;
+		}
+
+		/* ハンバーガーメニュー */
+		.menu-btn {
+			position: fixed;
+			top: 32px;
+			right: 60px;
+			display: flex;
+			height: 60px;
+			width: 60px;
+			justify-content: center;
+			align-items: center;
+			/* z-index: 90; */
+			background-color: black;
+		}
+		.menu-btn span,
+		.menu-btn span:before,
+		.menu-btn span:after {
+			content: '';
+			display: block;
+			height: 3px;
+			width: 25px;
+			border-radius: 3px;
+			background-color: #ffffff;
+			position: absolute;
+		}
+		.menu-btn span:before {
+			bottom: 8px;
+		}
+		.menu-btn span:after {
+			top: 8px;
+		}
+
+		#menu-btn-check:checked ~ .menu-btn span {
+			background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+		}
+		#menu-btn-check:checked ~ .menu-btn span::before {
+			bottom: 0;
+			transform: rotate(45deg);
+		}
+		#menu-btn-check:checked ~ .menu-btn span::after {
+			top: 0;
+			transform: rotate(-45deg);
+		}
+
+		/* チェックボックス */
+		#menu-btn-check {
+			display: none;
+		}
+
+		#menu-btn-check:checked ~ .menu-content {
+			left: 80%;/*メニューを画面内へ*/
+		}
+
+		/* ハンバーガーメニュー装飾 */
+		.menu-content {
+			width: 30%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 100%;
+			z-index: 80;
+			background-color: #4b4a4a;
+			transition: all 0.5s;/*アニメーション設定*/
+		}
+		.menu-content ul {
+			padding: 70px 10px 0;
+		}
+		.menu-content ul li {
+			border-bottom: solid 1px #ffffff;
+			list-style: none;
+		}
+		.menu-content ul li a {
+			display: block;
+			width: 100%;
+			font-size: 15px;
+			box-sizing: border-box;
+			color:#ffffff;
+			text-decoration: none;
+			padding: 9px 15px 10px 0;
+			position: relative;
+		}
+		.menu-content ul li a::before {
+			content: "";
+			width: 7px;
+			height: 7px;
+			border-top: solid 2px #ffffff;
+			border-right: solid 2px #ffffff;
+			transform: rotate(45deg);
+			position: absolute;
+			right: 11px;
+			top: 16px;
+		}
+	
+	
+	}

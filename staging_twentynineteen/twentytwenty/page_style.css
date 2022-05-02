@@ -1,0 +1,860 @@
+/* 固定ページ全体 */
+    .page-template-default{
+        width:80%;
+        margin :0 auto;
+    }
+
+    .page-content-line{
+        width: 50px;
+        margin: 0 auto;
+        border-bottom: 1px solid black;
+    }
+    @media screen and (max-width: 1024px){
+        .page-template-default{
+            width:100%;
+        }
+
+        /* .cart{
+            padding: 15px 30px 19px 15px;
+        } */
+
+        /* .page-id-66 .cart{ */
+        .cart{
+            padding: 15px 20px 15px 10px;
+            top: 32px;
+        }
+
+        .page-content-line{
+            width: 25px;
+        }
+	}
+
+    .clearfix a {
+        color: black;
+    }
+
+/* 問合せサンクス */
+    .thanks-title{
+        font: normal normal normal 40px Times New Roman;
+        text-align: center;
+        width:1000px;
+        height: 150px;
+        margin: 50px auto;
+    }
+
+    .thanks-content{
+        width:1150px;
+        height:100px;
+        margin:50px auto;
+        font: normal normal normal 25px Hiragino Sans;
+        overflow-wrap: break-word;
+    }
+
+	@media screen and (max-width: 1024px){
+        .contact-form .wpcf7-form-control-wrap{
+            position: unset;
+        }
+
+        .thanks-title{
+            font-size: 26px;
+            margin-top: 200px;
+            width: 100%;
+            height: auto;
+        }
+
+        .thanks-content{
+            font-size: 13px;
+            width: 80%;
+        }
+	}
+
+/* 注文 */
+    .mode-input,
+    .mode-conf,
+    .mode-comp{
+        width: 250px;
+        height: 40px;
+        background-color: #CECECE;
+        color: white;
+        font-weight: bold;
+        border-radius: 30px;
+        text-align: center;
+        font-size: 23px;
+        padding-top: 10px;
+    }
+
+    .mode-line{
+        border-bottom: 5px solid #cecece;
+        width: 35%;
+        margin-top: 20px;
+        height: 1px;
+    }
+
+    @media screen and (max-width: 1024px){
+        .mode-input,
+        .mode-conf,
+        .mode-comp{
+            margin-top: 50px;
+        }
+
+        .mode-line{
+            margin-top: 70px;
+        }
+	}
+
+/* 注文サンクス */
+    .order-flow-content{
+        width: 80%;
+        height: 100px;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        justify-content: space-between;
+    }
+    @media screen and (max-width: 1024px){
+        .order-flow-content{
+            width: 96%;
+            margin-left: 2%;
+        }
+
+        .mode-input,
+        .mode-conf,
+        .mode-comp{
+            width:  30%;
+        }
+
+        .mode-line{
+            width: 100px;
+        }
+
+        .page-id-55 .thanks-title{
+            margin-top: 50px;
+        }
+	}
+
+    .page-id-55 .mode-comp{
+        background-color: #9A0811;
+    }
+
+/* プライバシーポリシー */
+    .policy-title{
+        font: normal normal normal 40px Times New Roman;
+        text-align: center;
+        width:1000px;
+        height: 50px;
+        margin: 50px auto;
+    }
+
+    .policy-content{
+        width:1150px;
+        height:100px;
+        margin:50px auto;
+        font: normal normal normal 25px Hiragino Sans;
+        overflow-wrap: break-word;
+    }
+
+    @media screen and (max-width: 1024px){
+        .policy-title{
+            font-size: 26px;
+            margin-top: 200px;
+            width: 100%;
+            height: auto;
+        }
+
+        .policy-content{
+            font-size: 13px;
+            width: 100%;
+        }
+	}
+
+/* 問合せ */
+    .contact-title{
+        font: normal normal normal 40px Times New Roman;
+        text-align: center;
+        width:1000px;
+        height: 50px;
+        margin: 50px auto;
+    }
+
+    .contact-content{
+        width:1150px;
+        height:100px;
+        margin:50px auto;
+        font: normal normal normal 25px Hiragino Sans;
+        overflow-wrap: break-word;
+    }
+
+    .contact-form{
+        width: 1150px;
+        margin: 100px auto;
+        background-color: #F7F7F7;
+        padding: 50px;
+    }
+
+    .contact-form p input{
+        width: 100%;
+        height: 60px;
+        margin: 20px auto;
+        border: 1px solid;
+    }
+
+    .contact-form p input.wpcf7-submit{
+        width: 200px;
+        height: 60px;
+        margin: 20px auto;
+        background-color: black;
+        color:white;
+        margin-left: 40%;
+        border: none;
+        font: normal normal normal 23px/30px Hiragino Sans;
+    }
+    
+    .contact-form p textarea{
+        width: 100%;
+        height: 300px;
+        margin: 20px auto;
+        border: 1px solid;
+    }
+
+    @media screen and (max-width: 1024px){
+        .content-main{
+            width: 100%;
+        }
+
+        .contact-title{
+            font-size: 26px;
+            margin-top: 300px;
+            width: 100%;
+            height: auto;
+        }
+
+        .contact-content{
+            font-size: 13px;
+            width: 95%;
+        }
+
+        .contact-form{
+            width: 90%;
+        }
+
+        .contact-form p input.wpcf7-submit{
+            width: 100%;
+            margin-left:0px;
+        }
+	}
+
+
+/* 利用規約 */
+    .conditions-title{
+        font: normal normal normal 40px Times New Roman;
+        text-align: center;
+        width:1000px;
+        height: 50px;
+        margin: 50px auto;
+    }
+
+    .conditions-content{
+        width:1150px;
+        height:100px;
+        margin:50px auto;
+        font: normal normal normal 25px Hiragino Sans;
+        overflow-wrap: break-word;
+    }
+    @media screen and (max-width: 1024px){
+        .conditions-title{
+            font-size: 26px;
+            margin-top: 200px;
+            width: 100%;
+            height: auto;
+        }
+
+        .conditions-content{
+            font-size: 13px;
+            width: 80%;
+        }
+	}
+
+/* cart */
+    .cart-main{
+        width: 80%;
+        margin: 100px auto;
+    }
+    @media screen and (max-width: 1024px){
+        .cart-main{
+            width: 100%;
+        }
+	}
+
+    .cart-left-font{
+        width: 270px;
+        font: normal normal normal 29px/51px Times New Roman;
+        text-align:center;
+        border: solid 1px;
+        float:left;
+        border-right: none;
+    }
+    @media screen and (max-width: 1024px){
+        .cart-left-font{
+            float:unset;
+            width: calc(100% - 32px);
+            text-align:left;
+            height: 100px;
+            line-height: 100px;
+            padding-left: 30px;
+        }
+	}
+
+    .cart-main table{
+        border-collapse:collapse;
+    }
+
+    .cart-main table th
+    {
+        height: 60px;
+    }
+    .cart-main table td,
+    .cart-main table tr
+    {
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    .cart-main table .item-name{
+        text-align: left;
+        font-size: 20px;
+        line-height: 70px;
+    }
+    .cart-main table .item-name img{
+        height: 60px;
+        display: block;
+        float: left;
+        margin: 5;
+    }
+    @media screen and (max-width: 1024px){
+        .item-picture{
+            display: flex;
+        }
+
+        .item-picture .item-name{
+            text-align: left;
+            font-size: 36px;
+            line-height: 150px;
+            height: 15%;
+            width: 60%;
+            /* float: left; */
+        }
+
+        .item-picture img{
+            height: 150px;
+            margin: 5;
+            /* float: left; */
+        }
+
+        .cart-main .item-picture input.cart-delete-btn{
+            width: 140px;
+            height: 140px;
+            margin: 10px;
+            border: none;
+            font-size: 400%;
+        }
+
+        .tanka-area,
+        .amount-area,
+        .small-area{
+            display: flex;
+        }
+
+        .left-tag{
+            float:left;
+            width:calc(40% - 2px);
+            height: 100px;
+            background-color: #F7F7F7;
+            font-size:26px;
+            text-align: center;
+            line-height: 100px;
+            border: 1px solid #DDDDDD;
+        }
+        .item-money,
+        .item-count-no{
+            width: calc(60% - 2px);
+            font-size:26px;
+            text-align: center;
+            height: 100px;
+            line-height: 100px;
+            /* float:left; */
+            border: 1px solid #DDDDDD;
+        }
+        .money_disp{
+            width: calc(60% - 2px);
+            font-size:26px;
+            text-align: center;
+            height: 100px;
+            line-height: 100px;
+            border: 1px solid #DDDDDD;
+        }
+        .total_money{
+            width: calc(60% - 2px);
+            font-size:26px;
+            text-align: end;
+            height: 100px;
+            line-height: 140px;
+        }
+	}
+
+    .cart-main table th{
+        border: 1px solid;
+        background-color:#F7F7F7;
+    }
+
+    .cart-main input.cart-delete-btn{
+        width: 40px;
+        height: 40px;
+        background-color: #F7F7F7;
+    }
+
+    .cart-main table td.total_money{
+        height: 200px;
+        font-size: 36px;
+        text-align: end;
+        margin-right: 20px;
+    }
+
+    .cart-main input.item-count-sub,
+    .cart-main input.item-count-add{
+        width: 35px;
+        height: 35px;
+        border: none;
+        font: normal normal normal 23px Hiragino Sans;
+        background-color: #F7F7F7;
+        cursor: pointer;
+    }
+    @media screen and (max-width: 1024px){
+        .cart-main input.item-count-sub,
+        .cart-main input.item-count-add{
+            width: 25%;
+            height: 80px;
+            margin: 10px;
+            border: none;
+            font: normal normal normal 23px Hiragino Sans;
+            background-color: #F7F7F7;
+            cursor: pointer;
+        }
+	}
+
+    .item-count-disp{
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        font-size: 18px;
+    }
+    @media screen and (max-width: 1024px){
+        .item-count-disp{
+            width: 25%;
+            height: 80px;
+            text-align: center;
+            font-size: 26px;
+        }
+	}
+
+    .btn-area{
+        width: 1000px;
+        margin: 100px auto 0;
+        justify-content: space-between;
+        display: flex;
+    }
+    @media screen and (max-width: 1024px){
+        .btn-area{
+            display: unset;
+        }
+	}
+
+    .cart-main input.keep_shopping_btn{
+        width: 450px;
+        height: 70px;
+        background-color: black;
+        color: white;
+        font-size:22px;
+        cursor: pointer;
+        border: none;
+    }
+    .cart-main input.go_regi_btn{
+        width: 450px;
+        height: 70px;
+        background-color: #9A0200;
+        color: white;
+        font-size:22px;
+        cursor: pointer;
+        border: none;
+    }
+    @media screen and (max-width: 1024px){
+        .btn-area a{
+            width: 100%;
+        }
+
+        .cart-main input.keep_shopping_btn,
+        .cart-main input.go_regi_btn{
+            width: 90%;
+            margin-left: 5%;
+            margin-top: 20px;
+            border: none;
+        }
+
+        .money-area{
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .money_disp.total_money{
+            height: 130px;
+            text-align: center;
+            font: normal normal normal 27px/130px Hiragino Sans;
+        }
+
+        .money-font{
+            font-size: 60px;
+            line-height: 130px;
+        }
+	}
+
+/* 支払い入力 */
+
+    @media screen and (max-width: 1024px){
+        .settlement-area .order-flow-content{
+            width: 98%;
+            margin-left: -10%;
+            margin-left: 1%;
+        }
+    }
+
+    .page-id-70 .mode-input{
+        background-color: #9A0811;
+    }
+
+    .settlement-title{
+        font: normal normal normal 52px/62px Times New Roman;
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 50px;
+    }
+    @media screen and (max-width: 1024px){
+        .settlement-title{
+            width: 98%;
+            margin-left: 2%;
+            font-size: 300%;
+        }
+
+        .settlement-area .cart-left-font{
+            float: unset;
+            text-align: left;
+            padding-left: 2%;
+            line-height: 65px;
+            width: 98%;
+        }
+    }
+
+
+
+    .cart-main .settlement-total_money{
+        height: 200px;
+        font-size: 36px;
+        text-align: end;
+        margin-right: 20px;
+        color:#FF0000;
+    }
+    @media screen and (max-width: 1024px){
+        .cart-main .settlement-total_money{
+            line-height: 200px;
+            border: none;
+        }
+	}
+
+    .output-area{
+        display:none;
+    }
+
+    .comment-area{
+        display: flex;
+        margin: 20px 0;
+    }
+    .comment-area p{
+        color: #707070;
+        text-align: center;
+    }
+    @media screen and (max-width: 1024px){
+        .comment-area{
+            margin-left: 10%;
+        }
+        .comment-area p{
+            font-size: 150%;
+        }
+	}
+
+    .comment-area-line{
+        border-bottom: 1px solid #707070;
+        width: 30%;
+        margin: 0 20px;
+    }
+
+    @media screen and (max-width: 1024px){
+        .input-area label{
+            margin-left: 2%;
+        }
+        .input-area input{
+            margin-left: 2%;
+            width: 96%;
+        }
+	}
+
+    .CntInput1,
+    select#Cnt4{
+        width: 80%;
+        height: 60px;
+        border: solid 1px black;
+        margin: 20px 0 20px 10%;
+    }
+    @media screen and (max-width: 1024px){
+        .CntInput1,
+        select#Cnt4{
+            margin-left: 2%;
+            width: 96%;
+        }
+
+	}
+
+    #Cnt8,#Cnt9{
+        margin: -60px 0 00px 10%;
+    }
+    @media screen and (max-width: 1024px){
+        #Cnt8,#Cnt9{
+            margin: -40px 0 0 2%;
+        }
+        /* どこを押してもカレンダー表示 */
+        input[type=date]#Cnt8::-webkit-calendar-picker-indicator {
+                position: absolute;
+                width: 80%;
+                /* height: 100%; */
+                opacity: 0;
+            
+        }
+	}
+
+    .CntCheck1{
+        width: 35px;
+    }
+
+    .pay-radio{
+        display: flex;
+    }
+    .pay-radio p{
+        line-height: 65px;
+        margin-left: 20px;
+    }
+    @media screen and (max-width: 1024px){
+        .pay-radio input{
+            width: 40px;
+            margin-left: 4%;
+        }
+	}
+    
+    .bank-area{
+        width: 80%;
+        margin: 0 auto;
+        height: 350px;
+        background: #F3F3F3;
+    }
+    @media screen and (max-width: 1024px){
+        .bank-area{
+            width: 96%;
+            margin-left: 2%;
+        }
+	}
+
+    .bank-name,
+    .bank-commission-name{
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 10px;
+    }
+    @media screen and (max-width: 1024px){
+        .bank-name,
+        .bank-commission-name{
+            width: 96%;
+            margin-left: 2%;
+        }
+	}
+
+    .bank-sinbol{
+        width: 80%;
+        height: 100px;
+        background-color: white;
+        margin: 0 auto;
+        background-image: url("http://localhost/wordpress/wp-content/themes/twentytwenty/assets/images/index-img-05.gif");
+        background-repeat:no-repeat;
+        background-size:contain;
+        background-position: center;
+    }
+    @media screen and (max-width: 1024px){
+        .bank-sinbol{
+            width: 96%;
+            margin-left: 2%;
+        }
+	}
+
+    .bank-area p{
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 20px;
+    }
+    @media screen and (max-width: 1024px){
+        .bank-area p{
+            width: 96%;
+            margin-left: 2%;
+        }
+	}
+
+    .bank-commission-detail{
+        width: 80%;
+        height: 100px;
+        background-color: white;
+        margin: 0 auto;
+        text-align: center;
+        color: red;
+        line-height: 100px;
+        font-weight: bold;
+    }
+    @media screen and (max-width: 1024px){
+        .bank-commission-detail{
+            font-size: 150%;
+            width: 96%;
+            margin-left: 2%;
+        }
+	}
+    
+    textarea#Cnt11 {
+        height: 300px;
+        margin-bottom: 100px;
+    }
+    @media screen and (max-width: 1024px){
+        textarea#Cnt11 {
+            font-size: 150%;
+        }
+	}
+
+    #BtConfirm{
+        padding: 10px 20px;
+        margin-left: 42%;
+        color: white;
+        background-color: #9A0811;
+    }
+    @media screen and (max-width: 1024px){
+        #BtConfirm{
+            font-size: 150%;
+            padding: 10px 37%;
+            margin-left: 3%;
+        }
+	}
+
+    .simple_settlement{
+        border: solid 1px #DDDDDD;
+        margin: 50px 0;
+    }
+    .simple_settlement p{
+        font: normal normal normal 25px/25px Hiragino Sans;
+        margin-top: -12px;
+        margin-left: 15px;
+        background-color: white;
+        width: 420px;
+        text-align: center;
+    }
+
+    /* 入力内容確認 */
+    .output-area label{
+        font: normal normal normal 26px Hiragino Sans;
+    }
+    @media screen and (max-width: 1024px){
+        .output-area{
+            font-size: 25px;
+        }
+        .output-area label{
+            margin-left: 7%;
+        }
+	}
+
+    .result-tag{
+        float: left;
+        margin-left: 5%;
+        margin-right: 10%;
+        width: 300px;
+        height: 50px;
+        line-height: 50px;
+    }
+
+    .CfmItem1.border{
+        border-bottom: 1px solid #707070;
+        width: 80%;
+        margin-left: 5%;
+        height: 50px;
+        line-height: 50px;
+    }
+    #Cfm11.CfmItem1.border{
+        height: auto;
+        overflow-wrap: break-word;
+    }
+    @media screen and (max-width: 1024px){
+        .CfmItem1.border{
+            width: 90%;
+        }
+	}
+
+    .output-area .res_btn{
+        display: flex;
+        height: 60px;
+        margin-top: 70px;
+        justify-content: center;
+    }
+    @media screen and (max-width: 1024px){
+        .output-area .res_btn{
+            display: block;
+        }
+	}
+
+    #BtCancel{
+        width: 80px;
+        height: 20px;
+        background-color: black;
+        color: white;
+        padding: 10px 50px;
+    }
+
+    .output-area span#BtConfirm{
+        padding: 10px 57px 0px;
+        height: 30px;
+        color: white;
+        background-color: #9A0811;
+        margin-left: 2%;
+    }
+    .output-area span#BtConfirm input{
+        color: white;
+        background-color: #9A0811;
+        border: none;
+    }
+    @media screen and (max-width: 1024px){
+
+        
+        .output-area  #BtCancel{
+            padding: 10px 40%;
+            margin-left: 5%;
+        }
+        .output-area  span#BtConfirm{
+            padding: 0;
+            padding: 10px 40%;
+            margin-left: 5%;
+            display: block;
+            margin-top: 30px;
+            width: 12.3%;
+        }
+        .output-area  span#BtConfirm input{
+            font-size: 25px;
+        }
+	}

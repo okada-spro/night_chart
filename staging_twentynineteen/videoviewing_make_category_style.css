@@ -1,0 +1,27 @@
+@media screen and (max-width: 1024px){
+}
+@media screen and (max-width: 560px){
+    /* 4/20 */
+    .videoviewing_make_category table.user-table-two{
+        display: block;
+        overflow-x: scroll;
+        width: 95%;
+    }
+
+
+    .videoviewing_make_category .fixed_th_1{
+        position: sticky;
+        left: 4px;
+    }
+    .videoviewing_make_category .fixed_th_2{
+        position: sticky;
+        left: 110px;
+    }
+    .videoviewing_make_category td.fixed_th_1{
+        background-color: white;
+    }
+    .videoviewing_make_category td.fixed_th_2{
+        background-color: white;
+    }
+}
+

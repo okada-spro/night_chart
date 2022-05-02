@@ -1,0 +1,35 @@
+@media screen and (max-width: 1024px){
+    /* 4/20 */
+    .calendar-container{
+        width: 90%;
+    }
+
+    .vimeo-top-table-container{
+        width: 45%;
+        margin: 0 auto;
+    }
+
+
+}
+@media screen and (max-width: 560px){
+    .vimeo-top-table-container{
+        width: 80%;
+        margin: 0 auto;
+    }
+    .calendar-container table.calendar{
+        width: auto;
+        padding: 0;
+    }
+
+    table.user-table-two.video_list_table{
+        display: block;
+        overflow-x: scroll;
+        width: 95%;
+    }
+    table.user-table-two.video_list_table .fixed_th_1{
+        position: sticky;
+        left: 0px;
+    }
+
+}
+
