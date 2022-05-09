@@ -1,0 +1,45 @@
+@media screen and (max-width: 1024px){
+    /* 4/19 tab対応 */
+    .index_updata_button{
+        padding: 0;
+    }
+
+    .same-user-select{
+        margin-top: 0;
+    }
+
+    .index_updata_center{
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .index_center{
+        width: 95%;
+    }
+}
+@media screen and (max-width: 560px){
+    .index_updata_center{
+        width: 80%;
+    }
+
+    .index_history_button{
+        width: 80%;
+    }
+
+    .index_updata_button{
+        width: 80%;
+    }
+
+    .index_center{
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .same-user-select{
+        height: auto;
+    }
+
+    #input_disp{
+        height: 40px;
+    }
+}

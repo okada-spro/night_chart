@@ -94,6 +94,26 @@
             //FX講義
              $input_data->init_fx_kougi();
         }
+          else  if($_GET["catagory"] == 4)
+        {
+            //株作業会
+             $input_data->init_kabu_sagyou();
+        }
+          else  if($_GET["catagory"] == 5)
+        {
+            //FX作業会
+             $input_data->init_fx_sagyou();
+        }
+          else  if($_GET["catagory"] == 6)
+        {
+            //特別ｾﾐﾅｰ
+             $input_data->init_special_seminar();
+        }
+           else  if($_GET["catagory"] == 7)
+        {
+            //ZOOM座談会
+             $input_data->init_zoom_zadankai();
+        }
 
     }
 
@@ -140,8 +160,17 @@ function clickBtn1(){
 <?php }?>
 
 
+
+
 <form action="<?php  $id = 51; echo get_page_link( $id );?>" method="post" name="input_data">
     <div class="c-table-container">
+
+        <?php if( $_GET["catagory"] == 4 ||  $_GET["catagory"] == 5 ||  $_GET["catagory"] == 6){ ?>
+
+            <div style="margin-left: auto;margin-right: auto;max-width: 1200px;text-align: center;margin-bottom: 10px;"><font color="red"><b>こちはまだ初期値が設定されていません！ご注意ください！</b></font></div>
+
+        <?php } ?>
+
         <table class="c-table">
         <tbody>
             <tr>

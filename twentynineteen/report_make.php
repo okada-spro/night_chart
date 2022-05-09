@@ -124,7 +124,7 @@
                                     <option value="<?php echo $key;?>" <?php if($input_data->getReportData("input_type") == $key){ echo "selected";}?>><?php echo $value;?></option>
                                 <?php } ?>
                             </select>
-                            <font size="2" color="red">*なしの場合は株・FXの訓練生両方が提出できます</font>
+                            <br><font size="2" color="red">*なしの場合は株・FXの訓練生両方が提出できます</font>
                         </td>
                      </tr>
                     <tr>
@@ -148,9 +148,9 @@
 
     <p>
         <a class="index_button" href="<?php $id = 482; echo get_page_link( $id );?>">新規登録</a>
-    </p>>
+    </p>
 
 
     <p>
         <a class="index_button" href="<?php $id = 487; echo get_page_link( $id );?>">レポート提出一覧へ</a>
-    </p>>
+    </p>

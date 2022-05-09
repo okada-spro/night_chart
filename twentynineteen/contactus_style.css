@@ -1,0 +1,9 @@
+@media screen and (max-width: 560px){
+    .contus-css{
+        margin: 0 5%;
+    }
+    .contus-css input{
+        width: 100%;
+    }
+}
+

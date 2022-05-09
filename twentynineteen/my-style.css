@@ -49,7 +49,7 @@
     }
 
 .index_updata_center {
-      padding: 0.5em 1em;
+    padding: 0.5em 1em;
     margin: 2em 0;
     font-weight: bold;
     text-align: center;
@@ -103,8 +103,8 @@
 
 .index_button {
     display: block;
-    width: 650px;
-     height: 30px;
+    width: 600px;
+    height: 60px;
     padding: 15px;
     margin: 0 auto; /* 中央寄せになります。 */
     text-align: center;
@@ -161,7 +161,7 @@ table.top-table {
 .index_top_button {
     display: block;
     width: 350px;
-     height: 30px;
+    height: 30px;
     padding: 15px;
     margin: 0 auto; /* 中央寄せになります。 */
     text-align: center;
@@ -703,7 +703,7 @@ table.lecture-table {
 .user-tabclose-button {
     display: block;
     width: 650px;
-     height: 30px;
+    height: 30px;
     padding: 15px;
     margin: 0 auto; /* 中央寄せになります。 */
     text-align: center;
@@ -933,4 +933,18 @@ table.history-lsit-kougi-table {
 
 .login_header_banner_img{
 
+}
+
+.login_top_banner_area {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+@media screen and (max-width: 560px) {
+
+    .login_top_banner_area {
+        max-width: 350px;
+    }
 }

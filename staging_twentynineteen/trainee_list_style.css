@@ -1,0 +1,16 @@
+.page-id-849 .tablesorter-header-inner {
+    background-color: unset;
+}
+
+@media screen and (max-width: 560px){
+    .page-id-849 table.lecture-table .fixed_th_1,
+    .page-id-849 table.lecture-table .fixed_th_2{
+        position: unset;
+    }
+    .page-id-849 table.lecture-table .fixed_th_3{
+        left: 0px;
+    }
+    .page-id-849 .pager{
+        margin-left: 0px;
+    }
+}

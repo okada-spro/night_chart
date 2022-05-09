@@ -38,10 +38,14 @@
     .table.user-table {
         display: table;
     }
-    table.user-table .fixed_th_1{
+    /* table.user-table .fixed_th_1{ */
+    table.user-table.history_list th.fixed_th_1,
+    table.user-table.history_list td.fixed_th_1{
         position: unset;
     }
-    table.user-table .fixed_th_2{
+    /* table.user-table .fixed_th_2{ */
+    table.user-table.history_list th.fixed_th_2,
+    table.user-table.history_list td.fixed_th_2{
         position: unset;
     }
     table.user-table .fixed_th_3{

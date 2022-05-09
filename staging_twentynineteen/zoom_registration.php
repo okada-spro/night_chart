@@ -36,7 +36,7 @@
         $input_data->getListZoomRow($user->ID);
     }
 
-
+    //echo $user->ID;
 
 if(isset($_POST["viewing_url"]))
 {
@@ -196,6 +196,12 @@ function add_check_kougi(){
             {
                  continue;
             }
+
+            //作業会
+            if($key == ZoomClass::ZOOM_KABU_SAGYOU_CATEGORY)
+            {
+                 continue;
+            }
         }
 
         //株訓練生
@@ -205,7 +211,37 @@ function add_check_kougi(){
             {
                  continue;
             }
+            //作業会
+            if($key == ZoomClass::ZOOM_FX_SAGYOU_CATEGORY)
+            {
+                 continue;
+            }
         }
+
+         //動画会員が基本的に参加できない
+        if(  $member_level == UserClass::DOGA )
+        {
+            continue;
+        }
+
+        //特別セミナー会員は特別セミナーとZOOM座談会だけ参加できる
+        if(  $member_level == UserClass::SPECIAL_SEMINAR  &&  $key !=  ZoomClass::ZOOM_SPECIAL_SEMINAR &&  $key !=  ZoomClass::ZOOM_ZADANKAI)
+        {
+            continue;
+        }
+
+        /*
+         if($key == ZoomClass::ZOOM_KABU_SAGYOU_CATEGORY &&   $user->ID != 19)
+         {
+            continue;
+         }
+
+         if($key == ZoomClass::ZOOM_FX_SAGYOU_CATEGORY &&   $user->ID != 19)
+         {
+            continue;
+         }
+         */
+      
 
  ?>
 
@@ -291,12 +327,8 @@ function add_check_kougi(){
                         continue;
                     }
 
-                     //動画閲覧は見れない
-                    if( $row->post_zoom_jointype == ZoomClass::ZOOM_JOIN_NO_DOUGA && $member_level == UserClass::DOGA)
-                    {
-                        continue;
-                    }
-
+                   
+                    
 
 
 
@@ -370,7 +402,7 @@ function add_check_kougi(){
                                          </form>
                                     <?php }else{ ?>
                                         <?php if($enable_num + $add_mtg_num > 0 || $key ==  ZoomClass::ZOOM_KOUGI_CATEGORY){?>
-                                            <?php if( $key ==  ZoomClass::ZOOM_KOUGI_CATEGORY){ ?>
+                                            <?php if( $key ==  ZoomClass::ZOOM_KOUGI_CATEGORY || $key ==  ZoomClass::ZOOM_KABU_SAGYOU_CATEGORY || $key ==  ZoomClass::ZOOM_FX_SAGYOU_CATEGORY){ ?>
                                                 <form action="<?php  $id = 185; echo get_page_link( $id );?>" method="post"  onSubmit="return add_check_kougi()">
                                             <?php }else{ ?>
                                                 <form action="<?php  $id = 185; echo get_page_link( $id );?>" method="post"  onSubmit="return add_check()">

@@ -300,9 +300,9 @@ $(document).ready(function() {
         <tr>
            
 
-            <th>ID</th>
-            <th>提出</th>
-            <th>講義日</th>
+            <th class="fixed_th_1">ID</th>
+            <th class="fixed_th_2">提出</th>
+            <th  class="fixed_th_3">講義日</th>
             <th>講義名</th>
             <?php if(!isset($_POST['report_admin_list'])){?>
                 <th>アップロード</th>
@@ -328,9 +328,9 @@ $(document).ready(function() {
 
         <tr <?php echo $table_color;?>>
            
-            <td><?php echo $value["input_id"]; ?></td>
-            <td><?php if($value["input_is_submission"]){ echo "<b>提出済</b>";}else{ echo "<font color='red'>未提出</font>";}?></td>
-            <td><?php echo $value["input_eventdate"]; ?></td>
+            <td  class="fixed_th_1"><?php echo $value["input_id"]; ?></td>
+            <td  class="fixed_th_2"><?php if($value["input_is_submission"]){ echo "<b>提出済</b>";}else{ echo "<font color='red'>未提出</font>";}?></td>
+            <td  class="fixed_th_3"><?php echo $value["input_eventdate"]; ?></td>
             <td><?php echo $value["input_title"]; ?></td>
             
             <?php if(!isset($_POST['report_admin_list'])){?>

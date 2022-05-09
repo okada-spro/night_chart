@@ -280,8 +280,8 @@ function add_check_kougi(){
         </tr>
 
         <tr style="background-color:lemonchiffon;">
-            <td><?php echo "申込"; ?></td>
-            <td><?php echo "タイトル"; ?></td>
+            <td class="fixed_th_1" style="background-color:lemonchiffon;"><?php echo "申込"; ?></td>
+            <td class="fixed_th_2" style="background-color:lemonchiffon;"><?php echo "タイトル"; ?></td>
             <td><?php echo "募集"; ?>　/ <font color="red"><?php echo "締切"; ?></font><?php echo "時間"; ?></td>
             <td><?php echo "講義時間"; ?></td>
             <?php /*<td><?php echo "講義時間"; ?></td>*/ ?>
@@ -367,7 +367,10 @@ function add_check_kougi(){
                         if($zoom_time < $now_time)
                         {
                             $table_color = 'bgcolor="darkgray"';
+                            $back_table_color = 'style="background-color:darkgray"';
                             $join_now = "締切";
+                        }else{
+                            $back_table_color = 'style="background-color:white"';
                         }
 
                         if($plan_input_value == 1)
@@ -386,11 +389,11 @@ function add_check_kougi(){
 
                              <?php  if($zoom_time < $now_time){  ?>
 
-                                <td><?php echo "締切"; ?></td>
+                                <td class="fixed_th_1" <?php echo $back_table_color;?>><?php echo "締切"; ?></td>
 
                             <?php }else{ ?>
 
-                                <td>
+                                <td class="fixed_th_1" <?php echo $back_table_color;?>>
                                     <?php if($plan_input_value == 0){?>
                                          <form action="<?php  $id = 185; echo get_page_link( $id );?>" method="post">
                                              <input type="hidden" name="id" value="<?php echo $row->ID;?>">
@@ -416,7 +419,7 @@ function add_check_kougi(){
                             <?php } ?>
 
 
-                            <td><?php echo $row->post_zoom_title; ?></td>
+                            <td class="fixed_th_2" <?php echo $back_table_color;?>><?php echo $row->post_zoom_title; ?></td>
                             <td><?php echo date('Y/m/d H:i',  strtotime($row->post_zoom_day)); ?>　/　<font color="red"><?php echo date('H:i',  strtotime($row->post_zoom_deadline)); ?></font></td>
                             <td><?php echo date('Y/m/d H:i',  strtotime($row->post_zoom_start_day)); ?></td>
                             <?php /*<td><?php echo date('Y年m月d日 H時i分',  strtotime($row->post_zoom_start_day)); ?></td>

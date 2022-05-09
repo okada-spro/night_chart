@@ -195,7 +195,7 @@ function submitCheckMailFnc( id ){
 
 <div class="page_div_box">
     <p>
-    <div style="display:inline-flex">
+    <div class="user-list-table_sarch">
         <form action="<?php  $id = 11; echo get_page_link( $id );?>" method="post">
             <select name="level_table"  class="same-user-select">
             <?php foreach ($users_data->disp_only_level_array_data as $key => $value) {?>
@@ -212,7 +212,7 @@ function submitCheckMailFnc( id ){
         </form>
 
         <form action="<?php  $id = 11; echo get_page_link( $id );?>" method="post">
-            <input type="text"  name="input_serch" value="<?php echo $serch_str;?>"  style="height:50px;"></input>
+            <input type="text"  name="input_serch" value="<?php echo $serch_str;?>"  style="height:50px;display: block;margin: 50px auto 0 auto;"></input>
             <input type="submit" value="検索・更新"   class="same-user-select">
         </form>
     </div>
@@ -226,9 +226,9 @@ function submitCheckMailFnc( id ){
             <table class="lecture-table" id="userTable">
                <thead>
                 <tr>
-                    <th >ID</th>
-                    <th >ユーザー名</th>
-                    <th>名前</th>
+                    <th class="fixed_th_1">ID</th>
+                    <th class="fixed_th_2 mode-tab">ユーザー名</th>
+                    <th class="fixed_th_3">名前</th>
                     <th>会員</th>
                     
                     <th>生存</th>
@@ -339,15 +339,15 @@ function submitCheckMailFnc( id ){
                      </form>
                         
                     
-                        <td>
+                        <td class="fixed_th_1">
                             <a href="javaScript:submitCheckFnc(<?php echo  $row->ID;?>)" >
                                 <?php echo $row->ID;?>
                             </a>
                         </td>
                     
 
-                    <td ><?php echo $row->user_login;?></td>
-                    <td>
+                    <td class="fixed_th_2 mode-tab user-data"><?php echo $row->user_login;?></td>
+                    <td  class="fixed_th_3">
                         <?php echo get_the_author_meta('last_name',$row->ID);?>　<?php echo get_the_author_meta('first_name',$row->ID);?>
                     </td>
                     <td>

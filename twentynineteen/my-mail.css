@@ -16,6 +16,20 @@
 
 }
 
+@media screen and (max-width: 1024px){
+    .user-table-container{
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 560px){
+    .page-id-808 table.lecture-table .fixed_th_2{
+        position: unset;
+    }
+}
+
+
+
 .mail-menu-button-area a {
     display: flex;
     margin-left: auto;
@@ -27,6 +41,11 @@
     font-weight: 700;
     background-color: #cccccc;
     margin-bottom: 3%;
+}
+@media screen and (max-width: 560px){
+    .mail-menu-button-area a {
+        width: 90%;
+    }
 }
 
     .mail-menu-button-area a::after {
@@ -55,6 +74,19 @@
 
 .mail-send-main-contents {
 }
+@media screen and (max-width: 1024px){
+    .mail-send-main-contents {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+@media screen and (max-width: 560px){
+    .mail-send-main-contents {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+
 
 .mail-send-input-area {
     margin-bottom: 2%;
@@ -67,6 +99,18 @@
 .mail-send-input-str {
     margin-left: 5%;
     width: 60%;
+}
+.mail-send-input-str input{
+    width: 100%;
+}
+@media screen and (max-width: 560px){
+    .mail-send-input-str {
+        width: 95%;
+    }
+
+    .mail-send-input-str input{
+        width: 100%;
+    }
 }
 
 .mail-send-submit-area{
@@ -102,6 +146,11 @@
 
 .mail-send-input-contents {
     display: flex;
+}
+@media screen and (max-width: 560px){
+    .mail-send-input-contents {
+        display: unset;
+    }
 }
 
 .mail-send-check-textarea {

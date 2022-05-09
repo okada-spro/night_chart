@@ -260,10 +260,10 @@ $(document).ready(function() {
     <table class="histroy-list-table">
         <thead>
         <tr>
-            <th width="70">履歴</th>
-            <th width="70">ID</th>
-            <th>ユーザー名</th>
-            <th width="150">会員</th>
+            <th class="fixed_th_1" width="70">履歴</th>
+            <th class="fixed_th_2" width="70">ID</th>
+            <th class="fixed_th_3">ユーザー名</th>
+            <th width="150" class="fixed_th_4">会員</th>
             <?php for($i=$start_calendar;$i<=$end_calendar;$i++) {?>
                 <th style="min-width:100px"><?php echo $i;?>月</th>
             <?php } ?>
@@ -365,7 +365,7 @@ $(document).ready(function() {
             <?php if($disp_row){?>
 
                 <tr>
-                    <td>
+                    <td class="fixed_th_1">
                         <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post" target="_blank">
                             <input type="hidden" name="years" value="<?php echo $_GET["years"];?>">
                             <input type="hidden" name="id" value="<?php echo $key;?>">
@@ -375,15 +375,22 @@ $(document).ready(function() {
                         </form>
                     </td>
             
-                    <td><?php echo $key;?> </td>
+                    <td class="fixed_th_2"><?php echo $key;?> </td>
                 
-                    <td><p><?php echo $user_info->last_name ;?>　<?php echo $user_info->first_name;?>(<?php echo $user_info->user_login;?>)</p></td>
+                    <td class="fixed_th_3 mode-pc"><p><?php echo $user_info->last_name ;?>　<?php echo $user_info->first_name;?>(<?php echo $user_info->user_login;?>)</p></td>
+                    <td class="fixed_th_3 mode-sp"><p><?php echo $user_info->last_name ;?>　<?php echo $user_info->first_name;?></p></td>
                     
-                    <td>
+                    <td class="fixed_th_4">
                         <?php if( $member_level == 0 && $member_type > 0){ //訓練生 ?>
                             <?php echo $users_data->checkMemberTypeStr($member_type);?>
                         <?php } ?>
-                        <?php echo $users_data->checkLevelStr($member_level);?>(<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
+                        <div class="mode-pc">
+                            <?php echo $users_data->checkLevelStr($member_level);?>(<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
+                        </div>
+                        <div class="mode-tab">
+                        <?php echo $users_data->checkLevelStr($member_level);?><br>
+                        (<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
+                        </div>
                     </td>
 
                     <?php for($i=$start_calendar;$i<=$end_calendar;$i++) {?>

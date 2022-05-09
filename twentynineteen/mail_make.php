@@ -98,7 +98,7 @@ if( isset( $_POST["send_user_id"] ) )
 
 					<div class="mail-send-input-label">送　信　元</div>
 					<div class="mail-send-input-str">
-						<input type="text"  name="owner_name" value="<?php echo $send_owner_name;?>" style="width: 800px;"></input>
+						<input type="text"  name="owner_name" value="<?php echo $send_owner_name;?>" ></input>
 					</div>
 
 				</div><?php //mail-send-input-contents?>
@@ -113,7 +113,7 @@ if( isset( $_POST["send_user_id"] ) )
 
 					<div class="mail-send-input-label">送信メール</div>
 					<div class="mail-send-input-str">
-						<input type="text"  name="owner_mail" value="<?php echo $send_owner_mail;?>" style="width: 800px;"></input>
+						<input type="text"  name="owner_mail" value="<?php echo $send_owner_mail;?>" ></input>
 					</div>
 
 				</div><?php //mail-send-input-contents?>
@@ -159,7 +159,7 @@ if( isset( $_POST["send_user_id"] ) )
 
 					<div class="mail-send-input-label">件　　　名</div>
 					<div class="mail-send-input-str">
-						<input type="text"  name="user_email_title" value="<?php echo $user_email_title;?>" style="width: 800px;"></input>
+						<input type="text"  name="user_email_title" value="<?php echo $user_email_title;?>" ></input>
 					</div>
 
 				</div><?php //mail-send-input-contents?>

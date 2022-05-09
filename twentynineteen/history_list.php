@@ -376,17 +376,21 @@ jQuery(function ($) {
         <?php } ?>
 
     
-     <table class="user-table">
+     <table class="user-table history_list">
         <colgroup span="11"></colgroup>
         <thead>
         <tr>
-            <?php if($user_id == $user->ID){?>
-                <th>編集</th>
-                <th>削除</th>
-            <?php } ?>
-            <th>登録月</th>
-            <th>月分益</th>
-            <th>月分損</th>
+            <?php if($user_id == $user->ID || current_user_can('administrator')){?>
+                <th class="fixed_th_1">編集</th>
+                <th class="fixed_th_2">削除</th>
+                <th class="fixed_th_3">登録月</th>
+                <th>月分益</th>
+                <th>月分損</th>
+            <?php }else{ ?>
+                <th class="fixed_th_1">登録月</th>
+                <th class="fixed_th_2">>月分益</th>
+                <th class="fixed_th_3">>月分損</th>
+            <?php }?>
             <th>資金増減</th>
             <th>月利</th>
             <th>月末残高</th>
@@ -445,7 +449,7 @@ jQuery(function ($) {
                  <?php if($is_years){?>
                     <tr>
                         <?php if($user_id == $user->ID){?>
-                        <td>
+                        <td class="fixed_th_1">
                             <form action="<?php  $id = 35; echo get_page_link( $id );?>" method="post">
                                 <input type="hidden" name="id" value="<?php echo $row["ID"];?>">
                                 <input type="hidden" name="set_years" value="<?php echo $row["post_trade_year"];?>">
@@ -455,7 +459,7 @@ jQuery(function ($) {
                                 <input type="submit" value="編集">
                             </form>
                         </td>
-                        <td>
+                        <td class="fixed_th_2">
                             <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post"  onSubmit="return delete_check()">
                                 <input type="hidden" name="id" value="<?php echo $row["ID"];?>">
                                 <input type="hidden" name="is_delete" value="delete">
@@ -463,8 +467,15 @@ jQuery(function ($) {
                                 <input type="submit" value="削除">
                             </form>
                         </td>
+                        <?php }else{ ?>
+                            <td class="fixed_th_1">
+                                <input type="button" value="編集" class="no_push" disabled="disabled" >
+                            </td>
+                            <td class="fixed_th_2">
+                            <input type="button" value="削除" class="no_push">
+                            </td>
                         <?php } ?>
-                        <td><?php echo $row["post_trade_year"];?>年<?php echo $row["post_trade_month"];?>月 </td>
+                        <td class="fixed_th_3"><?php echo $row["post_trade_year"];?>年<?php echo $row["post_trade_month"];?>月 </td>
                         <td><?php echo number_format($row["post_profit"]);?> 円 </td>
 
                         <td>

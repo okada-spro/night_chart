@@ -248,7 +248,7 @@ function delete_check(){
 
                             if($zoom_plan_data)
                             {
-                                if(count($zoom_plan_data) > 1)
+                                if(count($zoom_plan_data) >= 1 && $zoom_plan_data[0] != "")
                                 {
                                     for($i=0;$i<count($zoom_plan_data);$i++){
                                         if( $row->ID == $zoom_plan_data[$i]){

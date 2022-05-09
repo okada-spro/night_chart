@@ -4,7 +4,7 @@
 
     /* 成績管理者ステージング対応 */
     .page-id-43 div.page_div_box {
-        margin-top: 400px;
+        /* margin-top: 400px; */
         overflow:scroll;
     }
 }
@@ -64,7 +64,7 @@
 /* ページ移動 */
 .pager{
     position: absolute;
-    margin-left: 30%;
+    margin-left: 35%;
 }
 @media screen and (max-width: 1024px){
     /* 12/6 tab対応 */

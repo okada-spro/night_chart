@@ -17,6 +17,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="profile" href="https://gmpg.org/xfn/11" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/my-style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	
+	<?php // 追加スタイル?>
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/history_list_admin_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/history_list_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/input_history_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+
+
+
+
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/my-mail.css?<?php echo date('Ymd-Hi'); ?>" type="text/css" />
 		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/zoom-style.css?<?php echo date('Ymd-Hi'); ?>" type="text/css" />
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -41,6 +50,18 @@ ul.header-dropmenu {
   padding: 0;
   display: table;
   table-layout: fixed;
+}
+@media screen and (max-width: 1024px){
+    /* 12/3 sp対応 作業中*/
+    ul.header-dropmenu {
+        width: 95%;
+    }
+}
+@media screen and (max-width: 560px){
+    /* 12/3 sp対応 作業中*/
+    ul.header-dropmenu {
+        width: 100%;
+    }
 }
 ul.header-dropmenu > li {
   position: relative;
@@ -71,6 +92,7 @@ ul.header-dropmenu li ul {
 }
 ul.header-dropmenu li:hover ul {
   visibility: visible;
+  z-index: 1;
 }
 ul.header-dropmenu li ul li {
   background: #fff;
@@ -85,7 +107,33 @@ ul.header-dropmenu li:hover ul li:hover {
   background: #f8f8f8;
 }
 -->
+
+/* 12/6 sp対応 */
+.mode-pc{
+	display:block;
+}
+.mode-tab,
+.mode-sp,
+ul.header-dropmenu li a.mode-tab{
+	display:none;
+}
+@media screen and (max-width: 1024px){
+    .mode-pc,
+	ul.header-dropmenu li a.mode-pc{
+		display:none;
+	}
+	.mode-tab,
+	ul.header-dropmenu li a.mode-tab{
+		display:block;
+	}
+}
+@media screen and (max-width: 560px){
+	.mode-sp{
+		display:block;
+	}
+}
 </style>
+
 
 <script>
 $(function(){
@@ -114,6 +162,25 @@ $(function(){
 				<?php get_template_part( 'template-parts/header/site', 'branding' ); ?>
 		</div><!-- .site-branding-container -->
 
+		<?php 
+
+			if (is_page('login')){
+
+			?>
+
+			<div class="login_header_banner_area">
+
+				<div class="login_header_banner_contents">
+					<img class="login_header_banner_img" src="<?php echo get_stylesheet_directory_uri(); ?>/images/screenshot_95.jpg" alt="">
+
+				</div>
+			</div>
+		<?php 
+			}else{
+
+		?>
+
+
 		<div class="header_div">
 
 			<?php
@@ -126,10 +193,12 @@ $(function(){
 			<ul class="header-dropmenu">
 
 				<li>
-					<a href="#">▼生徒&成績</a>
+					<a href="#" class="mode-pc">▼生徒&成績</a>
+					<a href="#" class="mode-tab">▼成績</a>
 					<ul>
 						<li>----生徒----</li>
 						<li><a href="<?php $id = 11; echo get_page_link( $id );?>">生徒一覧（管理者）</a></li>
+						<li><a href="<?php $id = 849; echo get_page_link( $id );?>">訓練生一覧（管理者）</a></li>
 						<li><a href="<?php $id = 694; echo get_page_link( $id );?>">コメント一覧（管理者）</a></li>
 						<li>----成績----</li>
 						<li><a href="<?php $id = 43; echo get_page_link( $id );?>?years=<?php echo $now_year;?>">成績一覧（管理者）</a></li>
@@ -138,7 +207,7 @@ $(function(){
 					</ul>
 				</li>
 				<li>
-					<a href="#">▼動画</a>
+					<a href="#" >▼動画</a>
 					<ul>
 						<li><a href="<?php $id = 129; echo get_page_link( $id );?>">登録（管理者）</a></li>
 						<li><a href="<?php $id = 54; echo get_page_link( $id );?>">一覧（管理者）</a></li>
@@ -147,7 +216,8 @@ $(function(){
 					</ul>
 				</li>
 				<li>
-					<a href="#">▼ザラ場指導・講義</a>
+					<a href="#" class="mode-pc">▼ザラ場指導・講義</a>
+					<a href="#" class="mode-tab">▼講義</a>
 					<ul>
 						<li>----レポート----</li>
 						<li><a href="<?php $id = 482; echo get_page_link( $id );?>">提出作成（管理者）</a></li>
@@ -157,6 +227,10 @@ $(function(){
 						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=1">ザラ場 登録</a></li>
 						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=2">株 講義登録</a></li>
 						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=3">FX 講義登録</a></li>
+						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=4">株 作業会登録</a></li>
+						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=5">FX 作業会登録</a></li>
+						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=6">特別ｾﾐﾅｰ登録</a></li>
+						<li><a href="<?php $id = 51; echo get_page_link( $id );?>?catagory=7">ZOOM座談会登録</a></li>
 						<li><a href="<?php $id = 46; echo get_page_link( $id );?>">講義一覧（管理者）</a></li>
 						<li><a href="<?php $id = 185; echo get_page_link( $id );?>?category=1">講義管理</a></li>
 					</ul>
@@ -203,7 +277,7 @@ $(function(){
 
 			<table class="header_table">
 
-				<?php if($member_level ==  UserClass::DOGA  && !$login_ban){ //動画会員?>
+				<?php if( ( $member_level ==  UserClass::DOGA || $member_level ==  UserClass::SPECIAL_SEMINAR )  && ( !$login_ban )){ //動画会員?>
 					<tr>
 					<td><a class="header_link" href="<?php  echo esc_url( home_url( '/' ) );?>">TOP</a></td>
 					<td><a class="header_link" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
@@ -243,8 +317,11 @@ $(function(){
 				<?php } ?>
 			</table>
 			<?php }?>
-		</div>
+		</div><!-- #masthead -->
 
+		<?php 
+			}
+		?>
 
 		</header><!-- #masthead -->
 

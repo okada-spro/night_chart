@@ -1,6 +1,12 @@
 
 /* 12/23 テーブル調整 */
 @media screen and (max-width: 560px){
+    .page-id-35 .user-table-two{
+        display: block;
+        overflow-x: scroll;
+        width: 95%;
+    }
+
     table.c-table th{
         width: 150px;
     }

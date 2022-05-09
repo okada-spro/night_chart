@@ -16,8 +16,8 @@
  *
  ****************************/
  /* 12/3 テーブルヘッダ背景色追加 */
- .tablesorter-header-inner{
-    /* background-color: white; */
+.page-id-43 .tablesorter-header-inner{
+    background-color: white;
 }
 
 /* 検索ボックス */
@@ -49,7 +49,7 @@
 @media screen and (max-width: 560px){
     /* 12/6 sp対応 */
     .pager{
-        margin-left: 20%;
+        margin-left:0%;
     }
 
     .pager button {

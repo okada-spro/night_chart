@@ -19,7 +19,6 @@ get_header();
 
 ?>
 
-
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
 		
@@ -95,6 +94,7 @@ get_header();
 
 		<?php if(current_user_can('administrator')){ ?>
 
+
 			<div class="mode-pc mode-tab">
 				<table class="top-table">
 					<tr>
@@ -102,9 +102,8 @@ get_header();
 						<td><a class="index_top_button index_top_button_grades_color" href="<?php $id = 43; echo get_page_link( $id );?>?years=<?php echo date('Y');?>">成績一覧（管理者）</a></td>
 					</tr>
 					<tr>
+					<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 849; echo get_page_link( $id );?>">訓練生一覧（管理者）</a></td>
 						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 694; echo get_page_link( $id );?>">コメント一覧（管理者）</a></td>
-						<td></td>
-	
 					</tr>
 				</table>
 	
@@ -140,15 +139,27 @@ get_header();
 					</tr>
 					<tr>
 						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=2">株 講義登録（管理者）</a></td>
-						
-					</tr>
-					<tr>
-						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=3">FX 講義登録（管理者）</a></td>
 						<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 537; echo get_page_link( $id );?>">ツールアップロード</a></td>
 					</tr>
 					<tr>
-						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 46; echo get_page_link( $id );?>">ZOOM登録一覧（管理者）</a></td>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=3">FX 講義登録（管理者）</a></td>
 						<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 539; echo get_page_link( $id );?>">ツールダウンロード</a></td>
+					</tr>
+					<tr><td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=4">株 作業会登録（管理者）</a></td></tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=5">FX 作業会登録（管理者）</a></td>
+					
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=6">特別ｾﾐﾅｰ登録（管理者）</a></td>
+						
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=7">ZOOM座談会登録（管理者）</a></td>
+						
+					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 46; echo get_page_link( $id );?>">ZOOM登録一覧（管理者）</a></td>
 						
 					</tr>
 					
@@ -178,6 +189,7 @@ get_header();
 					<tr>
 						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 694; echo get_page_link( $id );?>">コメント一覧（管理者）</a></td>
 					</tr>
+					<tr><td><a class="index_top_button index_top_button_st_color" href="<?php $id = 849; echo get_page_link( $id );?>">訓練生一覧（管理者）</a></td></tr>
 					<tr>
 						<td><a class="index_top_button index_top_button_grades_color" href="<?php $id = 43; echo get_page_link( $id );?>?years=<?php echo date('Y');?>">成績一覧（管理者）</a></td>
 					</tr>
@@ -217,6 +229,10 @@ get_header();
 					<tr>
 						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=3">FX 講義登録（管理者）</a></td>
 					</tr>
+					<tr><td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=4">株 作業会登録（管理者）</a></td></tr>
+					<tr><td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=5">FX 作業会登録（管理者）</a></td></tr>
+					<tr><td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=6">特別ｾﾐﾅｰ登録（管理者）</a></td></tr>
+					<tr><td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=7">ZOOM座談会登録（管理者）</a></td></tr>
 					<tr>
 						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 46; echo get_page_link( $id );?>">ZOOM登録一覧（管理者）</a></td>
 					</tr>

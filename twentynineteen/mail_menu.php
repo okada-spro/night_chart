@@ -137,7 +137,7 @@ function submitCheckFnc( id ){
 
 <div class="page_div_box">
     <p>
-    <div style="display:inline-flex">
+    <div>
         <form action="<?php  $id = 808; echo get_page_link( $id );?>?page_type=list" method="post">
             <select name="level_table"  class="same-user-select">
             <?php foreach ($users_data->disp_only_level_array_data as $key => $value) {?>
@@ -168,8 +168,8 @@ function submitCheckFnc( id ){
             <table class="lecture-table" id="userTable" style="max-width: 1200px;">
                <thead>
                 <tr>
-                    <th ></th>
-                    <th >ユーザー名</th>
+                    <th class="fixed_th_1"></th>
+                    <th class="fixed_th_2">ユーザー名</th>
                     <th>名前</th>
                     <th>会員</th>
                     <th>生存</th>
@@ -214,14 +214,14 @@ function submitCheckFnc( id ){
                      </form>
                         
                     
-                        <td>
+                        <td class="fixed_th_1">
                             <a href="javaScript:submitCheckFnc(<?php echo  $row->ID;?>)" >
                                 作成
                             </a>
                         </td>
                     
 
-                    <td ><?php echo $row->user_login;?></td>
+                    <td class="fixed_th_2"><?php echo $row->user_login;?></td>
                     <td>
                         <?php echo get_the_author_meta('last_name',$row->ID);?>　<?php echo get_the_author_meta('first_name',$row->ID);?>
                     </td>
@@ -322,7 +322,7 @@ $send_owner_mail = get_user_meta($user->ID, 'mail_send_owner_add',true );
 
 					<div class="mail-send-input-label">送　信　元</div>
 					<div class="mail-send-input-str">
-						<input type="text"  name="owner_name" value="<?php echo $send_owner_name;?>" style="width: 800px;"></input>
+						<input type="text"  name="owner_name" value="<?php echo $send_owner_name;?>"></input>
 					</div>
 
 				</div><?php //mail-send-input-contents?>
@@ -337,7 +337,7 @@ $send_owner_mail = get_user_meta($user->ID, 'mail_send_owner_add',true );
 
 					<div class="mail-send-input-label">送信メール</div>
 					<div class="mail-send-input-str">
-						<input type="text"  name="owner_mail" value="<?php echo $send_owner_mail;?>" style="width: 800px;"></input>
+						<input type="text"  name="owner_mail" value="<?php echo $send_owner_mail;?>"></input>
 					</div>
 
 				</div><?php //mail-send-input-contents?>
