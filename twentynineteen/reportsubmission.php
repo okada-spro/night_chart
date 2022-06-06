@@ -250,7 +250,32 @@ $(document).ready(function() {
     
 });
 
+// inputファイル名表示
+$(function(){
+    // $('.file_upload input[type="file"]').on('change', function () {
+    $('.fileinput').on('change', function () {
+        var file = $(this).prop('files')[0];
+        var no = $('.fileinput').index(this);
+        $("td.file_upload form p").eq(no).text(file.name);
+    });
+});
 
+// sp用テーブルスライド
+$(function(){
+    $(".disp_open").click(function(){
+        var id = $(this).data('id');
+        var t_text = $(this).find("td").eq(0).text();   //マーク取得
+
+        if($(".disp_close" + id).css("display") == "none"){
+            t_text = t_text.replace("▼","▲");
+            $(".disp_close" + id).slideDown(100);
+        }else{
+            t_text = t_text.replace("▲","▼");
+            $(".disp_close" + id).css("display","none");
+        }
+        $(this).find("td").eq(0).text(t_text);
+    });
+});
 </script>
 
 <?php if($file_up_str != ""){ ?>
@@ -295,7 +320,7 @@ $(document).ready(function() {
     <?php } ?>
 
      
-     <table class="user-table-two">
+     <table class="user-table-two mode-pc">
         <thead>
         <tr>
            
@@ -317,10 +342,12 @@ $(document).ready(function() {
         <?php 
            
             $table_color = "";
+            $style ="";
 
             if($value["input_is_submission"])
             {
                 $table_color = "bgcolor='#fffacd'";
+                $style = "style='background-color:#fffacd;'";
             }
         
         ?>
@@ -328,9 +355,9 @@ $(document).ready(function() {
 
         <tr <?php echo $table_color;?>>
            
-            <td  class="fixed_th_1"><?php echo $value["input_id"]; ?></td>
-            <td  class="fixed_th_2"><?php if($value["input_is_submission"]){ echo "<b>提出済</b>";}else{ echo "<font color='red'>未提出</font>";}?></td>
-            <td  class="fixed_th_3"><?php echo $value["input_eventdate"]; ?></td>
+            <td <?php echo $table_color;?> <?php echo $style;?>class="fixed_th_1"><?php echo $value["input_id"]; ?></td>
+            <td <?php echo $table_color;?> <?php echo $style;?>class="fixed_th_2"><?php if($value["input_is_submission"]){ echo "<b>提出済</b>";}else{ echo "<font color='red'>未提出</font>";}?></td>
+            <td <?php echo $table_color;?> <?php echo $style;?>class="fixed_th_3"><?php echo $value["input_eventdate"]; ?></td>
             <td><?php echo $value["input_title"]; ?></td>
             
             <?php if(!isset($_POST['report_admin_list'])){?>
@@ -375,6 +402,129 @@ $(document).ready(function() {
         <?php } ?>
     </table>
 
+    <table class=" mode-sp user-table-two">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>提出</th>
+            <th style="width:50%">講義日</th>
+        </tr>
+        <?php
+            foreach ($table_array as $key =>$value) {
+
+                $table_color = "";
+
+                if($value["input_is_submission"])
+                {
+                    $table_color = "bgcolor='#fffacd'";
+                }
+        
+        ?>
+
+
+        <tr <?php echo $table_color;?> class="disp_open"  data-id=<?php echo $value["input_id"];?>>
+            <td>▼ <?php echo $value["input_id"]; ?></td>
+            <td><?php if($value["input_is_submission"]){ echo "<b>提出済</b>";}else{ echo "<font color='red'>未提出</font>";}?></td>
+            <td><?php echo $value["input_eventdate"]; ?></td>
+        </tr>
+        <tr class="disp_close<?php echo $value["input_id"];?>">
+            <th colspan="3">講義名</th>
+        </tr>
+        <tr <?php echo $table_color;?> class="disp_close<?php echo $value["input_id"];?>">
+        
+            <td colspan="3"><?php echo $value["input_title"]; ?></td>
+        </tr>
+        <tr class="disp_close<?php echo $value["input_id"];?>">
+        
+            <?php if(!isset($_POST['report_admin_list'])){?>
+                <th colspan="3">アップロード</th>
+            <?php }elseif(current_user_can('administrator')){ ?>
+                <th>OPEN</th>
+            <?php } ?>
+        </tr>
+        <tr <?php echo $table_color;?> class="disp_close<?php echo $value["input_id"];?>">
+        
+            
+            <?php if(!isset($_POST['report_admin_list'])){?>
+
+                <td class="file_upload" colspan="3">
+                    <form enctype="multipart/form-data"  action="<?php  $id = 463; echo get_page_link( $id );?>" method="POST">
+                        <input type="hidden" name="input_id" value="<?php echo $value["input_id"]; ?>" />
+                        <input type="hidden" name="fileup" value="fileup" />
+                        <input type="hidden" name="disp_table" value="<?php echo $input_disp_table; ?>" />
+                        <input type="hidden" name="title" value="<?php echo $value["input_title"]; ?>" />
+                        <input type="hidden" name="user_id" value="<?php echo $user_id;?>">
+                        <label>ファイルを選択
+                            <input class="fileinput" name="userfile" type="file" accept=".pdf"/>
+                        </label>
+                        <p>選択されていません</p>
+                        <input type="submit" value="送信" />
+                    </form>
+                </td>
+        </tr>
+        <?php if($value["input_is_submission"]){ ?>
+            <tr class="disp_close<?php echo $value["input_id"];?>">
+            
+                <td colspan="3">
+                    <?php if(isset( $comment_array[ $value["input_id"] ] ) ){ ?>
+                        <button  type="button"   class="reply_text_button" id="reply_text_btn" data-id='<?php echo nl2br(get_field( 'report_reply',$comment_array[ $value["input_id"] ])); ?>' />返信済</button>
+                    <?php } ?>
+                <?php }else{ ?>
+                    
+                </td>
+            </tr>
+        <?php } ?>
+             <?php }elseif(current_user_can('administrator')){ ?>
+                <?php if($value["input_is_submission"]){ ?>
+                    <td><a href="<?php echo $value["file_url"]; ?>" target="_blank" ?>開く</a></td>
+                    <td>
+                        <button  type="button"  class="reply_button"   id="reply_btn"  data-value='{"input_id":"<?php echo $value["input_id"]; ?>","user_id":"<?php echo $user_id; ?>"}'  />入力</button>
+
+                         <?php if(isset( $comment_array[ $value["input_id"] ] ) ){ ?>
+                              <button  type="button"   class="reply_text_button" id="reply_text_btn" data-id='<?php echo nl2br(get_field( 'report_reply',$comment_array[ $value["input_id"] ])); ?>' />返信済</button>
+                         <?php } ?>
+                       
+                    </td>
+                <?php }else{ ?>
+                    <td>未提出</td>
+                    <td>  </td>
+                <?php } ?>
+
+            <?php } ?>
+        </tr>
+
+        
+        <tr class="disp_close<?php echo $value["input_id"];?>">
+        
+            <th colspan="3">返信</th>
+        </tr>
+        <tr class="disp_close<?php echo $value["input_id"];?>">
+        
+            <?php if(!isset($_POST['report_admin_list'])){?>
+                <td colspan="3">
+                    <?php if($value["input_is_submission"]){ ?>
+                        <?php if(isset( $comment_array[ $value["input_id"] ] ) ){ ?>
+                            <button  type="button"   class="reply_text_button" id="reply_text_btn" data-id='<?php echo nl2br(get_field( 'report_reply',$comment_array[ $value["input_id"] ])); ?>' />返信済</button>
+                        <?php } ?>
+                    <?php }else{ ?>
+                        
+                    <?php } ?>
+                </td>
+            <?php }elseif(current_user_can('administrator')){ ?>
+            <?php } ?>
+        </tr>
+        <tr class="disp_close<?php echo $value["input_id"];?>"> 
+            <td  colspan="3" style="border:none;height:30px"></td>
+        </tr>
+
+        <?php } ?>
+        </thead>
+
+
+
+        
+    </table>
+
     <?php if(current_user_can('administrator')){ ?>
       
         <form action="<?php  $id = 463; echo get_page_link( $id );?>" method="POST" id="replyForm" >
@@ -407,3 +557,6 @@ $(document).ready(function() {
 
 </div>
 
+<script>
+    $("[class^='disp_close']").css("display","none");
+</script>

@@ -13,9 +13,14 @@
 }
 @media screen and (max-width: 560px){
     .page-id-134 .user-table-two{
-        display: block;
+        /* display: block; */
         overflow-x: scroll;
         width: 95%;
+        font-size: 75%;
+    }
+
+    .vimeo-thumbnail-list{
+        max-width: 50%;
     }
 
     .vimeo-top-table-container{

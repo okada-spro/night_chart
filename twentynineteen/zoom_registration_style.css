@@ -1,6 +1,11 @@
+.page-id-185 .mode-sp{
+    display: none;
+}
 @media screen and (max-width: 1024px){
     /* 4/28 */
-
+    .page-id-185 table.lecture-table.mode-sp{
+        display: none;
+    }
 
 
     .lecture_center .lecture-table{
@@ -34,6 +39,14 @@
 
 }
 @media screen and (max-width: 560px){
+    .page-id-185 table.lecture-table.mode-sp{
+        display: inline-table;
+    }
+    .page-id-185 .mode-pc{
+        display: none;
+    }
+
+
     .lecture_center{
         margin: 1em 1em 3em 1em;
         padding:0;

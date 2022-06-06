@@ -310,7 +310,6 @@ jQuery(function ($) {
 
         //年テーブルを作成
         $years_table = array();
-        $admin_years_table = array();
 
         $years_table[0] = "直近10ヶ月分";
 
@@ -320,7 +319,6 @@ jQuery(function ($) {
 
         for($i=$years;$i>=2020;$i--)
         {
-            $admin_years_table[$i] = $i."年度";
             $years_table[$i] = $i."年度";
         }
 
@@ -337,7 +335,7 @@ jQuery(function ($) {
 
         $disp_count = 0;//直近用
 
-         
+       
 
     ?>
 
@@ -366,39 +364,19 @@ jQuery(function ($) {
                 </form>
 
             <?php }else{ ?>
+                <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post">
+                    <input type="hidden" name="years" value="all">
+                    <input type="hidden" name="id" value="<?php echo $_POST['id'];?>">
+                    <input type="hidden" name="is_list" value="checklist">
 
-                <div class="history_list_select_area"> <div class="history_list_select_contents">
-
-                    <div class="history_list_select_all">
-                        <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post">
-                            <input type="hidden" name="years" value="all">
-                            <input type="hidden" name="id" value="<?php echo $_POST['id'];?>">
-                            <input type="hidden" name="is_list" value="checklist">
-                            <input type="submit" value="全期間表示">
-                        </form>
-                    </div>
-
-                    <div class="history_list_select_year">
-                        <?php if(current_user_can('administrator')){ ?>
-                            <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post">
-                                <select name="year_table"  class="same-user-select">
-                                    <?php foreach ($admin_years_table as $key => $value) {?>
-                                        <option value="<?php echo $key;?>" <?php if($now_years == $key){ echo "selected";}?>><?php echo $value;?></option>
-                                    <?php } ?>
-                                </select>
-                                <input type="hidden" name="id" value="<?php echo $_POST['id'];?>">
-                                <input type="hidden" name="is_list" value="checklist">
-                                <input type="submit" value="年度変更"   class="same-user-select">
-                            </form>
-                        <?php } ?>
-                     </div>
-                </div></div>
+                    <input type="submit" value="全期間表示">
+                </form>
             <?php } ?>
             </p></div>
         <?php } ?>
 
     
-     <table class="user-table history_list mode-pc">
+     <table class="user-table history_list">
         <colgroup span="11"></colgroup>
         <thead>
         <tr>
@@ -535,39 +513,33 @@ jQuery(function ($) {
 
     </table>
 
-
-    <script>
-
-        // sp用テーブルスライド
-        $(function(){
-            $(".disp_open").click(function(){
-                var id = $(this).data('id');
-                var t_text = $(this).find("td").eq(0).text();   //マーク取得
-
-                if($(".disp_close" + id).css("display") == "none"){
-                    t_text = t_text.replace("▼","▲");
-                    $(".disp_close" + id).slideDown(100);
-                }else{
-                    t_text = t_text.replace("▲","▼");
-                    $(".disp_close" + id).css("display","none");
-                }
-                $(this).find("td").eq(0).text(t_text);
-            });
-        });
-    </script>
     <table class="user-table history_list mode-sp">
         <colgroup span="11"></colgroup>
+        <thead>
+        <tr>
+            <?php if($user_id == $user->ID || current_user_can('administrator')){?>
+                <th>編集</th>
+                <th>削除</th>
+            <?php } ?>
+            <th>登録月</th>
+            <th>月分益</th>
+            <th>月分損</th>
+            <th>資金増減</th>
+            <th>月利</th>
+            <th>月末残高</th>
+            <th>トレード回数</th>
+            <th>勝率</th>
+            <th>入金</th>
+            <th>出金</th>
+            <?php if(current_user_can('administrator')){ ?>
+                <th>ザラ場/講義</th>
+            <?php } ?>
 
+        </tr>
+        </thead>
         <tbody>
-            <tr>
-                <th>登録月</th>
-                <th>月分益</th>
-            </tr>
         <?php foreach ($rows as $row) {?>
-            <?php 
-                $is_years = true;
-                $disp_count = 0;
-            ?>
+            <?php $is_years = true;?>
                 <?php 
                     if( isset($_POST['years'])){
 
@@ -608,15 +580,37 @@ jQuery(function ($) {
 
                  ?>
                  <?php if($is_years){?>
-                    <tr class="disp_open" data-id=<?php echo $row["post_trade_month"];?>>
-                        <td>▼<?php echo $row["post_trade_year"];?>年<?php echo $row["post_trade_month"];?>月 </td>
+                    <tr>
+                        <?php if($user_id == $user->ID){?>
+                        <td>
+                            <form action="<?php  $id = 35; echo get_page_link( $id );?>" method="post">
+                                <input type="hidden" name="id" value="<?php echo $row["ID"];?>">
+                                <input type="hidden" name="set_years" value="<?php echo $row["post_trade_year"];?>">
+                                <input type="hidden" name="set_month" value="<?php echo $row["post_trade_month"];?>">
+                                 
+                                <input type="hidden" name="is_edit" value="edit">
+                                <input type="submit" value="編集">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post"  onSubmit="return delete_check()">
+                                <input type="hidden" name="id" value="<?php echo $row["ID"];?>">
+                                <input type="hidden" name="is_delete" value="delete">
+                                <input type="hidden" name="year_table" value="<?php echo $now_years;?>">
+                                <input type="submit" value="削除">
+                            </form>
+                        </td>
+                        <?php }else{ ?>
+                            <td>
+                                <input type="button" value="編集" class="no_push" disabled="disabled" >
+                            </td>
+                            <td>
+                            <input type="button" value="削除" class="no_push">
+                            </td>
+                        <?php } ?>
+                        <td><?php echo $row["post_trade_year"];?>年<?php echo $row["post_trade_month"];?>月 </td>
                         <td><?php echo number_format($row["post_profit"]);?> 円 </td>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
-                        <th>月分損</th>
-                        <th>資金増減</th>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
+
                         <td>
                             <?php if($row["post_loss"] != 0){?>
                                 <font color="red">-<?php echo number_format($row["post_loss"]);?> </font>円
@@ -631,12 +625,6 @@ jQuery(function ($) {
                                 <?php echo number_format($row["increase"]);?> 円 
                             <?php } ?>
                         </td>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
-                        <th>月利</th>
-                        <th>月末残高</th>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
                         <td>
                             <?php if($row["interest"] < 0){?>
                                 <font color="red"><?php echo number_format($row["interest"]);?> </font>％
@@ -645,65 +633,13 @@ jQuery(function ($) {
                             <?php } ?>
                         </td>
                         <td><?php echo number_format($row["balance"]); ?> 円 </td>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
-                        <th>トレード回数</th>
-                        <th>勝率</th>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
                         <td><?php echo $row["post_trade_number"];?> (<?php echo $row["post_trade_win_number"];?> /<?php echo $row["post_trade_lose_number"];?> )回 </td>
                         <td><?php echo $row["post_win_rate"];?> % </td>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
-                        <th>入金</th>
-                        <th>出金</th>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
                         <td><?php echo number_format($row["post_payment"]);?> 円  </td>
                         <td><?php echo number_format($row["post_withdrawal"]);?> 円  </td>
-
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
                         <?php if(current_user_can('administrator')){ ?>
-                            <th colspan="2">ザラ場/講義</th>
+                            <td><?php echo $zoom_plans_num;?>/<?php echo $kougi_plans_num;?> </td>
                         <?php } ?>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
-                        <?php if(current_user_can('administrator')){ ?>
-                            <td colspan="2"><?php echo $zoom_plans_num;?>/<?php echo $kougi_plans_num;?> </td>
-                        <?php } ?>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
-                        <?php if($user_id == $user->ID){?>
-                            <td>
-                                <form action="<?php  $id = 35; echo get_page_link( $id );?>" method="post">
-                                    <input type="hidden" name="id" value="<?php echo $row["ID"];?>">
-                                    <input type="hidden" name="set_years" value="<?php echo $row["post_trade_year"];?>">
-                                    <input type="hidden" name="set_month" value="<?php echo $row["post_trade_month"];?>">
-                                     
-                                    <input type="hidden" name="is_edit" value="edit">
-                                    <input type="submit" value="編集">
-                                </form>
-                            </td>
-                            <td>
-                                <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post"  onSubmit="return delete_check()">
-                                    <input type="hidden" name="id" value="<?php echo $row["ID"];?>">
-                                    <input type="hidden" name="is_delete" value="delete">
-                                    <input type="hidden" name="year_table" value="<?php echo $now_years;?>">
-                                    <input type="submit" value="削除">
-                                </form>
-                            </td>
-                            <?php }else{ ?>
-                                <td>
-                                    <input type="button" value="編集" class="no_push" disabled="disabled" >
-                                </td>
-                                <td>
-                                <input type="button" value="削除" class="no_push">
-                                </td>
-                            <?php } ?>
-                    </tr>
-                    <tr class="disp_close<?php echo $row["post_trade_month"];?>">
-                        <td colspan="2" style="height: 30px;border: none;"></td>
                     </tr>
             <?php } ?>
         <?php } ?>
@@ -739,16 +675,16 @@ jQuery(function ($) {
      ?>
 
 
-        <table class="history-lsit-kougi-table mode-pc" id="table_detail">
+        <table class="history-lsit-kougi-table" id="table_detail">
            
             <tr>
-                <th style="background-color: cornflowerblue;">最終ログイン <?php echo $the_login_date;?></th>
+                <th style="background-color: cornflowerblue;">最終ログイン　<?php echo $the_login_date;?></th>
 
             </tr>
              <?php for($j=$years;$j>=2020;$j--){ ?>
 
                 <tr <?php if( $years != $j) { ?> class="accordion-title js-accordion-title" <?php } ?>>
-                    <th>ザラ場/講義参加回数 (<?php echo $j;?>年)</th>
+                    <th>ザラ場/講義　参加回数(<?php echo $j;?>年)</th>
                 </tr>
             
                 <tr <?php if( $years != $j) { ?> id="hidden_row<?php echo $j;?>" class="accordion-content"  <?php } ?>>
@@ -762,63 +698,6 @@ jQuery(function ($) {
             
                         <tr>
                             <?php for($i=1;$i<=12;$i++){ ?>
-                                <?php 
-                                     $zoom_data->getZoomSetMonthRow( $j , $i);
-                   
-                                    $zoom_plans_num =  $zoom_data->checkUserZoomSetPlans( $user_id );
-                                    $kougi_plans_num =  $zoom_data->checkUserSetKougiPlans( $user_id );
-                                ?>
-
-                                <td><?php echo $zoom_plans_num;?>/<?php echo $kougi_plans_num;?> </td>
-                            <?php } ?>
-                        </tr>
-                    </table>
-                    </td>
-                </tr>
-            <?php } ?>
-
-        </table>
-        <table class="history-lsit-kougi-table mode-sp" id="table_detail">
-           
-            <tr>
-                <th style="background-color: cornflowerblue;">最終ログイン　<br><?php echo $the_login_date;?></th>
-
-            </tr>
-             <?php for($j=$years;$j>=2020;$j--){ ?>
-
-                <tr <?php if( $years != $j) { ?> class="accordion-title js-accordion-title" <?php } ?>>
-                    <th>ザラ場/講義　<br>参加回数(<?php echo $j;?>年)</th>
-                </tr>
-            
-                <tr <?php if( $years != $j) { ?> id="hidden_row<?php echo $j;?>" class="accordion-content"  <?php } ?>>
-                    <td>
-                    <table class="">
-                        <tr>
-                            <?php for($i=1;$i<=6;$i++){ ?>
-                                <th><?php echo $i;?>月</th>
-                            <?php } ?>
-                        </tr>
-            
-                        <tr>
-                            <?php for($i=1;$i<=6;$i++){ ?>
-                                <?php 
-                                     $zoom_data->getZoomSetMonthRow( $j , $i);
-                   
-                                    $zoom_plans_num =  $zoom_data->checkUserZoomSetPlans( $user_id );
-                                    $kougi_plans_num =  $zoom_data->checkUserSetKougiPlans( $user_id );
-                                ?>
-
-                                <td><?php echo $zoom_plans_num;?>/<?php echo $kougi_plans_num;?> </td>
-                            <?php } ?>
-                        </tr>
-                        <tr>
-                            <?php for($i=7;$i<=12;$i++){ ?>
-                                <th><?php echo $i;?>月</th>
-                            <?php } ?>
-                        </tr>
-            
-                        <tr>
-                            <?php for($i=7;$i<=12;$i++){ ?>
                                 <?php 
                                      $zoom_data->getZoomSetMonthRow( $j , $i);
                    

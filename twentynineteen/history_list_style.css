@@ -1,5 +1,11 @@
 @media screen and (max-width: 1024px){
-    /* 12/7 tab対応 */
+    .history_list.mode-sp{
+        display: none;
+    }
+
+    table#table_detail.history-lsit-kougi-table.mode-pc{
+        display: block;
+    }
 
     /* ステージング対応 */
     table.user-table {
@@ -27,6 +33,43 @@
         }
 }
 @media screen and (max-width: 560px){
+    .page-id-37 .history_list_select_contents{
+        width: auto;
+        display: unset;
+    }
+
+    .page-id-37 .disp_close1,
+    .page-id-37 .disp_close2,
+    .page-id-37 .disp_close3,
+    .page-id-37 .disp_close4,
+    .page-id-37 .disp_close5,
+    .page-id-37 .disp_close6,
+    .page-id-37 .disp_close7,
+    .page-id-37 .disp_close8,
+    .page-id-37 .disp_close9,
+    .page-id-37 .disp_close10,
+    .page-id-37 .disp_close11,
+    .page-id-37 .disp_close12{
+        display: none;
+    }
+
+    table#table_detail.history-lsit-kougi-table.mode-pc{
+        display: none;
+    }
+
+    table.history-lsit-kougi-table{
+        margin-left: 11%;
+    }
+
+    /* sp用修正　5/13 */
+    .history_list.mode-pc{
+        display: none;
+    }
+    .history_list.mode-sp{
+        display: inline-table;
+        margin-left: 2.5%;
+    }
+
     /* 12/7 sp対応 */
     .index_button{
         width: 350px;
@@ -38,6 +81,11 @@
     .table.user-table {
         display: table;
     }
+
+    /* table.user-table.history_list.mode-sp{
+        font-size: 75%;
+    } */
+
     /* table.user-table .fixed_th_1{ */
     table.user-table.history_list th.fixed_th_1,
     table.user-table.history_list td.fixed_th_1{

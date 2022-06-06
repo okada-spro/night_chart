@@ -222,7 +222,7 @@ function submitCheckMailFnc( id ){
     if($disp_user_data)
     {
 ?>
-        <div class="user-table-container">
+        <div class="user-table-container mode-pc">
             <table class="lecture-table" id="userTable">
                <thead>
                 <tr>
@@ -243,93 +243,93 @@ function submitCheckMailFnc( id ){
                 </tr>
                 </thead>
                 <tbody>
-        <?php 
-            foreach ($disp_user_data as $row)
-            {
-        
-                $Withdrawal =get_the_author_meta('member_withdrawal',$row->ID);
-
-                 $member_ban = get_the_author_meta('login_ban',$row->ID);
-
-               
-
-                if($Withdrawal == "" || $Withdrawal == NULL)
+            <?php 
+                foreach ($disp_user_data as $row)
                 {
-                    $Withdrawal = 0;
-                }
+            
+                    $Withdrawal =get_the_author_meta('member_withdrawal',$row->ID);
 
-                if(($input_disp_table == 2) || ($input_disp_table == 1 && $member_ban == true)|| ($input_disp_table == 0 && $Withdrawal == 0)|| ($input_disp_table == 4 && $Withdrawal == 0 && $member_ban == false)   )
-                {
-                    $member_level = get_the_author_meta('member_level',$row->ID);
-                    $member_type = get_the_author_meta('member_type',$row->ID);
                     $member_ban = get_the_author_meta('login_ban',$row->ID);
 
-                    if($member_level == "" || $member_level == NULL)
+                
+
+                    if($Withdrawal == "" || $Withdrawal == NULL)
                     {
-                        $member_level = 0;
+                        $Withdrawal = 0;
                     }
 
-                    $is_disp = false;
-
-
-                    //全て表示
-                    if(  $disp_level_table == 99 && $input_level_table == UserClass::ALL_DISP_CONST ){
-                        $is_disp = true;
-                    }
-                    else if( $input_level_table == $member_level && $input_level_table == UserClass::MONKASEI  ){ //門下生の時
-                        $is_disp = true;
-                    }
-                    else if( $disp_level_table == 0 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI ){ //訓練生の時の全表示
-                        $is_disp = true;
-                    }
-                    else if( $disp_level_table == 1 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI  && $member_type == 1){ //訓練生の時の株表示
-                        $is_disp = true;
-                    }
-                    else if( $disp_level_table == 2 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI  && $member_type == 2){ //訓練生の時のFX表示
-                        $is_disp = true;
-                    }
-                    else if( $disp_level_table == 5 && $member_level != UserClass::DOGA ){ //動画会員を非表示
-                        $is_disp = true; //動画会員を非表示
-                    }
-                    else if( $disp_level_table == 8 && $member_level == UserClass::SPECIAL_SEMINAR ){ //特別セミナーだけを表示
-                        $is_disp = true; 
-                    }
-                    else if( $disp_level_table == 9 && $member_level != UserClass::SPECIAL_SEMINAR ){ //特別セミナーを非表示
-                        $is_disp = true; 
-                    }
-                    else if( $disp_level_table == 6 && $member_level != UserClass::DOGA  && $member_level != UserClass::SPECIAL_SEMINAR && $member_type != 2){ //株のみ表示
-                        $is_disp = true; 
-                    }
-                    else if( $disp_level_table == 7 && $member_level != UserClass::DOGA  && $member_level != UserClass::SPECIAL_SEMINAR && $member_type != 1){ //FXのみ表示
-                        $is_disp = true;
-                    }
-
-
-                    else if( $input_level_table == UserClass::DOGA && $member_level == UserClass::DOGA ){ //動画会員
-                        $is_disp = true;
-                    }
-
-
-
-                    if($is_disp )
+                    if(($input_disp_table == 2) || ($input_disp_table == 1 && $member_ban == true)|| ($input_disp_table == 0 && $Withdrawal == 0)|| ($input_disp_table == 4 && $Withdrawal == 0 && $member_ban == false)   )
                     {
-                        $zoom_plans_num =  $zoom_data->checkUserZoomPlans($row->ID);
-                        $kougi_plans_num =  $zoom_data->checkUserKougiPlans($row->ID);
+                        $member_level = get_the_author_meta('member_level',$row->ID);
+                        $member_type = get_the_author_meta('member_type',$row->ID);
+                        $member_ban = get_the_author_meta('login_ban',$row->ID);
 
-                        //最終ﾛｸﾞｲﾝ
-                        $last_login = get_the_author_meta('last_login',$row->ID);
-                        
-                        if($last_login)
+                        if($member_level == "" || $member_level == NULL)
                         {
-                          //  $date = new DateTime($last_login);
-                          //  $date1 = $date->modify('+9 hours');
+                            $member_level = 0;
+                        }
 
-                            $the_login_date =  date('Y年m月d日 H時i分', $last_login);
+                        $is_disp = false;
+
+
+                        //全て表示
+                        if(  $disp_level_table == 99 && $input_level_table == UserClass::ALL_DISP_CONST ){
+                            $is_disp = true;
                         }
-                        else{
-                            $the_login_date = "";
+                        else if( $input_level_table == $member_level && $input_level_table == UserClass::MONKASEI  ){ //門下生の時
+                            $is_disp = true;
                         }
-        ?>
+                        else if( $disp_level_table == 0 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI ){ //訓練生の時の全表示
+                            $is_disp = true;
+                        }
+                        else if( $disp_level_table == 1 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI  && $member_type == 1){ //訓練生の時の株表示
+                            $is_disp = true;
+                        }
+                        else if( $disp_level_table == 2 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI  && $member_type == 2){ //訓練生の時のFX表示
+                            $is_disp = true;
+                        }
+                        else if( $disp_level_table == 5 && $member_level != UserClass::DOGA ){ //動画会員を非表示
+                            $is_disp = true; //動画会員を非表示
+                        }
+                        else if( $disp_level_table == 8 && $member_level == UserClass::SPECIAL_SEMINAR ){ //特別セミナーだけを表示
+                            $is_disp = true; 
+                        }
+                        else if( $disp_level_table == 9 && $member_level != UserClass::SPECIAL_SEMINAR ){ //特別セミナーを非表示
+                            $is_disp = true; 
+                        }
+                        else if( $disp_level_table == 6 && $member_level != UserClass::DOGA  && $member_level != UserClass::SPECIAL_SEMINAR && $member_type != 2){ //株のみ表示
+                            $is_disp = true; 
+                        }
+                        else if( $disp_level_table == 7 && $member_level != UserClass::DOGA  && $member_level != UserClass::SPECIAL_SEMINAR && $member_type != 1){ //FXのみ表示
+                            $is_disp = true;
+                        }
+
+
+                        else if( $input_level_table == UserClass::DOGA && $member_level == UserClass::DOGA ){ //動画会員
+                            $is_disp = true;
+                        }
+
+
+
+                        if($is_disp )
+                        {
+                            $zoom_plans_num =  $zoom_data->checkUserZoomPlans($row->ID);
+                            $kougi_plans_num =  $zoom_data->checkUserKougiPlans($row->ID);
+
+                            //最終ﾛｸﾞｲﾝ
+                            $last_login = get_the_author_meta('last_login',$row->ID);
+                            
+                            if($last_login)
+                            {
+                            //  $date = new DateTime($last_login);
+                            //  $date1 = $date->modify('+9 hours');
+
+                                $the_login_date =  date('Y年m月d日 H時i分', $last_login);
+                            }
+                            else{
+                                $the_login_date = "";
+                            }
+            ?>
                 <tr>
 
                       <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post" id="trade_page_form_<?php echo  $row->ID;?>" name="trade_page_form_<?php echo  $row->ID;?>" target="_blank">
@@ -422,6 +422,218 @@ function submitCheckMailFnc( id ){
             </tbody>
             </table>
         </div>
+
+        <div class="user-table-container mode-sp">
+            <table class="lecture-table" id="userTable">
+
+        <?php 
+            foreach ($disp_user_data as $row)
+            {
+        
+                $Withdrawal =get_the_author_meta('member_withdrawal',$row->ID);
+
+                 $member_ban = get_the_author_meta('login_ban',$row->ID);
+
+               
+
+                if($Withdrawal == "" || $Withdrawal == NULL)
+                {
+                    $Withdrawal = 0;
+                }
+
+                if(($input_disp_table == 2) || ($input_disp_table == 1 && $member_ban == true)|| ($input_disp_table == 0 && $Withdrawal == 0)|| ($input_disp_table == 4 && $Withdrawal == 0 && $member_ban == false)   )
+                {
+                    $member_level = get_the_author_meta('member_level',$row->ID);
+                    $member_type = get_the_author_meta('member_type',$row->ID);
+                    $member_ban = get_the_author_meta('login_ban',$row->ID);
+
+                    if($member_level == "" || $member_level == NULL)
+                    {
+                        $member_level = 0;
+                    }
+
+                    $is_disp = false;
+
+
+                    //全て表示
+                    if(  $disp_level_table == 99 && $input_level_table == UserClass::ALL_DISP_CONST ){
+                        $is_disp = true;
+                    }
+                    else if( $input_level_table == $member_level && $input_level_table == UserClass::MONKASEI  ){ //門下生の時
+                        $is_disp = true;
+                    }
+                    else if( $disp_level_table == 0 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI ){ //訓練生の時の全表示
+                        $is_disp = true;
+                    }
+                    else if( $disp_level_table == 1 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI  && $member_type == 1){ //訓練生の時の株表示
+                        $is_disp = true;
+                    }
+                    else if( $disp_level_table == 2 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI  && $member_type == 2){ //訓練生の時のFX表示
+                        $is_disp = true;
+                    }
+                    else if( $disp_level_table == 5 && $member_level != UserClass::DOGA ){ //動画会員を非表示
+                        $is_disp = true; //動画会員を非表示
+                    }
+                    else if( $disp_level_table == 8 && $member_level == UserClass::SPECIAL_SEMINAR ){ //特別セミナーだけを表示
+                        $is_disp = true; 
+                    }
+                    else if( $disp_level_table == 9 && $member_level != UserClass::SPECIAL_SEMINAR ){ //特別セミナーを非表示
+                        $is_disp = true; 
+                    }
+                    else if( $disp_level_table == 6 && $member_level != UserClass::DOGA  && $member_level != UserClass::SPECIAL_SEMINAR && $member_type != 2){ //株のみ表示
+                        $is_disp = true; 
+                    }
+                    else if( $disp_level_table == 7 && $member_level != UserClass::DOGA  && $member_level != UserClass::SPECIAL_SEMINAR && $member_type != 1){ //FXのみ表示
+                        $is_disp = true;
+                    }
+
+
+                    else if( $input_level_table == UserClass::DOGA && $member_level == UserClass::DOGA ){ //動画会員
+                        $is_disp = true;
+                    }
+
+
+
+                    if($is_disp )
+                    {
+                        $zoom_plans_num =  $zoom_data->checkUserZoomPlans($row->ID);
+                        $kougi_plans_num =  $zoom_data->checkUserKougiPlans($row->ID);
+
+                        //最終ﾛｸﾞｲﾝ
+                        $last_login = get_the_author_meta('last_login',$row->ID);
+                        
+                        if($last_login)
+                        {
+                          //  $date = new DateTime($last_login);
+                          //  $date1 = $date->modify('+9 hours');
+
+                            $the_login_date =  date('Y年m月d日 H時i分', $last_login);
+                        }
+                        else{
+                            $the_login_date = "";
+                        }
+        ?>
+            <thead>
+                <tr class="disp_open" data-id=<?php echo $row->ID;?>>
+                    <th>ID▽</th>
+                    <th colspan="2">名前</th>
+                    <th>会員</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="disp_open" data-id=<?php echo $row->ID;?>>
+
+                      <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post" id="trade_page_form_<?php echo  $row->ID;?>" name="trade_page_form_<?php echo  $row->ID;?>" target="_blank">
+                            <input type="hidden" name="years" value="<?php echo $now_year;?>">
+                            <input type="hidden" name="id" value="<?php echo  $row->ID;?>">
+                            <input type="hidden" name="is_list" value="checklist">
+                     </form>
+                    <td>
+                        <a href="javaScript:submitCheckFnc(<?php echo  $row->ID;?>)" >
+                            <?php echo $row->ID;?>
+                        </a>
+                    </td>
+                    <!-- <td colspan="2"><?php //echo $row->user_login;?></td> -->
+                    <td colspan="2"><?php echo get_the_author_meta('last_name',$row->ID);?>　<?php echo get_the_author_meta('first_name',$row->ID);?></td>
+                    <td>
+                        <?php if( $member_level == 0 && $member_type > 0){ //訓練生 ?>
+                            <?php echo $users_data->checkMemberTypeStr($member_type);?><br>
+                        <?php } ?>
+                        <?php echo $users_data->checkLevelStr($member_level);?>
+                    </td>
+                </tr>
+
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <th>生存</th>
+                    <th>BAN</th>
+                    <th>ザラ場</th>
+                    <th>講義</th>
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <td><?php echo $users_data->checkWithdrawalStr($Withdrawal);?></td>
+
+                    <td <?php if($member_ban == true){echo 'bgcolor=salmon';}?>>
+                        <?php
+                            if($member_ban == true){
+                                echo "停";
+                            }
+                            else{
+                                echo "常";
+                            }
+                        ?>
+                    </td>
+
+                    <td <?php if($zoom_plans_num >= 5){echo 'bgcolor=salmon';}?>   class="user-nowrap">
+                    <?php echo $zoom_plans_num;?>回
+                    </td>
+                    <td>
+                    <?php echo $kougi_plans_num;?>回
+                    </td>
+                </tr>
+                
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <th colspan="4">メールアドレス</th>
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    
+                    <form action="<?php  $id = 806; echo get_page_link( $id );?>" method="post" id="mail_send_user_<?php echo  $row->ID;?>" name="mail_send_user_<?php echo  $row->ID;?>" target="_blank">
+                        <input type="hidden" name="send_user_id" value="<?php echo  $row->ID;?>">
+                    </form>
+
+                    <td colspan="4">
+                        <a href="javaScript:submitCheckMailFnc(<?php echo  $row->ID;?>)" >
+                                <?php echo $row->user_email;?>
+                        </a>
+                    </td>
+                </tr>
+
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <th colspan="4">電話番号</th>
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <td colspan="4"><?php echo get_the_author_meta('billing_phone',$row->ID);?></td>
+                </tr>
+
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <th colspan="4">最終ﾛｸﾞｲﾝ</th>
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <td colspan="4" style="font-size:18px;"><?php echo $the_login_date;?></td>
+                </tr>
+
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <th colspan="2">レポート</th>
+                    <th colspan="2">詳細</th>
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>"> 
+                    <td colspan="2">
+                        <?php if($member_level != UserClass::DOGA){ //動画会員はなし?>
+                            <form action="<?php  $id = 463; echo get_page_link( $id );?>" method="post" target="_blank">
+                                <input type="hidden" name="user_id" value="<?php echo $row->ID;?>">
+                                <input type="hidden" name="report_admin_list" value="report_admin_list">
+                                <input type="submit" value="レポート"   style="background-color: rosybrown;">
+                            </form>
+                        <?php } ?>
+                    </td>
+                    <td colspan="2">
+                        <form action="<?php  $id = 11; echo get_page_link( $id );?>" method="post" target="_blank">
+                            <input type="hidden" name="id" value="<?php echo $row->ID;?>">
+                            <input type="hidden" name="is_details" value="details">
+                            <input type="submit" value="詳細">
+                        </form>
+                    </td>
+                </tr>
+                <tr> 
+                    <td colspan="4" style="border:none;height:10px"></td>
+                </tr>
+                    <?php } ?>
+                <?php } ?>
+            <?php } ?>
+            </tbody>
+            </table>
+        </div>
+
+
          <div class="pager">
             <button type='button' class='first'>&lt;&lt;</button>
             <button type='button' class='prev'>&lt;</button>
@@ -652,3 +864,27 @@ function submitCheckMailFnc( id ){
 	</p>
 <?php } ?>
 
+<script>
+    // 表示折り畳み
+    window.onload = function(){
+        $("[class^='disp_close']").css("display","none");
+    }
+
+    // sp用テーブルスライド
+$(function(){
+    $(".page-id-11 .disp_open").click(function(){
+        var id = $(this).data('id');
+        var t_text = $(this).find("th").eq(0).text();   //マーク取得
+
+        if($(".disp_close" + id).css("display") == "none"){
+            t_text = t_text.replace("▽","△");
+            $(".disp_close" + id).css("display","table-row");
+            // $(".disp_close" + id).slideDown(100);
+        }else{
+            t_text = t_text.replace("△","▽");
+            $(".disp_close" + id).css("display","none");
+        }
+        $(this).find("th").eq(0).text(t_text)
+    });
+});
+</script>
