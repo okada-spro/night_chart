@@ -22,5 +22,15 @@
     .mail-menu-button-area a{
         width: 90%;
     }
+
+    .page-id-808 .lecture-table{
+        font-size: 15px;
+        width: 95%;
+    }
+
+    .page-id-808 input,
+    .page-id-806 input{
+        width: 95%;
+    }
 }
 

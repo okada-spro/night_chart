@@ -474,6 +474,7 @@ function add_check_kougi(){
 
 
         <?php
+            $first = false;
             if($input_data->zoom_row){
                 foreach ($input_data->zoom_row as $row) {
 
@@ -554,25 +555,16 @@ function add_check_kougi(){
                             $plan_str = "参加予定";
                         }
             ?>
-
-            <?php 
-            /*
-                <tr style="background-color:lemonchiffon;">
-                    <td colspan="2" style="background-color:lemonchiffon;"><?php echo "タイトル"; ?></td>
-                </tr>
-            */
-            ?>
                 <tr <?php echo $table_color;?>>
                     <td colspan="2"class="disp_open" data-id=<?php echo $row->ID;?> <?php echo $back_table_color;?>>▼<?php echo $row->post_zoom_title; ?></td>
                 </tr>
-
-                <tr class="disp_close<?php echo $row->ID;?>">
+                <tr class="disp_close<?php echo $row->ID;?> <?php if(!$first){ echo "first";} ?>">
                     <td style="background-color:lemonchiffon;"><?php echo "申込"; ?></td>
                     <td style="background-color:lemonchiffon;"><?php echo "予定"; ?></td>
                 </tr>
 
                 <?php //参加?>
-                <tr class="disp_close<?php echo $row->ID;?>" <?php echo $table_color;?>>
+                <tr class="disp_close<?php echo $row->ID;?>  <?php if(!$first){ echo "first";} ?>" <?php echo $table_color;?>>
 
                     <?php  if($zoom_time < $now_time){  ?>
 
@@ -634,27 +626,29 @@ function add_check_kougi(){
 
                     <?php } ?>
                 </tr>
-                <tr style="background-color:lemonchiffon;"  class="disp_close<?php echo $row->ID;?>">
+                <tr style="background-color:lemonchiffon;"  class="disp_close<?php echo $row->ID;?>  <?php if(!$first){ echo "first";} ?>">
                     <td  colspan="2"><?php echo "募集"; ?>　/ <font color="red"><?php echo "締切"; ?></font><?php echo "時間"; ?></td>
                 </tr>
-                <tr <?php echo $table_color;?>  class="disp_close<?php echo $row->ID;?>">
+                <tr <?php echo $table_color;?>  class="disp_close<?php echo $row->ID;?> <?php if(!$first){ echo "first";} ?>">
                     <td colspan="2"><?php echo date('Y/m/d H:i',  strtotime($row->post_zoom_day)); ?>　/　<font color="red"><?php echo date('H:i',  strtotime($row->post_zoom_deadline)); ?></font></td>
                 </tr>
 
-                <tr style="background-color:lemonchiffon;"  class="disp_close<?php echo $row->ID;?>">
+                <tr style="background-color:lemonchiffon;"  class="disp_close<?php echo $row->ID;?> <?php if(!$first){ echo "first";} ?>">
                     <td  colspan="2"><?php echo "講義時間"; ?></td>
                 </tr>
-                <tr  <?php echo $table_color;?> class="disp_close<?php echo $row->ID;?>">
+                <tr  <?php echo $table_color;?> class="disp_close<?php echo $row->ID;?> <?php if(!$first){ echo "first";} ?>">
                     
                     <td  colspan="2"><?php echo date('Y/m/d H:i',  strtotime($row->post_zoom_start_day)); ?></td>
                     <?php /*<td><?php echo date('Y年m月d日 H時i分',  strtotime($row->post_zoom_start_day)); ?></td>
                     <td><?php echo $join_now; ?></td>*/?>
                 </tr>
-                <tr class="disp_close<?php echo $row->ID;?>">
+                <tr class="disp_close<?php echo $row->ID;?> <?php if(!$first){ echo "first";} ?>">
                     <td  colspan="2" style="border:none;height:30px"></td>
                 </tr>
 
-                <?php } ?>
+                <?php 
+                    if(!$first) $first = true;
+                    } ?>
             <?php } ?>
         <?php } ?>
         <?php } ?>
@@ -671,19 +665,22 @@ function add_check_kougi(){
     $("[class^='disp_close']").css("display","none");
 
     // sp用テーブルスライド
-$(function(){
-    $(".disp_open").click(function(){
-        var id = $(this).data('id');
-        var t_text = $(this).find("td").eq(0).text();   //マーク取得
+    // 一番上は開けておく　2022/11/18
+    $(".first").slideDown(100);
 
-        if($(".disp_close" + id).css("display") == "none"){
-            t_text = t_text.replace("▼","▲");
-            $(".disp_close" + id).slideDown(100);
-        }else{
-            t_text = t_text.replace("▲","▼");
-            $(".disp_close" + id).css("display","none");
-        }
-        $(this).find("td").eq(0).text(t_text);
+    $(function(){
+        $(".disp_open").click(function(){
+            var id = $(this).data('id');
+            var t_text = $(this).find("td").eq(0).text();   //マーク取得
+
+            if($(".disp_close" + id).css("display") == "none"){
+                t_text = t_text.replace("▼","▲");
+                $(".disp_close" + id).slideDown(100);
+            }else{
+                t_text = t_text.replace("▲","▼");
+                $(".disp_close" + id).css("display","none");
+            }
+            $(this).find("td").eq(0).text(t_text);
+        });
     });
-});
 </script>

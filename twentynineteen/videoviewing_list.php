@@ -57,6 +57,32 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+    // 表示折り畳み
+    window.onload = function(){
+        $("[class^='disp_close']").css("display","none");
+    }
+
+    // sp用テーブルスライド
+$(function(){
+    $(".disp_open").click(function(){
+        var id = $(this).data('id');
+        var t_text = $(this).find("th").eq(0).text();   //マーク取得
+
+        console.log(id);
+        console.log(t_text);
+        
+        if($(".disp_close" + id).css("display") == "none"){
+            t_text = t_text.replace("▽","△");
+            $(".disp_close" + id).slideDown(100);
+        }else{
+            t_text = t_text.replace("△","▽");
+            $(".disp_close" + id).css("display","none");
+        }
+        $(this).find("th").eq(0).text(t_text)
+    });
+});
+</script>
 
 
     <div class="page_div_box videoviewing_list">
@@ -74,7 +100,7 @@ $(document).ready(function() {
 
     <?php if($table_array){ ?>
 
-        <table class="user-table">
+        <table class="user-table mode-pc">
              <thead>
             <tr>
                 <th class="fixed_th_1">編集</th>
@@ -121,7 +147,80 @@ $(document).ready(function() {
             <?php } ?>
             </tbody>
         </table>
-    
+
+        <table class="user-table mode-sp">
+             <tbody>
+            <?php foreach ($table_array as $key =>$row) { ?>
+                <?php 
+                    $table_color = "";
+                        if($row["input_disp"] == 0){
+                            $table_color = 'bgcolor="darkgray"';
+                    }
+                ?>
+            <tr  class="disp_open"  data-id=<?php echo $row["input_id"];?>>
+                <th colspan="4">タイトル▽</th>
+            </tr>
+            <tr <?php echo $table_color;?>  class="disp_open"  data-id=<?php echo $row["input_id"];?>>
+                <td colspan="4"><?php echo $row["input_title"]; ?></td>
+            </tr>
+            <tr <?php echo $table_color;?> class="disp_close<?php echo $row["input_id"];?>">
+                <td>編集</td>
+                <td>視聴</td>
+                <td>公開</td>
+            </tr>
+            <tr <?php echo $table_color;?> class="disp_close<?php echo $row["input_id"];?>">
+                <td>
+                    <form action="<?php  $id = 129; echo get_page_link( $id );?>" method="post">
+                        <input type="hidden" name="id" value="<?php echo $row["input_id"];?>">
+                        <input type="hidden" name="viewing_edit" value="viewing_edit">
+                        <input type="submit" value="編集">
+                    </form>
+                </td>
+                <td>
+                    <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
+                        <input type="hidden" name="id" value="<?php echo $row["input_id"];?>">
+                        <input type="hidden" name="category_id" value="<?php echo $row["input_category"];?>">
+                        <input type="hidden" name="viewing" value="viewing">
+                        <input type="submit" value="視聴">
+                    </form>
+                </td>
+                <td><?php if($row["input_disp"] == 0){echo "非公開";}else{echo "公開";} ?></td>
+            </tr>
+            <tr <?php echo $table_color;?> class="disp_close<?php echo $row["input_id"];?>">
+                <td colspan="2">カテゴリ</td>
+                <td colspan="2">埋め込み番号</td>
+            </tr>
+            <tr <?php echo $table_color;?> class="disp_close<?php echo $row["input_id"];?>">
+                <td colspan="2"><?php echo $input_data->getCategoryNameData($row["input_category"]); ?></td>
+                <td colspan="2"><?php echo $row["input_flame"]; ?></td>
+            </tr>
+            <tr <?php echo $table_color;?> class="disp_close<?php echo $row["input_id"];?>">
+                <td colspan="4">公開日</td>
+            </tr>
+            <tr <?php echo $table_color;?> class="disp_close<?php echo $row["input_id"];?>">
+                <td colspan="4"><?php echo $row["input_release_date"]; ?></td>
+            </tr>
+            <tr> 
+                <td style="border:none;height:10px"></td>
+            </tr>
+            <?php 
+            /*
+            
+
+            <tr>
+            </tr>
+            <tr >
+                
+                
+
+                
+                
+            </tr>
+                    */
+                    ?>
+            <?php } ?>
+            </tbody>
+        </table>
 
         <p>
         <div class="pager">

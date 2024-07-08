@@ -1,3 +1,6 @@
+.page-id-487 table.user-table-two.mode-sp{
+    display: none;
+}
 @media screen and (max-width: 1024px){
     /* 4/20 */
     .page_div_box.report_list table.user-table-two .fixed_th_1{
@@ -16,21 +19,15 @@
 
 }
 @media screen and (max-width: 560px){
-    table.user-table-two.report_list  {
-            display: block;
-            overflow-x: scroll;
-            width: 95%;
+    .page-id-487 table.user-table-two.mode-pc{
+        display: none;
     }
-    
-    table.user-table-two.report_list .fixed_th_1{
-        position: sticky;
-        left: 4px;
+    .page-id-487 table.user-table-two.mode-sp{
+        display: inline-table;
     }
-    .page_div_box.report_list table.user-table-two .fixed_th_2{
-        position:unset;
-    }
-    .page_div_box.report_list table.user-table-two .fixed_th_3{
-        position:unset;
+
+    .page-id-487 table.mode-sp.user-table-two td{
+        white-space: normal;
     }
 }
 

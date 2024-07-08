@@ -1,7 +1,16 @@
 
-@media screen and (max-width: 1024px){
-    #wpmem_login{
-        width: 100%  !important;
+#wpmem_login{
+    width: 100% !important;
+}
+.post-12 .entry-content{
+    margin: 0 20%  !important;
+}
+@media screen and (max-width: 560px){
+    .post-12 .entry-content{
+        margin: 0 10%  !important;
+    }
+    .link-text{
+        width: 100% !important;
     }
 }
 

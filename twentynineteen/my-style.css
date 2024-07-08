@@ -196,7 +196,7 @@ table.top-table {
 
 /*ZOOM関連色*/
 .index_top_button_zoom_color {
-    background-color: #add8e6;
+    background-color: #FF9933;
 }
 
 /*ツールアップロード関連色*/
@@ -206,7 +206,7 @@ table.top-table {
 
 /*ツールアップロード関連色*/
 .index_top_button_logout_color {
-    background-color: #ffa07a;
+    background-color: #00FFFF;
 }
 /*設定色*/
 .index_top_button_setting_color {
@@ -900,13 +900,32 @@ table.history-lsit-kougi-table {
         border-collapse: collapse;
     }
 
+.history_list_select_area {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+.history_list_select_contents {
+    display: flex;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.history_list_select_all{
+
+}
+
+.history_list_select_year {
+    margin-left: 50px;
+}
 /**************************
  * 
  *　フッター
  *
  ****************************/
-@media screen and (max-width: 560px){
+@media screen and (max-width: 560px) {
     /* 12/6 sp対応 */
     .site-footer{
         margin-top: 50px;

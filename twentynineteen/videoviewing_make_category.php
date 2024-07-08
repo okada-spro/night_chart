@@ -100,6 +100,32 @@ function delete_check(){
 }
 // -->
 </script>
+<script>
+    // 表示折り畳み
+    window.onload = function(){
+        $("[class^='disp_close']").css("display","none");
+    }
+
+    // sp用テーブルスライド
+$(function(){
+    $(".disp_open").click(function(){
+        var id = $(this).data('id');
+        var t_text = $(this).find("th").eq(0).text();   //マーク取得
+
+        console.log(id);
+        console.log(t_text);
+        
+        if($(".disp_close" + id).css("display") == "none"){
+            t_text = t_text.replace("▽","△");
+            $(".disp_close" + id).slideDown(100);
+        }else{
+            t_text = t_text.replace("△","▽");
+            $(".disp_close" + id).css("display","none");
+        }
+        $(this).find("th").eq(0).text(t_text)
+    });
+});
+</script>
 
 
 <?php if($insert_str != ""){ ?>
@@ -166,7 +192,7 @@ function delete_check(){
     </div>
     </p>
 
-    <table class="user-table-two">
+    <table class="user-table-two mode-pc">
         <colgroup span="3"></colgroup>
         <tr>
             <th class="fixed_th_1">編集</th>
@@ -201,6 +227,85 @@ function delete_check(){
             <td><?php echo $row->post_category_name; ?></td>
             <td><?php echo $users_data->member_type_array[$row->post_type]; ?></td>
          </tr>
+        <?php } ?>
+    </table>
+
+    <table class="user-table-two mode-sp">
+        <colgroup span="3"></colgroup>
+        <?php foreach ($input_data->view_category_row as $row) { ?>
+
+            <tr class="disp_open"  data-id=<?php echo $row->ID;?>>
+                <th>ID▽</th>
+                <th colspan="2">カテゴリー名</th>
+            </tr>
+            <tr class="disp_open"  data-id=<?php echo $row->ID;?>>
+                <td><?php echo $row->ID; ?></td>
+                <td colspan="2"><?php echo $row->post_category_name; ?></td>
+            </tr>
+            <tr class="disp_close<?php echo $row->ID;?>">
+                <td>編集</td>
+                <td>削除</td>
+                <td>タイプ</td>
+            </tr>
+            <tr class="disp_close<?php echo $row->ID;?>">
+                <td>
+                    <?php if(($row->ID > 1 && $row->ID != 7)){ ?>
+                        <form action="<?php  $id = 209; echo get_page_link( $id );?>" method="post">
+                            <input type="hidden" name="id" value="<?php echo $row->ID;?>">
+                            <input type="hidden" name="word" value="<?php echo $row->post_category_name;?>">
+                            <input type="hidden" name="type" value="<?php echo $row->post_type;?>">
+                            <input type="hidden" name="edit" value="edit">
+                            <input type="submit" value="編集">
+                        </form>
+                    <?php } ?>
+                </td>
+                <td>
+                    <?php if($row->ID > 1 && $row->ID != 7){ ?>
+                        <form action="<?php  $id = 209; echo get_page_link( $id );?>" method="post"  onSubmit="return delete_check()">
+                            <input type="hidden" name="id" value="<?php echo $row->ID;?>">
+                            <input type="hidden" name="is_delete" value="delete">
+                            <input type="submit" value="削除">
+                        </form>
+                    <?php } ?>
+                </td>
+                <td><?php echo $users_data->member_type_array[$row->post_type]; ?></td>
+            </tr>
+            <tr> 
+                <td style="border:none;height:10px"></td>
+            </tr>
+            <?php 
+                /*
+
+
+        <tr>
+
+        </tr>
+        <tr>
+            <td>
+                <?php if(($row->ID > 1 && $row->ID != 7)){ ?>
+                    <form action="<?php  $id = 209; echo get_page_link( $id );?>" method="post">
+                        <input type="hidden" name="id" value="<?php echo $row->ID;?>">
+                        <input type="hidden" name="word" value="<?php echo $row->post_category_name;?>">
+                        <input type="hidden" name="type" value="<?php echo $row->post_type;?>">
+                        <input type="hidden" name="edit" value="edit">
+                        <input type="submit" value="編集">
+                    </form>
+                <?php } ?>
+            </td>
+             <td>
+                <?php if($row->ID > 1 && $row->ID != 7){ ?>
+                    <form action="<?php  $id = 209; echo get_page_link( $id );?>" method="post"  onSubmit="return delete_check()">
+                        <input type="hidden" name="id" value="<?php echo $row->ID;?>">
+                        <input type="hidden" name="is_delete" value="delete">
+                        <input type="submit" value="削除">
+                    </form>
+                <?php } ?>
+            </td>
+
+            <td><?php echo $users_data->member_type_array[$row->post_type]; ?></td>
+         </tr>
+                         */
+                        ?>
         <?php } ?>
     </table>
 

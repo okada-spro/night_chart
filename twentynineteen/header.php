@@ -43,6 +43,7 @@
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/trainee_list_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/mail_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/login_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
+	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/register_style.css?<?php echo date('Ymd-His'); ?>" type="text/css" />
 
 
 

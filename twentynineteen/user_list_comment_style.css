@@ -8,12 +8,14 @@
     }
 }
 @media screen and (max-width: 560px){
-    table.lecture-comment-table {
-        display: block;
-        overflow-x: scroll;
+    .page-id-694 table.lecture-comment-table {
+        /* display: block; */
     }
 
-    .fixed_th_1{
+    /* .page-id-694 .user-table-comment-container.mode-sp{
+        display: inline-table;
+    } */
+    /* .fixed_th_1{
         position: sticky;
         left: 4px;
         background-color: white;
@@ -23,5 +25,5 @@
         width: 300px;
         min-height: 150px;
         display: block;
-    }
+    } */
 }

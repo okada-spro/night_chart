@@ -197,7 +197,7 @@ function clickBtn1(){
                 <td><input type="text"   name="input_zoom_title"  value="<?php echo $input_data->getZoomData("input_zoom_title");?>"   size="40" maxlength="300"></input></td>
             </tr>
             <tr>
-                <th>カテゴリー</th>
+                <th>カテゴリ</th>
                 <td>
                      <select name="input_zoom_category" >
                         <?php foreach ($input_data->zoom_catagory_array_data as $key => $value) {?>
@@ -294,7 +294,6 @@ function clickBtn1(){
                     </tr>
                     <?php foreach ($table_array as $row){?>
                         <?php if($row != ""){?>
-                        <tr>
                             <?php 
                                 if( in_array($row,(array)$table_array) )
                                 { 
@@ -304,13 +303,18 @@ function clickBtn1(){
                                      if($joins_info)
                                      {
                             ?>
+                        <tr class="mode-pc">
                                 <td><?php echo $row;?></td>
                                 <td><?php echo get_the_author_meta('last_name',$row);?>　<?php echo get_the_author_meta('first_name',$row);?>(<?php echo get_the_author_meta('user_login',$row);?>)</td>
+                        </tr>
+                        <tr class="mode-sp">
+                                <td><?php echo $row;?></td>
+                                <td><?php echo get_the_author_meta('last_name',$row);?>　<?php echo get_the_author_meta('first_name',$row);?></td>
+                        </tr>
                             <?php    
                                     }
                                  }
                             ?>
-                        </tr>
                         <?php } ?>
                     <?php } ?>
                  </table>

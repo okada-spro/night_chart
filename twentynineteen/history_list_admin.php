@@ -213,6 +213,36 @@ $(document).ready(function() {
 });
 
 </script>
+<script>
+    // 表示折り畳み
+    window.onload = function(){
+        $("[class^='disp_close']").css("display","none");
+    }
+
+    // sp用テーブルスライド
+$(function(){
+    $(".disp_open").click(function(){
+        var id = $(this).data('id');
+        var t_text = $(this).find("th").eq(0).text();   //マーク取得
+
+        console.log(id);
+        console.log(t_text);
+        
+        if($(".disp_close" + id).css("display") == "none"){
+            t_text = t_text.replace("▽","△");
+            $(".disp_close" + id).slideDown(100);
+            $(".user_name_disp").css("width","40%");
+            $(".th_disp").css("width","40%");
+        }else{
+            t_text = t_text.replace("△","▽");
+            $(".disp_close" + id).css("display","none");
+            $(".user_name_disp").css("width","200px");
+            $(".th_disp").css("width","auto");
+        }
+        $(this).find("th").eq(0).text(t_text)
+    });
+});
+</script>
 
 
 <div class="history_list_admin_title_area">
@@ -264,7 +294,7 @@ $(document).ready(function() {
     </div>
     </p>
 
-    <table class="histroy-list-table">
+    <table class="histroy-list-table mode-pc">
         <thead>
         <tr>
             <th class="fixed_th_1" width="70">履歴</th>
@@ -453,6 +483,362 @@ $(document).ready(function() {
         <?php } ?>
     </table>
 
+    <table class="histroy-list-table mode-sp">
+        <?php foreach ($trade_array  as $key => $value) {?>
+
+            <?php $user_info = get_userdata( $key ); //var_dump($user_info); echo "<br/><br/>";?>
+
+         
+            <?php $total_profit = 0;$total_interest = 0; ?>
+
+            <?php  
+                $member_level = get_the_author_meta('member_level',$key);
+                $member_type = get_the_author_meta('member_type',$key);
+            ?>
+            <?php  if($member_level == "" || $member_level == NULL){$member_level = 0;}?>
+
+            <?php  $Withdrawal =get_the_author_meta('member_withdrawal',$key);?>
+            <?php  if($Withdrawal == "" || $Withdrawal == NULL){$Withdrawal = 0;}?>
+
+
+            <?php $disp_row = false; 
+            
+                  //全て表示
+                 if(  $disp_level_table == 99  && $input_level_table == UserClass::ALL_DISP_CONST){
+                     $disp_row = true;
+                 }
+                 else if( $input_level_table == $member_level && $input_level_table == UserClass::MONKASEI  ){ //門下生の時
+                     $disp_row = true;
+                 }
+                 else if( $disp_level_table == 0 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI ){ //訓練生の時の全表示
+                     $disp_row = true;
+                 }
+                 else if( $disp_level_table == 1 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI  && $member_type == 1){ //訓練生の時の株表示
+                     $disp_row = true;
+                 }
+                 else if( $disp_level_table == 2 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI  && $member_type == 2){ //訓練生の時のFX表示
+                     $disp_row = true;
+                 }
+                 else if( $disp_level_table == 5 && $member_level != UserClass::DOGA ){ //動画会員を非表示
+                        $disp_row = true; //動画会員を非表示
+                 }
+                 else if( $disp_level_table == 6 && $member_level != UserClass::DOGA && $member_type != 2){ //株のみ表示
+                        $disp_row = true; 
+                 }
+                 else if( $disp_level_table == 7 && $member_level != UserClass::DOGA && $member_type != 1){ //FXのみ表示
+                        $disp_row = true;
+                 }
+
+                 else if( $input_level_table == UserClass::DOGA && $member_level == UserClass::DOGA ){ //動画会員
+                        $disp_row = true;
+                 }
+                 else{
+                      //echo $key;
+                 }
+
+                 //そもそも特別セミナーと動画会員は必要ない
+                 if( $member_level == UserClass::DOGA ||  $member_level == UserClass::SPECIAL_SEMINAR)
+                 {
+                     $disp_row = false;
+                 }
+
+                 //提出未提出
+                 if($disp_submission_table == 0 && !$value["disp"]) //提出者表示（未提出非表示)
+                 {
+                    if($disp_row)
+                    {
+                        $disp_row = false;
+                    }
+                 }
+                 else  if($disp_submission_table == 1 && $value["disp"]) //未提出者表示（提出非表示)
+                 {
+                    if($disp_row)
+                    {
+                        $disp_row = false;
+                    }
+                 }
+            
+            ?>
+            
+
+            <?php 
+
+         
+                //最後にユーザー名を検索
+                if($serch_str !="")
+                {
+                    if(( strpos( $key , $serch_str) !== false ) ||
+                       ( strpos( $user_info->first_name , $serch_str) !== false ) ||
+                       ( strpos( $user_info->last_name , $serch_str) !== false ) ||
+                       ( strpos( $user_info->user_login , $serch_str) !== false ) )
+                    {
+                        //検索があった
+                        $disp_row = true;
+                    }
+                    else{
+                        $disp_row = false;
+                    }
+                }
+            ?>
+
+
+            <?php if($disp_row){?>
+                <tr class="disp_open"  data-id=<?php echo $user_info->ID;?>>
+                    <th class="th_disp">ID▽</th>
+                    <th class="user_name_disp" style="width:200px;">ユーザー名</th>
+                    <th class="th_disp">履歴</th>
+                </tr>
+                <tr class="disp_open"  data-id=<?php echo $user_info->ID;?>>
+                    <td><?php echo $key;?> </td>
+                    <td><p><?php echo $user_info->last_name ;?>　<?php echo $user_info->first_name;?></p></td>
+                    <td>
+                        <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post" target="_blank">
+                            <input type="hidden" name="years" value="<?php echo $_GET["years"];?>">
+                            <input type="hidden" name="id" value="<?php echo $key;?>">
+                            <input type="hidden" name="is_list" value="checklist">
+                            <input type="submit" value="確認">
+                        </form>
+                    </td>
+                </tr>
+                <tr class="disp_close<?php echo $user_info->ID;?>">
+                    <th>会員</th>
+                    <th colspan="2">詳細</th>
+                </tr>
+                <tr class="disp_close<?php echo $user_info->ID;?>">
+                    <td>
+                        <?php if( $member_level == 0 && $member_type > 0){ //訓練生 ?>
+                            <?php echo $users_data->checkMemberTypeStr($member_type);?>
+                        <?php } ?>
+                        <?php echo $users_data->checkLevelStr($member_level);?><br>
+                        (<?php echo $users_data->checkWithdrawalStr($Withdrawal);?>)
+                    </td>
+                    <td colspan="2">
+                        <form action="<?php  $id = 11; echo get_page_link( $id );?>" method="post" target="_blank">
+                            <input type="hidden" name="id" value="<?php echo $key;?>">
+                            <input type="hidden" name="is_details" value="details">
+                            <input type="submit" value="詳細">
+                        </form>
+                    </td>
+                </tr>
+                <tr class="disp_close<?php echo $user_info->ID;?>">
+                    <?php for($i=$start_calendar;$i<=3;$i++) {?>
+                        <th style="min-width:100px"><?php echo $i;?>月</th>
+                    <?php } ?>
+                </tr>
+                <tr class="disp_close<?php echo $user_info->ID;?>">
+                    <?php for($i=$start_calendar;$i<=3;$i++) {?>
+                        <?php if(array_key_exists($i,$value["days"])){?>
+                        <?php 
+                            $balance = $value["days"][$i]["balance"];
+
+                            if($balance != 0)
+                            {
+                                $balance  =  floor($balance/ 1000) / 10;
+
+                            }
+
+                            $interest = $value["days"][$i]["interest"];
+                            $total_profit += $balance;
+                            $total_interest += $interest;
+                        ?>
+
+                        <td>
+                            <p>
+                                <?php echo $balance;?>
+                                <?php if($input_disp_table > 0){ //6ヶ月以上は２行 ?>
+                                <br>
+                                <?php } ?>
+                                (
+                                    <?php if($interest < 0){?>
+                                        <font color="red"><?php echo $interest;?> </font>％
+                                    <?php }else{ ?>
+                                        <?php echo $interest;?> ％ 
+                                    <?php } ?>
+                                )
+                            </p>
+                        </td>
+                        <?php }else{ ?>
+                            <td>0</td>
+                        <?php } ?>
+                    <?php } ?>
+                </tr>
+                <tr class="disp_close<?php echo $user_info->ID;?>">
+                    <?php for($i=4;$i<=6;$i++) {?>
+                        <th style="min-width:100px"><?php echo $i;?>月</th>
+                    <?php } ?>
+                </tr>
+                <tr class="disp_close<?php echo $user_info->ID;?>">
+                    <?php for($i=4;$i<=6;$i++) {?>
+                        <?php if(array_key_exists($i,$value["days"])){?>
+                        <?php 
+                            $balance = $value["days"][$i]["balance"];
+
+                            if($balance != 0)
+                            {
+                                $balance  =  floor($balance/ 1000) / 10;
+
+                            }
+
+                            $interest = $value["days"][$i]["interest"];
+                            $total_profit += $balance;
+                            $total_interest += $interest;
+                        ?>
+
+                        <td>
+                            <p>
+                                <?php echo $balance;?>
+                                <?php if($input_disp_table > 0){ //6ヶ月以上は２行 ?>
+                                <br>
+                                <?php } ?>
+                                (
+                                    <?php if($interest < 0){?>
+                                        <font color="red"><?php echo $interest;?> </font>％
+                                    <?php }else{ ?>
+                                        <?php echo $interest;?> ％ 
+                                    <?php } ?>
+                                )
+                            </p>
+                        </td>
+                        <?php }else{ ?>
+                            <td>0</td>
+                        <?php } ?>
+                    <?php } ?>
+                </tr>
+                <tr class="disp_close<?php echo $user_info->ID;?>">
+                    <?php for($i=7;$i<=9;$i++) {?>
+                        <th style="min-width:100px"><?php echo $i;?>月</th>
+                    <?php } ?>
+                </tr>
+                <tr class="disp_close<?php echo $user_info->ID;?>">
+                    <?php for($i=7;$i<=9;$i++) {?>
+                        <?php if(array_key_exists($i,$value["days"])){?>
+                        <?php 
+                            $balance = $value["days"][$i]["balance"];
+
+                            if($balance != 0)
+                            {
+                                $balance  =  floor($balance/ 1000) / 10;
+
+                            }
+
+                            $interest = $value["days"][$i]["interest"];
+                            $total_profit += $balance;
+                            $total_interest += $interest;
+                        ?>
+
+                        <td>
+                            <p>
+                                <?php echo $balance;?>
+                                <?php if($input_disp_table > 0){ //6ヶ月以上は２行 ?>
+                                <br>
+                                <?php } ?>
+                                (
+                                    <?php if($interest < 0){?>
+                                        <font color="red"><?php echo $interest;?> </font>％
+                                    <?php }else{ ?>
+                                        <?php echo $interest;?> ％ 
+                                    <?php } ?>
+                                )
+                            </p>
+                        </td>
+                        <?php }else{ ?>
+                            <td>0</td>
+                        <?php } ?>
+                    <?php } ?>
+                </tr>
+                <tr class="disp_close<?php echo $user_info->ID;?>">
+                    <?php for($i=10;$i<=12;$i++) {?>
+                        <th style="min-width:100px"><?php echo $i;?>月</th>
+                    <?php } ?>
+                </tr>
+                <tr class="disp_close<?php echo $user_info->ID;?>">
+                    <?php for($i=10;$i<=12;$i++) {?>
+                        <?php if(array_key_exists($i,$value["days"])){?>
+                        <?php 
+                            $balance = $value["days"][$i]["balance"];
+
+                            if($balance != 0)
+                            {
+                                $balance  =  floor($balance/ 1000) / 10;
+
+                            }
+
+                            $interest = $value["days"][$i]["interest"];
+                            $total_profit += $balance;
+                            $total_interest += $interest;
+                        ?>
+
+                        <td>
+                            <p>
+                                <?php echo $balance;?>
+                                <?php if($input_disp_table > 0){ //6ヶ月以上は２行 ?>
+                                <br>
+                                <?php } ?>
+                                (
+                                    <?php if($interest < 0){?>
+                                        <font color="red"><?php echo $interest;?> </font>％
+                                    <?php }else{ ?>
+                                        <?php echo $interest;?> ％ 
+                                    <?php } ?>
+                                )
+                            </p>
+                        </td>
+                        <?php }else{ ?>
+                            <td>0</td>
+                        <?php } ?>
+                    <?php } ?>
+                </tr>
+                <tr> 
+                    <td style="border:none;height:10px;background:none"></td>
+                </tr>
+
+                <?php 
+                /*
+
+                <tr>
+
+                    <?php for($i=$start_calendar;$i<=$end_calendar;$i++) {?>
+                        <?php if(array_key_exists($i,$value["days"])){?>
+                        <?php 
+                            $balance = $value["days"][$i]["balance"];
+
+                            if($balance != 0)
+                            {
+                                $balance  =  floor($balance/ 1000) / 10;
+
+                            }
+
+                            $interest = $value["days"][$i]["interest"];
+                            $total_profit += $balance;
+                            $total_interest += $interest;
+                        ?>
+
+                        <td>
+                            <p>
+                                <?php echo $balance;?>
+                                <?php if($input_disp_table > 0){ //6ヶ月以上は２行 ?>
+                                <br>
+                                <?php } ?>
+                                (
+                                    <?php if($interest < 0){?>
+                                        <font color="red"><?php echo $interest;?> </font>％
+                                    <?php }else{ ?>
+                                        <?php echo $interest;?> ％ 
+                                    <?php } ?>
+                                )
+                            </p>
+                        </td>
+                        <?php }else{ ?>
+                            <td>0</td>
+                        <?php } ?>
+                    <?php } ?>
+
+                </tr>
+                                */
+                                ?>
+            <?php } ?>
+        <?php } ?>
+    </table>
     <p>
      <div class="pager">
             <button type='button' class='first'>&lt;&lt;</button>

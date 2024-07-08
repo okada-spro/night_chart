@@ -134,6 +134,29 @@ function submitCheckFnc( id ){
 
 // -->
 </script>
+<script>
+    // 表示折り畳み
+    window.onload = function(){
+        $("[class^='disp_close']").css("display","none");
+    }
+
+    // sp用テーブルスライド
+$(function(){
+    $(".disp_open").click(function(){
+        var id = $(this).data('id');
+        var t_text = $(this).find("th").eq(0).text();   //マーク取得
+        
+        if($(".disp_close" + id).css("display") == "none"){
+            t_text = t_text.replace("▽","△");
+            $(".disp_close" + id).slideDown(100);
+        }else{
+            t_text = t_text.replace("△","▽");
+            $(".disp_close" + id).css("display","none");
+        }
+        $(this).find("th").eq(0).text(t_text)
+    });
+});
+</script>
 
 <div class="page_div_box">
     <p>
@@ -164,7 +187,7 @@ function submitCheckFnc( id ){
     if($disp_user_data)
     {
 ?>
-        <div class="user-table-container">
+        <div class="user-table-container mode-pc">
             <table class="lecture-table" id="userTable" style="max-width: 1200px;">
                <thead>
                 <tr>
@@ -249,6 +272,89 @@ function submitCheckFnc( id ){
             </tbody>
             </table>
         </div>
+
+        <div class="user-table-container mode-sp">
+            <table class="lecture-table" id="userTable" style="max-width: 1200px;">
+                <tbody>
+        <?php 
+            foreach ($disp_user_data as $row)
+            {
+        
+                $Withdrawal =get_the_author_meta('member_withdrawal',$row->ID);
+
+                if($Withdrawal == "" || $Withdrawal == NULL)
+                {
+                    $Withdrawal = 0;
+                }
+
+                if(($input_disp_table == 2) || ($input_disp_table == $Withdrawal) )
+                {
+                    $member_level = get_the_author_meta('member_level',$row->ID);
+                    $member_type = get_the_author_meta('member_type',$row->ID);
+
+                    if($member_level == "" || $member_level == NULL)
+                    {
+                        $member_level = 0;
+                    }
+
+                    $is_disp = false;
+
+                    //表示
+                    $is_disp = $users_data->checkDispStudents( $disp_level_table , $input_level_table , $member_level , $member_type);
+
+
+                    if($is_disp )
+                    {
+        ?>
+        <tr class="disp_open" data-id=<?php echo $row->ID;?>>
+            <th>▽</th>
+            <th>ユーザー名</th>
+        </tr>
+        <tr class="disp_open" data-id=<?php echo $row->ID;?>>
+            <form action="<?php  $id = 806; echo get_page_link( $id );?>" method="post" id="mail_send_user_<?php echo  $row->ID;?>" name="mail_send_user_<?php echo  $row->ID;?>" target="_blank">
+                <input type="hidden" name="send_user_id" value="<?php echo  $row->ID;?>">
+            </form>
+            <td>
+                <a href="javaScript:submitCheckFnc(<?php echo  $row->ID;?>)" >
+                    作成
+                </a>
+            </td>
+            <td><?php echo $row->user_login;?></td>
+        </tr>
+        <tr class="disp_close<?php echo $row->ID;?>">
+            <th>会員</th>
+            <th>名前</th>
+        </tr>
+        <tr class="disp_close<?php echo $row->ID;?>">
+            <td>
+                <?php if( $member_level == 0 && $member_type > 0){ //訓練生 ?>
+                    <?php echo $users_data->checkMemberTypeStr($member_type);?><br>
+                <?php } ?>
+                <?php echo $users_data->checkLevelStr($member_level);?>
+            </td>
+            <td>
+                <?php echo get_the_author_meta('last_name',$row->ID);?>　<?php echo get_the_author_meta('first_name',$row->ID);?>
+            </td>
+        </tr>
+        <tr class="disp_close<?php echo $row->ID;?>">
+            <th>生存</th>
+            <th>メールアドレス</th>
+        </tr>
+        <tr class="disp_close<?php echo $row->ID;?>">
+            <td><?php echo $users_data->checkWithdrawalStr($Withdrawal);?></td>
+            <td style="font-size:13px"><?php echo $row->user_email;?></td>
+        </tr>
+        <tr> 
+            <td style="border:none;height:10px"></td>
+        </tr>
+        
+                    <?php } ?>
+                <?php } ?>
+            <?php } ?>
+            </tbody>
+            </table>
+        </div>
+
          <div class="pager">
             <button type='button' class='first'>&lt;&lt;</button>
             <button type='button' class='prev'>&lt;</button>

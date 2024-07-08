@@ -21,6 +21,7 @@
 
     .vimeo-thumbnail-list{
         max-width: 50%;
+        flex: auto;
     }
 
     .vimeo-top-table-container{

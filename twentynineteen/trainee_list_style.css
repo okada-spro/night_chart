@@ -3,13 +3,20 @@
 }
 
 @media screen and (max-width: 560px){
-    .page-id-849 table.lecture-table .fixed_th_1,
-    .page-id-849 table.lecture-table .fixed_th_2{
-        position: unset;
+    .page-id-849 .user-table-container.mode-sp{
+        /* overflow: unset; */
     }
-    .page-id-849 table.lecture-table .fixed_th_3{
-        left: 0px;
+
+    .trainee_email{
+        font-size: 18px;
     }
+
+
+    .page-id-849 table.lecture-table{
+        /* display: block; */
+        width: 95%;
+    }
+
     .page-id-849 .pager{
         margin-left: 0px;
     }

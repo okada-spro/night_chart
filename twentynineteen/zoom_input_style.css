@@ -4,13 +4,23 @@
             width: 95%;
     }
     .page-id-51 table.c-table th{
-        width: 160px;
+        width: 110px;
         white-space: break-spaces;
         display: block;
     }
 
     .page-id-51 table.c-table select{
         width: 100%;
+    }
+    .page-id-51 table.c-table input{
+        width: 65vw;
+    }
+    .page-id-51 table.user-table{
+        display: inline-table;
+        margin-left: 2%;
+    }
+    .page-id-51 .mode-sp{
+        display: table-row;
     }
     
 }

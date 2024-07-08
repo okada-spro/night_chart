@@ -134,6 +134,33 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+    // 表示折り畳み
+    window.onload = function(){
+        $("[class^='disp_close']").css("display","none");
+    }
+
+    // sp用テーブルスライド
+$(function(){
+    $(".disp_open").click(function(){
+        var id = $(this).data('id');
+        var t_text = $(this).find("th").eq(0).text();   //マーク取得
+
+        console.log(id);
+        console.log(t_text);
+        
+        if($(".disp_close" + id).css("display") == "none"){
+            t_text = t_text.replace("▽","△");
+            $(".disp_close" + id).slideDown(100);
+        }else{
+            t_text = t_text.replace("△","▽");
+            $(".disp_close" + id).css("display","none");
+        }
+        $(this).find("th").eq(0).text(t_text)
+    });
+});
+</script>
+
 
 <div class="page_div_box">
     <p>
@@ -164,7 +191,7 @@ $(document).ready(function() {
     if($disp_user_data)
     {
 ?>
-        <div class="user-table-comment-container">
+        <div class="user-table-comment-container mode-pc">
             <table class="lecture-comment-table" id="userTable">
                <thead>
                 <tr>
@@ -262,6 +289,123 @@ $(document).ready(function() {
             </tbody>
             </table>
         </div>
+
+        <div class="user-table-comment-container mode-sp">
+            <table class="lecture-comment-table" id="userTable">
+                <tbody>
+        <?php 
+            foreach ($disp_user_data as $row)
+            {
+        
+                $Withdrawal =get_the_author_meta('member_withdrawal',$row->ID);
+                 $member_type = get_the_author_meta('member_type',$row->ID);
+
+                if($Withdrawal == "" || $Withdrawal == NULL)
+                {
+                    $Withdrawal = 0;
+                }
+
+                if(($input_disp_table == 2) || ($input_disp_table == $Withdrawal) )
+                {
+                    $member_level = get_the_author_meta('member_level',$row->ID);
+
+                    if($member_level == "" || $member_level == NULL)
+                    {
+                        $member_level = 0;
+                    }
+
+                    $is_disp = false;
+
+
+                  //全て表示
+                    if(  $disp_level_table == 99 && $input_level_table == UserClass::ALL_DISP_CONST ){
+                        $is_disp = true;
+                    }
+                    else if( $input_level_table == $member_level && $input_level_table == UserClass::MONKASEI  ){ //門下生の時
+                        $is_disp = true;
+                    }
+                    else if( $disp_level_table == 0 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI ){ //訓練生の時の全表示
+                        $is_disp = true;
+                    }
+                    else if( $disp_level_table == 1 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI  && $member_type == 1){ //訓練生の時の株表示
+                        $is_disp = true;
+                    }
+                    else if( $disp_level_table == 2 && $input_level_table == UserClass::KUNRENSEI && $member_level == UserClass::KUNRENSEI  && $member_type == 2){ //訓練生の時のFX表示
+                        $is_disp = true;
+                    }
+                    else if( $disp_level_table == 5 && $member_level != UserClass::DOGA ){ //動画会員を非表示
+                        $is_disp = true; //動画会員を非表示
+                    }
+                    else if( $disp_level_table == 6 && $member_level != UserClass::DOGA && $member_type != 2){ //株のみ表示
+                        $is_disp = true; 
+                    }
+                    else if( $disp_level_table == 7 && $member_level != UserClass::DOGA && $member_type != 1){ //FXのみ表示
+                        $is_disp = true;
+                    }
+
+                    else if( $input_level_table == UserClass::DOGA && $member_level == UserClass::DOGA ){ //動画会員
+                        $is_disp = true;
+                    }
+
+                    if($is_disp )
+                    {
+                        //$zoom_num =  $users_data->checkUserZoomJoin($row->ID);
+                        $zoom_plans_num =  $users_data->checkUserZoomPlans($row->ID);
+        ?>
+
+                <tr class="disp_open"  data-id=<?php echo $row->ID;?>>
+                    <th colspan="3">名前▽</th>
+                </tr>
+                <tr class="disp_open" data-id=<?php echo $row->ID;?>>
+                    <td colspan="3"><?php echo get_the_author_meta('last_name',$row->ID);?>　<?php echo get_the_author_meta('first_name',$row->ID);?></td>
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <th colspan="3">ユーザー名</th>
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <td colspan="3"><?php echo $row->user_login;?></td>
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <th >ID</th>
+                    <th >会員</th>
+                    <th >生存</th>
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <td ><?php echo $row->ID;?></td>
+                    <td >
+                       
+                        
+                        <?php if( $member_level == 0 && $member_type > 0){ //訓練生 ?>
+                            <?php echo $users_data->checkMemberTypeStr($member_type);?>
+                        <?php } ?>
+
+                         <?php echo $users_data->checkLevelStr($member_level);?>
+                    </td>
+
+
+                    <td><?php echo $users_data->checkWithdrawalStr($Withdrawal);?></td>
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <th colspan="3" class="lecture-comment-message">コメント</th>
+                    <!-- <th colspan="3" class="lecture-comment-message">コメント</th> -->
+                </tr>
+                <tr class="disp_close<?php echo $row->ID;?>">
+                    <!-- <td colspan="3" class="lecture-comment-message"> -->
+                    <td colspan="3" class="lecture-comment-message">
+                        <?php echo get_the_author_meta('message',$row->ID);?>
+                    </td>
+                </tr>
+                <tr> 
+                    <td style="border:none;height:10px"></td>
+                </tr>
+                    <?php } ?>
+                <?php } ?>
+            <?php } ?>
+            </tbody>
+            </table>
+        </div>
+
+
          <div class="pager">
             <button type='button' class='first'>&lt;&lt;</button>
             <button type='button' class='prev'>&lt;</button>
@@ -288,3 +432,4 @@ $(document).ready(function() {
 </div>
 
 <?php }
+

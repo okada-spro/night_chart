@@ -1,3 +1,8 @@
+.zoom-list-area table.user-table.mode-sp{
+    display: none;
+}
+
+
 @media screen and (max-width: 1024px){
     /* 4/22 */
     .zoom-list-area table.user-table .fixed_th_1{
@@ -26,17 +31,14 @@
 
 }
 @media screen and (max-width: 560px){
-    .zoom-list-area table.user-table .fixed_th_1,
-    .zoom-list-area table.user-table td.fixed_th_1{
-        position: unset;
+    .zoom-list-area table.user-table.mode-sp{
+        display: inline-table;
+        width: 95%;
+        margin-left: 2%;
+        font-size: 16px;
     }
-    .zoom-list-area table.user-table .fixed_th_2,
-    .zoom-list-area table.user-table td.fixed_th_2{
-        position: unset;
-    }
-    .zoom-list-area table.user-table .fixed_th_3,
-    .zoom-list-area table.user-table td.fixed_th_3{
-        left: 4px;
+    .zoom-list-area table.user-table.mode-pc{
+        display: none;
     }
 }
 

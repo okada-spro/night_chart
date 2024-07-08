@@ -62,10 +62,36 @@ $(document).ready(function() {
     });
 });
 </script>
+<script>
+    // 表示折り畳み
+    window.onload = function(){
+        $("[class^='disp_close']").css("display","none");
+    }
+
+    // sp用テーブルスライド
+$(function(){
+    $(".disp_open").click(function(){
+        var id = $(this).data('id');
+        var t_text = $(this).find("th").eq(0).text();   //マーク取得
+
+        console.log(id);
+        console.log(t_text);
+        
+        if($(".disp_close" + id).css("display") == "none"){
+            t_text = t_text.replace("▽","△");
+            $(".disp_close" + id).css("display","table-row");
+        }else{
+            t_text = t_text.replace("△","▽");
+            $(".disp_close" + id).css("display","none");
+        }
+        $(this).find("th").eq(0).text(t_text)
+    });
+});
+</script>
 
 <div class="page_div_box report_list">
 
-     <table class="user-table-two">
+     <table class="user-table-two mode-pc">
         <thead>
         <tr>
             <th class="fixed_th_1">編集</th>
@@ -111,6 +137,70 @@ $(document).ready(function() {
          </tr>
         <?php } ?>
     </table>
+
+    <table class="user-table-two mode-sp">
+        <?php foreach ($table_array as $key =>$value) { ?>
+            <tr class="disp_open"  data-id=<?php echo $value["input_id"];?>>
+                <th>ID▽</th>
+                <th colspan="2">講義名</th>
+            </tr>
+            <tr class="disp_open"  data-id=<?php echo $value["input_id"];?>>
+                <td><?php echo $value["input_id"]; ?></td>
+                <td colspan="2"><?php echo $value["input_title"]; ?></td>
+            </tr>
+            <tr class="disp_close<?php echo $value["input_id"];?>">
+                <td>タイプ</td>
+                <td>講義日</td>
+                <td>提出人数</td>
+            </tr>
+            <tr class="disp_close<?php echo $value["input_id"];?>">
+                <td><?php echo $users_data->member_type_array[$value["input_type"]]; ?></td>
+                <td><?php echo $value["input_eventdate"]; ?></td>
+                <td><?php echo $value["input_is_submission_num"]; ?>人</td>
+            </tr>
+            <tr class="disp_close<?php echo $value["input_id"];?>">
+                <td>編集</td>
+                <td>削除</td>
+                <td>提出</td>
+            </tr>
+            <tr class="disp_close<?php echo $value["input_id"];?>">
+                <td>
+                    <form action="<?php  $id = 482; echo get_page_link( $id );?>" method="post">
+                        <input type="hidden" name="input_id" value="<?php echo $value["input_id"];?>">
+                        <input type="hidden" name="edit" value="edit">
+                        <input type="submit" value="編集">
+                    </form>
+                </td>
+                <td>
+                    <form action="<?php  $id = 487; echo get_page_link( $id );?>" method="post"  onSubmit="return delete_check()">
+                        <input type="hidden" name="delete_id" value="<?php echo $value["input_id"];?>">
+                        <input type="hidden" name="is_delete" value="delete">
+                        <input type="submit" value="削除">
+                    </form>
+                </td>
+                <td>
+                    <?php if( $value["input_is_submission_num"] > 0) {?>
+                        <form action="<?php  $id = 487; echo get_page_link( $id );?>" method="post">
+                            <input type="hidden" name="input_id" value="<?php echo $value["input_id"];?>">
+                            <input type="hidden" name="confirmation" value="confirmation">
+                            <input type="submit" value="確認">
+                        </form>
+                    <?php } ?>
+                </td>
+            </tr>
+        <tr> 
+            <td style="border:none;height:10px"></td>
+        </tr>
+        <?php 
+        /*    
+
+        
+                     */
+        ?>
+        <?php } ?>
+    </table>
+
+
     <p>
     <div class="pager">
             <button type='button' class='first'>&lt;&lt;</button>

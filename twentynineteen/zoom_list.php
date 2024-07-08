@@ -54,6 +54,32 @@ function delete_check(){
 }
 // -->
 </script>
+<script>
+    // 表示折り畳み
+    window.onload = function(){
+        $("[class^='disp_close']").css("display","none");
+    }
+
+    // sp用テーブルスライド
+$(function(){
+    $(".disp_open").click(function(){
+        var id = $(this).data('id');
+        var t_text = $(this).find("th").eq(0).text();   //マーク取得
+
+        console.log(id);
+        console.log(t_text);
+        
+        if($(".disp_close" + id).css("display") == "none"){
+            t_text = t_text.replace("▽","△");
+            $(".disp_close" + id).slideDown(100);
+        }else{
+            t_text = t_text.replace("△","▽");
+            $(".disp_close" + id).css("display","none");
+        }
+        $(this).find("th").eq(0).text(t_text)
+    });
+});
+</script>
 
 <div class="zoom-list-area">
 
@@ -61,7 +87,7 @@ function delete_check(){
         <font size="6">直近のミーティング一覧</font>
     </div>
     <?php if($rows){?>
-        <table class="user-table">
+        <table class="user-table mode-pc">
             <colgroup span="6"></colgroup>
             <tr>
                 <th class="fixed_th_1" style="text-align: center">詳細</th>
@@ -125,6 +151,66 @@ function delete_check(){
                 <td><?php echo $url_link;?> </td>
                 <?php /*<td><?php echo $input_data->getParticNum($row->post_zoom_participant);?>人 </td>*/ ?>
                 <td><?php echo $input_data->getPlanNum($row->post_zoom_participant_plans);?>人 </td>
+            </tr>
+                <?php } ?>
+            <?php } ?>
+        </table>
+
+        <?php $disp_count = 0;?>
+        <table class="user-table mode-sp">
+            <colgroup span="6"></colgroup>
+            <?php foreach ($rows as $row) { $disp_count++;?>
+            <?php
+                if($disp_count < 30)
+                {
+                    $today = date("Y-M-d H:i:s", strtotime('+9hour'));
+                    $target_day = date("Y-M-d H:i:s",strtotime($row->post_zoom_deadline));
+
+                    $table_color = "";
+
+                    $url_link = '<a href="'.$row->post_zoom_url .'"  target="_blank" rel="noopener noreferrer">' .$row->post_zoom_url .'</a>';
+
+                    if( strtotime($today) > strtotime($target_day) ){
+                        $table_color = 'bgcolor="darkgray"';
+                        $back_table_color = 'style="background-color:darkgray"';
+                        $url_link = $row->post_zoom_url;
+                    }else{
+                        $back_table_color = 'style="background-color:white"';
+                    }
+            ?>
+            <tr class="disp_open"  data-id=<?php echo $row->ID;?>>
+                <th style="text-align: center">詳細▽</th>
+                <th style="text-align: center">タイトル</th>
+
+            </tr>
+            <tr class="disp_open"  data-id=<?php echo $row->ID;?> <?php echo $table_color;?>>
+                <td <?php echo $back_table_color;?>>
+                    <form action="<?php  $id = 51; echo get_page_link( $id );?>" method="post">
+                        <input type="hidden" name="id" value="<?php echo $row->ID;?>">
+                        <input type="hidden" name="is_edit" value="edit">
+                        <input type="submit" value="詳細">
+                    </form>
+                </td>
+                <td><?php echo $row->post_zoom_title;?> </td>
+            </tr>
+            <tr  class="disp_close<?php echo $row->ID;?>" <?php echo $table_color;?>>
+                <td style="text-align: center">カテゴリ</td>
+                <td style="text-align: center">開始予定時間</td>
+            </tr>
+            <tr class="disp_close<?php echo $row->ID;?>"  <?php echo $table_color;?>>
+                <td <?php echo $back_table_color;?>><?php echo $input_data->zoom_catagory_array_data[$row->post_zoom_category];?> </td>
+                <td <?php echo $back_table_color;?>><?php echo $row->post_zoom_start_day;?> </td>
+            </tr>
+            <tr class="disp_close<?php echo $row->ID;?>"  <?php echo $table_color;?>>
+                <td style="text-align: center">予定人数</td>
+                <td style="text-align: center">URL</td>
+            </tr>
+            <tr class="disp_close<?php echo $row->ID;?>"  <?php echo $table_color;?>>
+                <td><?php echo $input_data->getPlanNum($row->post_zoom_participant_plans);?>人 </td>
+                <td style="white-space:normal;font-size:8px;"><?php echo $url_link;?> </td>
+            </tr>
+            <tr> 
+                <td style="border:none;height:10px"></td>
             </tr>
                 <?php } ?>
             <?php } ?>

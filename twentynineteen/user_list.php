@@ -513,14 +513,15 @@ function submitCheckMailFnc( id ){
                             $the_login_date = "";
                         }
         ?>
-            <thead>
-                <tr class="disp_open" data-id=<?php echo $row->ID;?>>
+            <tbody>
+            <!-- <thead> -->
+                <tr class="disp_open" data-id=<?php echo $row->ID;?> style="background: #3f3f3f;">
                     <th>ID▽</th>
                     <th colspan="2">名前</th>
                     <th>会員</th>
                 </tr>
-            </thead>
-            <tbody>
+            <!-- </thead> -->
+            <!-- <tbody> -->
                 <tr class="disp_open" data-id=<?php echo $row->ID;?>>
 
                       <form action="<?php  $id = 37; echo get_page_link( $id );?>" method="post" id="trade_page_form_<?php echo  $row->ID;?>" name="trade_page_form_<?php echo  $row->ID;?>" target="_blank">
@@ -872,14 +873,13 @@ function submitCheckMailFnc( id ){
 
     // sp用テーブルスライド
 $(function(){
-    $(".page-id-11 .disp_open").click(function(){
+    $(".disp_open").click(function(){
         var id = $(this).data('id');
         var t_text = $(this).find("th").eq(0).text();   //マーク取得
-
+        
         if($(".disp_close" + id).css("display") == "none"){
             t_text = t_text.replace("▽","△");
-            $(".disp_close" + id).css("display","table-row");
-            // $(".disp_close" + id).slideDown(100);
+            $(".disp_close" + id).slideDown(100);
         }else{
             t_text = t_text.replace("△","▽");
             $(".disp_close" + id).css("display","none");

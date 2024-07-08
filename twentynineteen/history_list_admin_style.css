@@ -114,40 +114,16 @@ td.fixed_th_3.mode-sp{
         display: none;
     }
 
-    table.histroy-list-table .fixed_th_1 {
-        position: sticky;
-        left: 4px;
-        width: 50px;
+    .page-id-43 table.histroy-list-table{
+        width: 97.5%;
     }
-    table.histroy-list-table .fixed_th_1 input{
-        width: 40px;
-        padding: 1.5rem 0;
-    }
-    table.histroy-list-table .fixed_th_2 {
-        position: sticky;
-        /* 先頭からセル幅＋ボーダー幅 */
-        left: calc(52px + 4px);
-        width: 31px;
-        /* 87px */
-    }
-    table.histroy-list-table .fixed_th_3 {
-        position: sticky;
-        left: calc(85px + 4px);
-        width: 100px;
-        /* 189px */
-    }
-        table.histroy-list-table .fixed_th_3.mode-sp{
-            height: 101px;
-        }
-    table.histroy-list-table .fixed_th_4 {
-        position: sticky;
-        left: calc(189px + 2px);
-        width: 65px;
-    }
+
+    
 }
 
     table.histroy-list-table td, th {
         border: 1px #808080 solid;
+        width: 50px;
     }
     @media screen and (max-width: 1024px){
         /* 12/3 tab対応 */
@@ -173,6 +149,12 @@ td.fixed_th_3.mode-sp{
     /* 12/3 セル色追加 */
     table.histroy-list-table tr:nth-child(even) td {
         background: white;
+    }
+    @media screen and (max-width: 560px){
+        /* 12/3 tab対応 */
+        table.histroy-list-table tr:nth-child(even) td {
+            background: #DDFFFF;
+        }
     }
 
 

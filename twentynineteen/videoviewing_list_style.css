@@ -1,3 +1,7 @@
+.page-id-54 .user-table.mode-sp.tablesorter.tablesorter-default{
+    display: none;
+}
+
 @media screen and (max-width: 1024px){
     /* 4/19 tab対応 */
     .videoviewing_list .fixed_th_1{
@@ -9,11 +13,21 @@
     }
 }
 @media screen and (max-width: 560px){
-    .videoviewing_list .fixed_th_1{
+    .page-id-54 .user-table.mode-pc.tablesorter.tablesorter-default{
+        display: none;
+    }
+    .page-id-54 table.user-table.mode-sp{
+        display: inline-table;
+    }
+
+    .page-id-54 table.user-table td{
+        white-space: normal;
+    }
+    /* .videoviewing_list .fixed_th_1{
         position: sticky;
         left: 4px;
     }
     .videoviewing_list .index_button{
         margin-top: 150px;
-    }
+    } */
 }

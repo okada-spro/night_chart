@@ -45,6 +45,9 @@
     .page-id-185 .mode-pc{
         display: none;
     }
+    .page-id-185 a{
+        word-break: break-all;
+    }
 
 
     .lecture_center{
