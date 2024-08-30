@@ -56,7 +56,11 @@
                       // データ取得クエリ実行(再更新)
                       $input_data->getNewViewRow();
 
-                       $new_not_str = "<font color='red'>＊新しい動画を登録する際は必ず新規登録画面より登録してください</font>";
+                      $new_not_str = "<font color='red'>＊新しい動画を登録する際は必ず新規登録画面より登録してください</font>";
+
+
+                      //新動画データ
+                      $input_data->setNewVideo( $insert_sql ,  $_POST["input_title"] , $_POST["input_category"] );
 
                     }
                 }
@@ -172,81 +176,135 @@ function update_check(){
 
 
 <form action="<?php  $id = 129; echo get_page_link( $id );?>" method="post"    <?php if($input_data->getViewData("input_id") != 0){?> onSubmit="return update_check();" <?php } ?>>
-    <div class="c-table-container">
-        <table class="c-table">
-        <tbody>
-
-        <input type="hidden" name="input_id" value="<?php echo $input_data->getViewData("input_id");?>">
-        <input type="hidden"  name="input_flame_width" value='<?php echo $input_data->getViewData("input_flame_width");?>'  >
-         <input type="hidden"  name="input_flame_height" value='<?php echo $input_data->getViewData("input_flame_height");?>'  >
-
-        <?php  if(isset($_POST["list"])){?>
-            <input type="hidden" name="list" value="<?php echo $_POST["list"];?>">
-        <?php } ?>
 
 
-        <tr>
-            <th>カテゴリー</th>
-            <td>
-                <select name="input_category" id="input_category"  class="same-user-select">
-                    <?php foreach ($input_data->view_category_row as $value) {?>
-                        <option value="<?php echo $value->ID;?>"  <?php if($input_data->getViewData("input_category") == $value->ID){ echo "selected";}?>><?php echo $value->post_category_name;?></option>
-                    <?php } ?>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th>公開日</th>
-            <td>
-                <input type="datetime-local" name="input_release_date" id="input_release_date" value="<?php echo $input_data->getViewData("input_release_date");?>" >*公開順に並びます
-            </td>
-        </tr>
+    <input type="hidden" name="input_id" value="<?php echo $input_data->getViewData("input_id");?>">
+    <input type="hidden"  name="input_flame_width" value='<?php echo $input_data->getViewData("input_flame_width");?>'  >
+    <input type="hidden"  name="input_flame_height" value='<?php echo $input_data->getViewData("input_flame_height");?>'  >
 
-        <tr>
-            <th>動画タイトル</th>
-            <td><input type="text" name="input_title" id="input_title" value='<?php echo $input_data->getViewData("input_title");?>'  ></input></td>
-        </tr>
-   
-        <tr>
-            <th>埋め込み番号</th>
-            <td>
-                <input type="number"  name="input_flame" value='<?php echo $input_data->getViewData("input_flame");?>'   size="60"></input>
-            </td>
-        </tr>
-        <tr>
-            <th>埋め込みURL</th>
-            <td>
-                <input type="text"  name="input_url" value='<?php echo $input_data->getViewData("input_url");?>'   size="60"></input>
-            </td>
-        </tr>
-        <?php /*
-         <tr>
-            <th>表示横幅（width）</th>
-            <td>
-                <input type="number"  name="input_flame_width" value='<?php echo $input_data->getViewData("input_flame_width");?>'   size="60"></input>
-            </td>
-        </tr>
+    <?php  if(isset($_POST["list"])){?>
+        <input type="hidden" name="list" value="<?php echo $_POST["list"];?>">
+    <?php } ?>
 
-          <tr>
-            <th>表示縦幅（height）</th>
-            <td>
-                <input type="number"  name="input_flame_height" value='<?php echo $input_data->getViewData("input_flame_height");?>'   size="60"></input>
-            </td>
-        </tr>
-        */?>
-        
 
-        <tr>
-            <th>公開</th>
-            <td>
-                <select name="input_disp" id="input_disp">
-                    <option value="0" <?php if($input_data->getViewData("input_disp") == 0){echo "selected";}  ?>>非公開</option>
-                    <option value="1" <?php if($input_data->getViewData("input_disp") == 1){echo "selected";}  ?>>公開</option>
-                 </select>
-            </td>
-        </tr>
-        </tbody>
+    <div class="vimeo-input-area">
+
+
+        <div class="vimeo-input-title">
+             <div class="vimeo-input-title-text">動画内容</div>
+        </div>
+
+        <table class="videoviewing-input-table">
+            <tbody>
+                <tr>
+                    <th>カテゴリー</th>
+                    <td>
+                        <select name="input_category" id="input_category"  class="same-user-select">
+                            <?php foreach ($input_data->view_category_row as $value) {?>
+                                <option value="<?php echo $value->ID;?>"  <?php if($input_data->getViewData("input_category") == $value->ID){ echo "selected";}?>><?php echo $value->post_category_name;?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>公開日</th>
+                    <td>
+                        <input type="datetime-local" name="input_release_date" id="input_release_date" value="<?php echo $input_data->getViewData("input_release_date");?>" >*公開順に並びます
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>動画タイトル</th>
+                    <td><input type="text" name="input_title" id="input_title" value='<?php echo $input_data->getViewData("input_title");?>'  ></input></td>
+                </tr>
+            </tbody>
         </table>
+
+        <div class="vimeo-input-title">
+             <div class="vimeo-input-title-text">VIMEO</div>
+        </div>
+
+        <table class="videoviewing-input-table">
+            <tbody>
+                <tr>
+                    <th>埋め込み番号</th>
+                    <td>
+                        <input type="number"  name="input_flame" value='<?php echo $input_data->getViewData("input_flame");?>'></input>
+                    </td>
+                </tr>
+                <tr>
+                    <th>埋め込みURL</th>
+                    <td>
+                        <input type="text"  name="input_url" value='<?php echo $input_data->getViewData("input_url");?>'></input>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div class="vimeo-input-title">
+             <div class="vimeo-input-title-text">Youtube</div>
+        </div>
+
+        <table class="videoviewing-input-table">
+            <tbody>
+                <tr>
+                    <th>動画ID</th>
+                    <td>
+                        <input type="text"  name="input_youtube_id" value='<?php echo $input_data->getViewData("input_youtube_id");?>'></input>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div class="vimeo-input-title">
+             <div class="vimeo-input-title-text">表示</div>
+        </div>
+
+        <table class="videoviewing-input-table">
+            <tbody>
+                <tr>
+                    <th>動画選択</th>
+                    <td>
+                        <?php
+                        
+                            $post_video_type =  $input_data->getViewData("input_video_type");
+                        
+                        ?>
+
+                        <input type="radio" name="input_video_type" value="0" <?php if($post_video_type == 0){ echo "checked";}?>>VIMEO
+		                <input type="radio" name="input_video_type" value="1" <?php if($post_video_type == 1){ echo "checked";}?>>Youtube
+                    </td>
+                </tr>
+                <tr>
+                <th>公開</th>
+                    <td>
+                        <select name="input_disp" id="input_disp">
+                            <option value="0" <?php if($input_data->getViewData("input_disp") == 0){echo "selected";}  ?>>非公開</option>
+                            <option value="1" <?php if($input_data->getViewData("input_disp") == 1){echo "selected";}  ?>>公開</option>
+                         </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+            <?php /*
+             <tr>
+                <th>表示横幅（width）</th>
+                <td>
+                    <input type="number"  name="input_flame_width" value='<?php echo $input_data->getViewData("input_flame_width");?>'   size="60"></input>
+                </td>
+            </tr>
+
+              <tr>
+                <th>表示縦幅（height）</th>
+                <td>
+                    <input type="number"  name="input_flame_height" value='<?php echo $input_data->getViewData("input_flame_height");?>'   size="60"></input>
+                </td>
+            </tr>
+            */?>
+        
+       
     </div>
     <p>
          <input type="hidden" name="is_save" value="save">

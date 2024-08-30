@@ -23,13 +23,11 @@ get_header();
 		<main id="main" class="site-main">
 		
 <?php if ( ! is_user_logged_in()){?>
-		<p>
-			<a class="index_button" href="<?php $id = 12; echo get_page_link( $id );?>">ログイン</a>
-		</p>
 
-		<p>
-			<a class="index_button" href="<?php $id = 13; echo get_page_link( $id );?>">新規登録</a>
-		</p>
+		<?php 
+		
+			include("top_login.php");
+		?>
 
 <?php  }else{?>
 		
@@ -44,11 +42,18 @@ get_header();
 			$login_ban = false;
 		}
 
+		require_once("pageFunction.php");//ページ用
 
+		//期限切れ
+		$updata_page_index = getUserUpdataDayPage($user->ID);
 
 		if($login_ban)
 		{
 			include("logn-ban.php");
+		}
+		else if(strtotime($updata_page_index) <= strtotime( date('Y-m-d H:i:s') )) //期限切れ
+		{
+			include("logn-limit.php");
 		}
 		else{
 			require_once("zoomClass.php");
@@ -98,12 +103,15 @@ get_header();
 			<div class="mode-pc mode-tab">
 				<table class="top-table">
 					<tr>
-						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 11; echo get_page_link( $id );?>">生徒一覧（管理者）</a></td>
+						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 882; echo get_page_link( $id );?>">動画会員一覧（管理者）</a></td>
 						<td><a class="index_top_button index_top_button_grades_color" href="<?php $id = 43; echo get_page_link( $id );?>?years=<?php echo date('Y');?>">成績一覧（管理者）</a></td>
 					</tr>
 					<tr>
 					<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 849; echo get_page_link( $id );?>">訓練生一覧（管理者）</a></td>
 						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 694; echo get_page_link( $id );?>">コメント一覧（管理者）</a></td>
+					<tr>
+						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 11; echo get_page_link( $id );?>">登録者一覧（管理者）</a></td>
+						<td><a class="index_top_button index_top_button_st_color" href="<?php $id = 1037; echo get_page_link( $id );?>">更新用一覧（管理者）</a></td>
 					</tr>
 				</table>
 	
@@ -125,6 +133,10 @@ get_header();
 						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
 						<td></td>
 					</tr>
+					<tr>
+						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 1794; echo get_page_link( $id );?>">動画順番並べ替え</a></td>
+						<td></td>
+					</tr>
 				</table>
 				</p>
 	
@@ -135,7 +147,7 @@ get_header();
 						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=1">ザラ場 登録（管理者）</a></td>
 						<!-- <td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 808; echo get_page_link( $id );?>">メールメニュー</a></td> -->
 						<!-- staging -->
-						<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 771; echo get_page_link( $id );?>">メールメニュー</a></td>
+						<td><a class="index_top_button index_top_button_tool_color" href="<?php $id = 1400; echo get_page_link( $id );?>">送信メール一覧</a></td>
 					</tr>
 					<tr>
 						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=2">株 講義登録（管理者）</a></td>
@@ -154,8 +166,12 @@ get_header();
 						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=6">特別ｾﾐﾅｰ登録（管理者）</a></td>
 						
 					</tr>
-					<tr>
+					<?php /*<tr>
 						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=7">ZOOM座談会登録（管理者）</a></td>
+						
+					</tr>*/?>
+					<tr>
+						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=8">質問会（管理者）</a></td>
 						
 					</tr>
 					<tr>
@@ -170,6 +186,7 @@ get_header();
 				<table class="top-table">
 					<tr>
 						<td><a class="index_top_button index_top_button_setting_color" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></td>
+						<td><a class="index_top_button index_top_button_setting_color" href="<?php $id = 969; echo get_page_link( $id );?>">個別相談申し込み</a></td>
 						<td><a class="index_top_button index_top_button_news_color" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></td>
 					
 					</tr>
@@ -232,7 +249,7 @@ get_header();
 					<tr><td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=4">株 作業会登録（管理者）</a></td></tr>
 					<tr><td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=5">FX 作業会登録（管理者）</a></td></tr>
 					<tr><td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=6">特別ｾﾐﾅｰ登録（管理者）</a></td></tr>
-					<tr><td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=7">ZOOM座談会登録（管理者）</a></td></tr>
+					<?php /*<tr><td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 51; echo get_page_link( $id );?>?catagory=7">ZOOM座談会登録（管理者）</a></td></tr>*/?>
 					<tr>
 						<td><a class="index_top_button index_top_button_zoom_color" href="<?php $id = 46; echo get_page_link( $id );?>">ZOOM登録一覧（管理者）</a></td>
 					</tr>
@@ -253,6 +270,7 @@ get_header();
 					<tr>
 						<td><a class="index_top_button index_top_button_setting_color" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a></td>					
 					</tr>
+					<td><a class="index_top_button index_top_button_setting_color" href="<?php $id = 969; echo get_page_link( $id );?>">個別相談申し込み</a></td>
 					<tr>
 						<td><a class="index_top_button index_top_button_news_color" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a></td>
 					</tr>
@@ -268,44 +286,263 @@ get_header();
 
 		<?php if( !current_user_can('administrator') || isset($_GET["user_p"])){ ?>
 		
-			<?php if($member_level ==  UserClass::DOGA ){ //動画会員?>
+			<?php if($member_level ==  UserClass::DOGA || $member_level ==  UserClass::NEW_DOGA ){ //動画会員?>
+
+
+
+				<div class="menu-box-area" style="margin-top: 30px;">
+
+					<div class="menu-box-title">動画について</div>
+
+					<div class="menu-box-table">
+					
+						<table class="menu-table">
+
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 185; echo get_page_link( $id );?>">質問会</a>
+									</div>
+								</td>
+							</tr>
+						</table>
+					
+					
+					</div>
+
+				</div>
+
+				<div class="menu-box-area" >
+
+					<div class="menu-box-title">その他</div>
+
+					<div class="menu-box-table">
+					
+						<table class="menu-table">
+
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 969; echo get_page_link( $id );?>">個別相談申し込み</a>
+									</div>
+								</td>
+							</tr>
+						</table>
+					
+					
+					</div>
+
+				</div>
+		
+				<div class="menu-box-area" >
+
+					<div class="menu-box-title">個人の設定</div>
+
+					<div class="menu-box-table">
+					
+						<table class="menu-table">
+
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 743; echo get_page_link( $id );?>">パスワード変更</a>
+									</div>
+								</td>
+							</tr>
+							
+						</table>
+					
+					
+					</div>
+
+				</div>
+		
+				<div class="menu-box-logout" >
+					<a class="" href="<?php  echo wp_logout_url();?>">ログアウト</a>
+				</div>
+
+
+				
+			<?php }else if($member_level ==  UserClass::SPECIAL_SEMINAR ){ //特別セミナー?>
 
 				<p>
-					<a class="index_user_button index_top_button_video_color" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a>		
+					<a class="index_user_button index_top_button_video_color" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a>
 				</p>
 				<p>
-					<a class="index_user_button index_top_button_setting_color" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a>		
 					<a class="index_user_button index_top_button_setting_color" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a>
 				</p>
 				<p>
 					<a class="index_user_button index_top_button_logout_color" href="<?php  echo wp_logout_url();?>">ログアウト</a>
 				</p>
 			<?php }else{ ?>
-			
-			<p>
-				<a class="index_user_button index_top_button_grades_color" href="<?php $id = 35; echo get_page_link( $id );?>">成績入力</a>
-				<a class="index_user_button index_top_button_grades_color" href="<?php $id = 37; echo get_page_link( $id );?>">成績一覧</a>
-			</p>
 
-			<p>
-				<a class="index_user_button index_top_button_video_color" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a>		
-				<a class="index_user_button index_top_button_zoom_color" href="<?php $id = 463; echo get_page_link( $id );?>">レポート提出</a>		
-				<a class="index_user_button index_top_button_zoom_color" href="<?php $id = 185; echo get_page_link( $id );?>?category=<?php echo ZoomClass::ZOOM_ZARABA_CATEGORY; ?>">ザラ場指導・講義管理</a>
-			</p>
+
+				<div class="menu-box-area" style="margin-top: 30px;">
+
+					<div class="menu-box-title">動画について</div>
+
+					<div class="menu-box-table">
+					
+						<table class="menu-table">
+
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 185; echo get_page_link( $id );?>">ザラ場指導・講義・質問会</a>
+									</div>
+								</td>
+							</tr>
+						</table>
+					
+					
+					</div>
+
+				</div>
+
+				<div class="menu-box-area" >
+
+					<div class="menu-box-title">成績について</div>
+
+					<div class="menu-box-table">
+					
+						<table class="menu-table">
+
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 35; echo get_page_link( $id );?>">成績入力</a>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 37; echo get_page_link( $id );?>">成績一覧</a>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 463; echo get_page_link( $id );?>">レポート提出</a>
+									</div>
+								</td>
+							</tr>
+						</table>
+					
+					
+					</div>
+
+				</div>
+
+
+				<div class="menu-box-area" >
+
+					<div class="menu-box-title">その他</div>
+
+					<div class="menu-box-table">
+					
+						<table class="menu-table">
+
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 969; echo get_page_link( $id );?>">個別相談申し込み</a>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 539; echo get_page_link( $id );?>">ダウンロード</a>
+									</div>
+								</td>
+							</tr>
+						</table>
+					
+					
+					</div>
+
+				</div>
 		
-			<p>
-				<a class="index_user_button index_top_button_setting_color" href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ</a>		
-				<a class="index_user_button index_top_button_setting_color" href="<?php $id = 539; echo get_page_link( $id );?>">ダウンロード</a>		
-				<a class="index_user_button index_top_button_setting_color" href="<?php $id = 762; echo get_page_link( $id );?>">お問い合わせ</a>
-			</p>
+				<div class="menu-box-area" >
 
-			<p>
-				<a class="index_user_button index_top_button_setting_color" href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a>
-				<a class="index_user_button index_top_button_setting_color" href="<?php $id = 743; echo get_page_link( $id );?>">パスワード変更</a>
-			</p>
-			<p>
-				<a class="index_user_button index_top_button_logout_color" href="<?php  echo wp_logout_url();?>">ログアウト</a>
-			</p>
+					<div class="menu-box-title">個人の設定</div>
+
+					<div class="menu-box-table">
+					
+						<table class="menu-table">
+
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 24; echo get_page_link( $id );?>">設定変更</a>
+									</div>
+								</td>
+
+							</tr>
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 743; echo get_page_link( $id );?>">パスワード変更</a>
+									</div>
+								</td>
+							</tr>
+							
+						</table>
+					
+					
+					</div>
+
+				</div>
+		
+
+			
+				<div class="menu-box-logout" >
+					<a class="" href="<?php  echo wp_logout_url();?>">ログアウト</a>
+				</div>
+			
 			<?php } ?>
 		<?php } ?>
 	<?php } ?>

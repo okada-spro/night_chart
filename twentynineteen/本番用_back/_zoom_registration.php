@@ -218,17 +218,9 @@ function add_check_kougi(){
             }
         }
 
-
-        //質問会は動画会員以外は見れない
-        if($key == ZoomClass::ZOOM_QUESTION && $member_level != UserClass::DOGA)
+         //動画会員が基本的に参加できない
+        if(  $member_level == UserClass::DOGA )
         {
-            continue;
-        }
-
-         //動画会員が基本的に参加できない(質問会以外)
-        if(  $member_level == UserClass::DOGA && $key != ZoomClass::ZOOM_QUESTION  )
-        {
-           
             continue;
         }
 
@@ -280,7 +272,7 @@ function add_check_kougi(){
 
         <?php }?>
 
-    <table class="lecture-table mode-pc">
+    <table class="lecture-table">
         <colgroup span="1"></colgroup>
 
         <tr>
@@ -288,8 +280,8 @@ function add_check_kougi(){
         </tr>
 
         <tr style="background-color:lemonchiffon;">
-            <td class="fixed_th_1" style="background-color:lemonchiffon;"><?php echo "申込"; ?></td>
-            <td class="fixed_th_2" style="background-color:lemonchiffon;"><?php echo "タイトル"; ?></td>
+            <td><?php echo "申込"; ?></td>
+            <td><?php echo "タイトル"; ?></td>
             <td><?php echo "募集"; ?>　/ <font color="red"><?php echo "締切"; ?></font><?php echo "時間"; ?></td>
             <td><?php echo "講義時間"; ?></td>
             <?php /*<td><?php echo "講義時間"; ?></td>*/ ?>
@@ -336,11 +328,8 @@ function add_check_kougi(){
                     }
 
                    
-                    //動画会員だけ
-                    if( $row->post_zoom_jointype == ZoomClass::ZOOM_JOIN_DOUGA_ONLY && $member_level !=  UserClass::DOGA)
-                    {
-                        continue;
-                    }
+                    
+
 
 
 
@@ -378,10 +367,7 @@ function add_check_kougi(){
                         if($zoom_time < $now_time)
                         {
                             $table_color = 'bgcolor="darkgray"';
-                            $back_table_color = 'style="background-color:darkgray"';
                             $join_now = "締切";
-                        }else{
-                            $back_table_color = 'style="background-color:white"';
                         }
 
                         if($plan_input_value == 1)
@@ -400,11 +386,11 @@ function add_check_kougi(){
 
                              <?php  if($zoom_time < $now_time){  ?>
 
-                                <td class="fixed_th_1" <?php echo $back_table_color;?>><?php echo "締切"; ?></td>
+                                <td><?php echo "締切"; ?></td>
 
                             <?php }else{ ?>
 
-                                <td class="fixed_th_1" <?php echo $back_table_color;?>>
+                                <td>
                                     <?php if($plan_input_value == 0){?>
                                          <form action="<?php  $id = 185; echo get_page_link( $id );?>" method="post">
                                              <input type="hidden" name="id" value="<?php echo $row->ID;?>">
@@ -430,7 +416,7 @@ function add_check_kougi(){
                             <?php } ?>
 
 
-                            <td class="fixed_th_2" <?php echo $back_table_color;?>><?php echo $row->post_zoom_title; ?></td>
+                            <td><?php echo $row->post_zoom_title; ?></td>
                             <td><?php echo date('Y/m/d H:i',  strtotime($row->post_zoom_day)); ?>　/　<font color="red"><?php echo date('H:i',  strtotime($row->post_zoom_deadline)); ?></font></td>
                             <td><?php echo date('Y/m/d H:i',  strtotime($row->post_zoom_start_day)); ?></td>
                             <?php /*<td><?php echo date('Y年m月d日 H時i分',  strtotime($row->post_zoom_start_day)); ?></td>
@@ -472,229 +458,9 @@ function add_check_kougi(){
         <?php } ?>
     </table>
 
-    <table class="lecture-table mode-sp">
-        <colgroup span="1"></colgroup>
-
-        <tr>
-            <th  colspan="2"><?php echo $value;?> 開催予定一覧</th>
-        </tr>
-        
-        <?php /*<td><?php echo "講義時間"; ?></td>*/ ?>
-        <?php /*<td><?php echo "募集"; ?></td>*/ ?>
-        
-
-
-        <?php
-            if($input_data->zoom_row){
-                foreach ($input_data->zoom_row as $row) {
-
-        ?>
-            
-            <?php if($row->post_zoom_category ==  $key){
-                    $year_m =  date('Y',  strtotime($row->post_zoom_day));
-                    $hour_m =  date('m',  strtotime($row->post_zoom_day));
-                    $recruitment_time = new DateTime($row->post_zoom_day); //募集開始時間
-
-
-                    //訓練生は見れない
-                    if( $row->post_zoom_jointype == ZoomClass::ZOOM_JOIN_NO_KUNRENSEI && $member_level == UserClass::KUNRENSEI)
-                    {
-                        continue;
-                    }
-
-                    //門下生は見れない(基本的に全部見れるのでマスク)
-                    if( $row->post_zoom_jointype == ZoomClass::ZOOM_JOIN_NO_MONKASEI && $member_level == UserClass::MONKASEI)
-                    {
-                        //continue;
-                    }
-
-                    //訓練生と動画性見れない
-                    if( $row->post_zoom_jointype == ZoomClass::ZOOM_JOIN_NO_KUNRENSEI_DOUGA && $member_level ==  UserClass::KUNRENSEI)
-                    {
-                        continue;
-                    }
-                    else if( $row->post_zoom_jointype == ZoomClass::ZOOM_JOIN_NO_KUNRENSEI_DOUGA && $member_level ==  UserClass::DOGA)
-                    {
-                        continue;
-                    }
-
-                    if((($now_year == $year_m && $hour_m == $now_month ) || ($now_year < $year_m) ||    ($now_year == $year_m && $hour_m > $now_month )) && ($recruitment_time < $now_time))
-                    {
-
-                        $start_date = new DateTime( date("Y-M-d H:i:s", strtotime($row->post_zoom_start_day . "+4 hour")));
-                        $deadline_date = new DateTime( date("Y-M-d H:i:s", strtotime($row->post_zoom_deadline)));
-
-
-                         //参加予定かどうかを確認
-                         $plan_input_value = 1;
-                         $zoom_time = $deadline_date;
-
-                         if(isset($row->post_zoom_participant_plans))
-                         {
-                            $zoom_plan_data =explode(",",$row->post_zoom_participant_plans);
-
-                            for($i=0;$i<count($zoom_plan_data);$i++){
-                                if( $user->ID == $zoom_plan_data[$i]){
-                                    $plan_input_value = 0;
-                                    $zoom_time = $start_date;
-                                    break;
-                                }
-                            }
-                        }
-
-                         //echo $zoom_time->format('Y-m-d H:i:s');
-
-                        $join_now = "募集中";
-                        $table_color = "";
-
-                        if($zoom_time < $now_time)
-                        {
-                            $table_color = 'bgcolor="darkgray"';
-                            $back_table_color = 'style="background-color:darkgray"';
-                            $join_now = "締切";
-                        }else{
-                            $back_table_color = 'style="background-color:white"';
-                        }
-
-                        if($plan_input_value == 1)
-                        {
-                            $plan_str = "参加予定なし";
-                            $plan_input_str = "参加する";
-                        }
-                        else{
-                            $plan_str = "参加予定";
-                        }
-            ?>
-
-            <?php 
-            /*
-                <tr style="background-color:lemonchiffon;">
-                    <td colspan="2" style="background-color:lemonchiffon;"><?php echo "タイトル"; ?></td>
-                </tr>
-            */
-            ?>
-                <tr <?php echo $table_color;?>>
-                    <td colspan="2"class="disp_open" data-id=<?php echo $row->ID;?> <?php echo $back_table_color;?>>▼<?php echo $row->post_zoom_title; ?></td>
-                </tr>
-
-                <tr class="disp_close<?php echo $row->ID;?>">
-                    <td style="background-color:lemonchiffon;"><?php echo "申込"; ?></td>
-                    <td style="background-color:lemonchiffon;"><?php echo "予定"; ?></td>
-                </tr>
-
-                <?php //参加?>
-                <tr class="disp_close<?php echo $row->ID;?>" <?php echo $table_color;?>>
-
-                    <?php  if($zoom_time < $now_time){  ?>
-
-                    <td <?php echo $back_table_color;?>><?php echo "締切"; ?></td>
-
-                    <?php }else{ ?>
-
-                    <td <?php echo $back_table_color;?>>
-                        <?php if($plan_input_value == 0){?>
-                                <form action="<?php  $id = 185; echo get_page_link( $id );?>" method="post">
-                                    <input type="hidden" name="id" value="<?php echo $row->ID;?>">
-                                    <input type="hidden" name="viewing_url" value="viewing_url">
-                                    <input type="submit" value="URL確認"  style="background-color: rosybrown;">
-                                </form>
-                        <?php }else{ ?>
-                            <?php if($enable_num + $add_mtg_num > 0 || $key ==  ZoomClass::ZOOM_KOUGI_CATEGORY){?>
-                                <?php if( $key ==  ZoomClass::ZOOM_KOUGI_CATEGORY || $key ==  ZoomClass::ZOOM_KABU_SAGYOU_CATEGORY || $key ==  ZoomClass::ZOOM_FX_SAGYOU_CATEGORY){ ?>
-                                    <form action="<?php  $id = 185; echo get_page_link( $id );?>" method="post"  onSubmit="return add_check_kougi()">
-                                <?php }else{ ?>
-                                    <form action="<?php  $id = 185; echo get_page_link( $id );?>" method="post"  onSubmit="return add_check()">
-                                <?php } ?>
-                                    <input type="hidden" name="id" value="<?php echo $row->ID;?>">
-                                    <input type="hidden" name="viewing_plan" value="<?php echo $plan_input_value;?>">
-                                    <input type="submit" value="<?php echo $plan_input_str;?>">
-                                </form>
-                            <?php }else{ ?>
-                                参加できません
-                            <?php } ?>
-                        <?php } ?>
-                    </td>
-                    <?php } ?>
-
-                    
-                    <?php  if($zoom_time < $now_time){
-
-                        $join_str = "不参加";
-
-                        if(isset($row->post_zoom_participant_plans))
-                        {
-
-
-                            $zoom_join_data =explode(",",$row->post_zoom_participant_plans);
-
-                            for($i=0;$i<count($zoom_join_data);$i++){
-                                if( $user->ID == $zoom_join_data[$i]){
-                                    $join_str = "参加";break;
-                                }
-                            }
-                        }
-                    ?>
-
-                        <td><?php echo $join_str; ?></td>
-
-                    <?php }else{ ?>
-
-
-
-                        <td><?php echo $plan_str; ?></td>
-
-                    <?php } ?>
-                </tr>
-                <tr style="background-color:lemonchiffon;"  class="disp_close<?php echo $row->ID;?>">
-                    <td  colspan="2"><?php echo "募集"; ?>　/ <font color="red"><?php echo "締切"; ?></font><?php echo "時間"; ?></td>
-                </tr>
-                <tr <?php echo $table_color;?>  class="disp_close<?php echo $row->ID;?>">
-                    <td colspan="2"><?php echo date('Y/m/d H:i',  strtotime($row->post_zoom_day)); ?>　/　<font color="red"><?php echo date('H:i',  strtotime($row->post_zoom_deadline)); ?></font></td>
-                </tr>
-
-                <tr style="background-color:lemonchiffon;"  class="disp_close<?php echo $row->ID;?>">
-                    <td  colspan="2"><?php echo "講義時間"; ?></td>
-                </tr>
-                <tr  <?php echo $table_color;?> class="disp_close<?php echo $row->ID;?>">
-                    
-                    <td  colspan="2"><?php echo date('Y/m/d H:i',  strtotime($row->post_zoom_start_day)); ?></td>
-                    <?php /*<td><?php echo date('Y年m月d日 H時i分',  strtotime($row->post_zoom_start_day)); ?></td>
-                    <td><?php echo $join_now; ?></td>*/?>
-                </tr>
-                <tr class="disp_close<?php echo $row->ID;?>">
-                    <td  colspan="2" style="border:none;height:30px"></td>
-                </tr>
-
-                <?php } ?>
-            <?php } ?>
-        <?php } ?>
-        <?php } ?>
-    </table>
-
 </div>
 <?php } ?>
 
 
 
 <?php } ?>
-<script>
-    // 表示折り畳み
-    $("[class^='disp_close']").css("display","none");
-
-    // sp用テーブルスライド
-$(function(){
-    $(".disp_open").click(function(){
-        var id = $(this).data('id');
-        var t_text = $(this).find("td").eq(0).text();   //マーク取得
-
-        if($(".disp_close" + id).css("display") == "none"){
-            t_text = t_text.replace("▼","▲");
-            $(".disp_close" + id).slideDown(100);
-        }else{
-            t_text = t_text.replace("▲","▼");
-            $(".disp_close" + id).css("display","none");
-        }
-        $(this).find("td").eq(0).text(t_text);
-    });
-});
-</script>

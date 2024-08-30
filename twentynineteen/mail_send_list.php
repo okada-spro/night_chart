@@ -8,17 +8,50 @@ $mail_data= new MailClass();
 
 //メールIDを取得
 $send_mail_id_list = $mail_data->getMailList();
+ 
 
+$send_mail_word ="";
+
+if(isset($_POST["mail_send_word"]))
+{
+    $send_mail_word = $_POST["mail_send_word"];
+
+
+    $send_mail_id_list = $mail_data->searchSendMail( $send_mail_word , $send_mail_id_list);
+}
 
 
 
 ?>
+
+ 
  
 
 <?php if( !isset($_POST["send_post_mail_id"] ) ){ ?>
 
 
+     <div class="mail_send_submit_area">
+
+        <form action="<?php  $id = 1400; echo get_page_link( $id );?>" method="post" style="display: flex;">
+
+            <div class="mail_send_submit_text">
+                <input type="text"  name="mail_send_word" value="<?php echo $send_mail_word;?>">
+            </div>
+
+            <div class="mail_send_submit_button">
+                <input type="submit" value="検索">
+            </div>
+        </form>
+
+        <div class="mail_send_submit_str">複数検索の場合は「,」で区分けしてください </div>
+
+     </div>
+
+
+
     <?php if($send_mail_id_list ){ ?>
+
+
 
 <script>
 $(document).ready(function() {

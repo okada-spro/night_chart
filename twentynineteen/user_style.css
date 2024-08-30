@@ -47,6 +47,11 @@ table.lecture-table_sarch{
     }
 }
 
+.list-delete-area{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 
 /* テーブル */
 .user-table-container .tablesorter-header-inner{

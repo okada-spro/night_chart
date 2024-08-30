@@ -4,12 +4,13 @@
     require_once("zoomClass.php");
 
     //ユーザー
-     $user = wp_get_current_user();
+    $user = wp_get_current_user();
 
       //クラス作成
     $users_data= new UserClass();
     $zoom_data= new ZoomClass();
-  
+    
+
     //ZOOMデータの作成
     $users_data->getZoomRow();
     $zoom_data->getZoomMonthRow();
@@ -20,7 +21,7 @@
 
 
     //訓練生ページ
-    $page_post = 849;
+    $page_post = 882;
 
 
 
@@ -31,7 +32,7 @@
 
     $update_str = "";
 
-    
+
     //CSVファイル用の配列を準備
     $csv_export_array =array();
 
@@ -87,15 +88,15 @@
     }
 
 
-    $input_disp_table = get_user_meta($user->ID, 'user-status-page-disp-kunrensei',true );//生存(0)or離脱(1)orALL(2)
-    $disp_level_table =  get_user_meta($user->ID, 'user-level-page-disp-kunrensei',true );//
+    $input_disp_table = get_user_meta($user->ID, 'user-status-page-disp-doga-member',true );//生存(0)or離脱(1)orALL(2)
+    $disp_level_table = get_user_meta($user->ID, 'user-level-page-disp-doga-member',true );//
 
     //生存or離脱
     if(isset($_POST['disp_table']) )
     {
         $input_disp_table = $_POST['disp_table'];
 
-        //update_user_meta($user->ID, 'user-status-page-disp-kunrensei', $input_disp_table);
+        update_user_meta($user->ID, 'user-level-page-disp-doga-member', $input_disp_table);
 
     }
    
@@ -105,13 +106,14 @@
     {
         $disp_level_table = $_POST['level_table'];
 
-       // update_user_meta($user->ID, 'user-level-page-disp-kunrensei', $disp_level_table);
+        update_user_meta($user->ID, 'user-status-page-disp-doga-member', $disp_level_table);
 
       
     }
+    
    
     //訓練生のみ表示
-    $input_level_table = UserClass::KUNRENSEI;
+    $input_level_table = UserClass::DOGA;
    
    
    
@@ -203,37 +205,47 @@ $(function(){
 
 <div class="history_list_admin_title_area">
     <div class="history_list_admin_title">
-        <div class="history_list_admin_title_str">訓練生一覧</div>
+        <div class="history_list_admin_title_str">動画会員一覧</div>
     </div>
 </div>
 
 
 <div class="page_div_box">
     <p>
-    <div>
-        <form action="<?php  $id = $page_post; echo get_page_link( $id );?>" method="post">
-            <select name="level_table"  class="same-user-select">
-            <?php foreach ($users_data->disp_only_kunren_level_array_data as $key => $value) {?>
-                   <option value="<?php echo $key;?>" <?php if($disp_level_table == $key){ echo "selected";}?>><?php echo $value;?></option>
-            <?php } ?>
-            </select>
-            <select name="disp_table"  class="same-user-select">
-                <?php foreach ($users_data->disp_array_data as $key => $value) {?>
-                   <option value="<?php echo $key;?>" <?php if($input_disp_table == $key){ echo "selected";}?>><?php echo $value;?></option>
-                <?php } ?>
-            </select>
-            <input type="hidden"  name="input_serch" value="<?php echo $serch_str;?>">
-            <input type="submit" value="表示変更"   class="same-user-select">
-        </form>
+        <div class="admin-list-post-area">
 
-        <div class="admin-list-post-search-area">
-            <form action="<?php  $id = $page_post; echo get_page_link( $id );?>" method="post">
-                <input type="text"  name="input_serch" value="<?php echo $serch_str;?>"  style="height:50px;"></input>
-                <input type="submit" value="検索・更新"   class="same-user-select">
-            </form>
+            <div class="admin-list-post-disp-area">
+
+                <form action="<?php  $id = $page_post; echo get_page_link( $id );?>" method="post">
+            
+                    <select name="level_table"  class="same-user-select">
+                        <?php foreach ($users_data->disp_only_douga_member_level_array_data as $key => $value) {?>
+                            <option value="<?php echo $key;?>" <?php if($disp_level_table == $key){ echo "selected";}?>><?php echo $value;?></option>
+                        <?php } ?>
+                    </select>
+            
+                    <select name="disp_table"  class="same-user-select">
+                        <?php foreach ($users_data->disp_array_data as $key => $value) {?>
+                            <option value="<?php echo $key;?>" <?php if($input_disp_table == $key){ echo "selected";}?>><?php echo $value;?></option>
+                        <?php } ?>
+                    </select>
+                    <input type="hidden"  name="input_serch" value="<?php echo $serch_str;?>">
+                    <input type="submit" value="表示変更"   class="same-user-select">
+                </form>
+
+            </div>
+
+            <div class="admin-list-post-search-area">
+
+                <form action="<?php  $id = $page_post; echo get_page_link( $id );?>" method="post">
+                    <input type="text"  name="input_serch" value="<?php echo $serch_str;?>"  style="height:50px;"></input>
+                    <input type="submit" value="検索・更新"   class="same-user-select">
+                </form>
+             </div>
          </div>
-    </div>
-    </p>
+     </p>
+ </div>
+   
 
 <?php 
     if($disp_user_data)
@@ -250,12 +262,11 @@ $(function(){
                     
                     <th>生存</th>
                     <th>BAN</th>
-                    <th>ザラ場</th>
-                    <th>講義</th>
+                
                     <th>メールアドレス</th>
                     <th>電話番号</th>
                     <th>最終ﾛｸﾞｲﾝ/新規登録</th>
-                    <th>レポート</th>
+                  
                     <th>詳細</th>
                 </tr>
                 </thead>
@@ -269,8 +280,7 @@ $(function(){
         
                 $Withdrawal =get_the_author_meta('member_withdrawal',$row->ID);
 
-                $member_ban = get_the_author_meta('login_ban',$row->ID);
-                $kunren_type = get_the_author_meta('kunren_type',$row->ID);
+                 $member_ban = get_the_author_meta('login_ban',$row->ID);
 
                   //リスト削除
                   $list_delete =  get_the_author_meta('list_delete',$row->ID);
@@ -287,6 +297,8 @@ $(function(){
 
                 if(($input_disp_table == 2) || ($input_disp_table == 1 && $member_ban == true)|| ($input_disp_table == 0 && $Withdrawal == 0)|| ($input_disp_table == 4 && $Withdrawal == 0 && $member_ban == false)   )
                 {
+                   
+
                     $member_level = get_the_author_meta('member_level',$row->ID);
                     $member_type = get_the_author_meta('member_type',$row->ID);
                     $member_ban = get_the_author_meta('login_ban',$row->ID);
@@ -299,9 +311,11 @@ $(function(){
                     $is_disp = false;
 
 
-                    if($member_level == UserClass::KUNRENSEI)
+                   // echo $member_level;
+
+                    if($member_level == UserClass::DOGA)
                     {
-                        if( $disp_level_table == $member_type &&  $disp_level_table >= 1)
+                        if( $disp_level_table == $member_type &&  $disp_level_table >= 1 &&  $disp_level_table < 3)
                         {
                              $is_disp = true;
                         }
@@ -309,10 +323,20 @@ $(function(){
                             $is_disp = true;
                         }
                     }
-
+                    else if($member_level == UserClass::NEW_DOGA)
+                    {
+                        if( $disp_level_table == $member_type &&  $disp_level_table == 3)
+                        {
+                             $is_disp = true;
+                        }
+                        else  if( $disp_level_table == 0 || $disp_level_table == 3 ){
+                            $is_disp = true;
+                        }
+                    }
 
                     if($is_disp )
                     {
+
                         $id_count++;
 
                         $zoom_plans_num =  $zoom_data->checkUserZoomPlans($row->ID);
@@ -336,7 +360,7 @@ $(function(){
                         $registerd = get_the_author_meta('user_registered',$row->ID);
                         $the_registerd_date =  date('Y年m月d日 H時i分', strtotime($registerd));
 
-                         if( $row->ID != 19 && $row->ID != 123){
+                        if( $row->ID != 19 && $row->ID != 123){
 
                             array_push($csv_export_array,$row->ID);
 
@@ -363,14 +387,10 @@ $(function(){
                         <?php echo get_the_author_meta('last_name',$row->ID);?>　<?php echo get_the_author_meta('first_name',$row->ID);?>
                     </td>
                     <td>
-                        <?php if( $member_level == 0 && $member_type > 0){ //訓練生 ?>
-                            <?php echo $users_data->checkMemberTypeStr($member_type);?><br>
-                        <?php } ?>
-
+                       
                         <?php echo $users_data->checkLevelStr($member_level);?>
                         <?php if($member_type ==1){ //株 ?>(株) <?php } ?>
                         <?php if($member_type ==2){ //FX ?>(FX) <?php } ?>
-                        
                         
 
                     </td>
@@ -388,24 +408,7 @@ $(function(){
                         ?>
                     </td>
 
-                    <td <?php if($zoom_plans_num >= 5){echo 'bgcolor=salmon';}?>   class="user-nowrap">
-
-                           <?php 
-                            if(($kunren_type == UserClass::KUNREN_TYPE_KOUGI && $input_level_table == UserClass::KUNRENSEI && $member_type ==1) || ($member_level == UserClass::KUNRENSEI  && $member_type == 2))
-                            {
-                               
-                            }else{
-                        ?>
-
-                             <?php echo $zoom_plans_num;?>回
-
-                        <?php } ?>
-                    </td>
-                    <td>
-
-                     
-                       <?php echo $kougi_plans_num;?>回
-                    </td>
+                   
                   
                     
                      <form action="<?php  $id = 806; echo get_page_link( $id );?>" method="post" id="mail_send_user_<?php echo  $row->ID;?>" name="mail_send_user_<?php echo  $row->ID;?>" target="_blank">
@@ -425,15 +428,7 @@ $(function(){
                     <td><?php echo get_the_author_meta('billing_phone',$row->ID);?></td>
                     <td style="font-size:18px;"><?php echo $the_login_date;?><br><?php echo $the_registerd_date;?></td>
 
-                    <td>
-                        <?php if($member_level != UserClass::DOGA){ //動画会員はなし?>
-                            <form action="<?php  $id = 463; echo get_page_link( $id );?>" method="post" target="_blank">
-                                <input type="hidden" name="user_id" value="<?php echo $row->ID;?>">
-                                <input type="hidden" name="report_admin_list" value="report_admin_list">
-                                <input type="submit" value="レポート"   style="background-color: rosybrown;">
-                            </form>
-                        <?php } ?>
-                    </td>
+                 
                     <td>
                         <form action="<?php  $id = 11; echo get_page_link( $id );?>" method="post" target="_blank">
                             <input type="hidden" name="id" value="<?php echo $row->ID;?>">
@@ -511,6 +506,10 @@ $(function(){
                         else{
                             $the_login_date = "";
                         }
+
+                        //CSVファイルに入れていく(博多は入れない)
+
+                        
         ?>
         <tr class="disp_open"  data-id=<?php echo $row->ID;?>>
             <th>ID▽</th>
@@ -626,7 +625,7 @@ $(function(){
         <tr> 
             <td style="border:none;height:10px"></td>
         </tr>
-    
+       
                     <?php } ?>
                 <?php } ?>
             <?php } ?>
@@ -667,7 +666,7 @@ $(function(){
 
                 <?php } ?>
 
-                <input type="hidden" name="csv_file_name" value="kunren_member_list">
+                <input type="hidden" name="csv_file_name" value="video_member_list">
                 <input type="hidden" name="csv_ex" value="csv_ex">
 
                 <div class="user-list-csv-button">
@@ -695,8 +694,6 @@ $(function(){
              </form>
 
         </div>
-
-
 
     <?php }else{?>
         <p>

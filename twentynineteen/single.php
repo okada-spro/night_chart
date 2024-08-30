@@ -33,7 +33,7 @@ get_header();
 					);
 				} elseif ( is_singular( 'post' ) ) {
 					// Previous/next post navigation.
-					the_post_navigation(
+					/*the_post_navigation(
 						array(
 							'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Next Post', 'twentynineteen' ) . '</span> ' .
 								'<span class="screen-reader-text">' . __( 'Next post:', 'twentynineteen' ) . '</span> <br/>' .
@@ -43,6 +43,12 @@ get_header();
 								'<span class="post-title">%title</span>',
 						)
 					);
+					*/
+?>
+
+					<div class="news-list-return"><a href="<?php $id = 499; echo get_page_link( $id );?>">お知らせ一覧に戻る</a></div>
+<?
+					
 				}
 
 				// If comments are open or we have at least one comment, load up the comment template.

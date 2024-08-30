@@ -25,7 +25,7 @@
     $input_data->getCategoryDataRow();
 
     //本数計算
-    $input_data->checkCategoryNum($user_level,$user_member_type);
+    $input_data->checkCategoryNum($user_level,$user_member_type,$user->ID);
 
    function setVideoLink( $data_array, $set_day_count , $set_now_month)
    {
@@ -52,6 +52,15 @@ if($input_data->view_row){
 
     if(isset($_POST['viewing']) )
     {
+        //視聴完了を保存
+        if(isset($_POST['complete']) )
+        {
+            $input_data->setVideoComplete( $user->ID ,  $_POST['id']  , $_POST['category_id']  );
+        }
+
+        //完了データを取得
+        $complete_array = $input_data->getVideoComplete( $user->ID );
+
 
         //var_dump($_POST);
 
@@ -61,16 +70,89 @@ if($input_data->view_row){
         $make_url = "https://player.vimeo.com/video/" .$input_data->input_data["input_flame"];
         $make_width = $input_data->input_data["input_flame_width"];
         $make_height = $input_data->input_data["input_flame_height"];
+        $youtube_id = $input_data->input_data["input_youtube_id"];
 
-        if($input_data->input_data["input_disp"] == 1 || current_user_can('administrator'))
+
+        //閲覧禁止
+        if(7 ==  $input_data->input_data["input_category"] && $user_member_type == 2 && $user_level != UserClass::MONKASEI)
+        {
+
+            echo "<div style='text-align: center;'>この動画は閲覧できません</div>";
+
+            return;
+        }
+
+        if( isset($input_data->view_category_number[$input_data->input_data["input_category"]]) )
+        {
+            if($input_data->view_category_number[$input_data->input_data["input_category"]] == 0)
+            {
+                echo "<div style='text-align: center;'>この動画は閲覧できません</div>";
+
+                return;
+            }
+        }
+        
+
+
+        if(($input_data->input_data["input_disp"] == 1 || current_user_can('administrator')) &&  $input_data->input_data["input_title"] != "")
         {
 ?>
     <div class="index_center">
         <?php echo  $input_data->input_data["input_title"]; ?>
     </div>
     <div class="viewing_div">
-        <iframe src=<?php echo $make_url;?> width="<?php echo $make_width;?>" height="<?php echo $make_height;?>" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+        <?php //if(current_user_can('administrator')){?>
+
+            <?php if($input_data->input_data["input_video_type"] == 1  ){ ?>
+
+
+                <div class="video-youtube-flame">
+
+                    <iframe width="640" height="360" src="https://www.youtube.com/embed/<?php echo $youtube_id;?>?showinfo=0&modestbranding=1" title="<?php echo  $input_data->input_data["input_title"]; ?>" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            
+                </div>
+
+            <?php }else{ ?>
+
+                <iframe src=<?php echo $make_url;?> width="<?php echo $make_width;?>" height="<?php echo $make_height;?>" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+
+            <?php } ?>
+        <?php /* }else{ ?>
+            <iframe src=<?php echo $make_url;?> width="<?php echo $make_width;?>" height="<?php echo $make_height;?>" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        <?php }*/ ?>
     </div>
+
+
+    <?php if($input_data->input_data["input_category"] != 7   &&  $input_data->input_data["input_title"] != "" ){ ?>
+
+
+        <div class="video-youtube-complete-button-area">
+
+            <?php if( !isset( $complete_array[ $_POST['category_id'] ] ) || !isset( $complete_array[ $_POST['category_id'] ][ $input_data->input_data["input_id"] ] ) ){ ?>
+
+
+                 <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
+                    <input type="hidden" name="id" value="<?php echo $input_data->input_data["input_id"];?>">
+                    <input type="hidden" name="viewing" value="viewing">
+                    <input type="hidden" name="complete" value="complete">
+                    <input type="hidden" name="category_id" value="<?php echo  $_POST['category_id']; ?>">
+                    <input type="submit" value="動画視聴完了する"   class="">
+                 </form>
+
+            <?php }else{ ?>
+
+                <div class="video-youtube-complete-end-button">
+                    <input type="submit" value="動画視聴完了" style="background-color: crimson;cursor: none;">
+                 </div>
+
+            <?php } ?>
+
+        </div>
+
+
+    <?php } ?>
+
 <?php
         }else{
 ?>
@@ -79,6 +161,216 @@ if($input_data->view_row){
         }
 ?>
 
+    <?php 
+    
+        $test_info =  wp_get_current_user();
+
+
+        $title_name = "";
+
+        foreach( $input_data->view_category_row as $key => $value)
+        {
+            if(isset($_POST['video_month']))
+            {
+                
+                if(7 ==  $_POST['category_id'])
+                {
+                    $title_name = $value->post_category_name;
+                    break;
+                }
+            }
+            else
+            {
+                if($value->ID ==  $_POST['category_id'])
+                {
+                    $title_name = $value->post_category_name;
+                    break;
+                }
+            }
+        }
+
+        $categorys_id = 7;
+
+        if(!isset($_POST['video_month']))
+        {
+            $categorys_id = $_POST['category_id'];
+        }
+       
+
+        $open_array = $input_data->setOpenData(false);
+             //動画全体から
+        $video_array = array();
+
+       
+
+        $vimeo_key = "";
+
+        $disp_count = 0;
+
+        foreach( $open_array as $key => $value)
+        {
+
+            if( $value["input_category"] == $categorys_id &&  $value["input_disp"] == 1)
+            {
+
+                array_push($video_array , $value);
+
+           //var_dump($value);
+           
+                if( $value["input_id"] == $input_data->input_data[ "input_id" ] )
+                {
+                    $vimeo_key =$disp_count;
+                }
+
+                $disp_count++;
+            }
+        }
+
+        
+
+        //$open_array = $input_data->setOpenData(false);
+
+        //var_dump($video_array);
+
+        if($user->ID == 19)
+        {
+            var_dump($_POST);
+            echo $_POST['category_id'];
+        }
+        
+?>
+
+
+    <?php if($video_array  &&  $input_data->input_data["input_title"] != ""){?>
+
+
+        <div class="video-next-button-area">
+
+             <div class="video-next-button-area-constens">
+
+                 <div class="video-next-button-left">
+
+                    <?php if( isset( $video_array[ $vimeo_key + 1 ] ) ){?>
+
+                        <?php $after_video = $video_array[ $vimeo_key + 1 ]; ?>
+
+                        <?php if( $input_data->input_data["input_category"] != 26){ //このIDのものは表示しない?>
+                            <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
+                                <input type="hidden" name="id" value="<?php echo $after_video["input_id"];?>">
+                                <input type="hidden" name="viewing" value="viewing">
+                                <input type="hidden" name="category_id" value="<?php echo  $after_video['input_category']; ?>">
+                                <input type="hidden" name="vimeo-id" value="<?php echo $after_video["input_flame"];?>" >
+                                <input type="submit" value="前の動画へ"   class="">
+                            </form>
+                        <?php } ?>
+
+                    <?php }else{ ?>
+
+                        <input type="submit" value="前の動画へ"  style="background-color: darkgrey;">
+
+                    <?php } ?>
+
+                 </div>
+
+
+                 <div class="video-next-button-center">
+
+                 <?php if(isset($_POST['video_month']) || $input_data->input_data["input_category"] == 7 ){?>
+
+
+                    <?php 
+                    
+                        $video_month = "";
+                        
+
+                        if(isset($_POST['video_month']))
+                        {
+                            $video_month = $_POST['video_month'];
+                        }
+                        else{
+
+                            //ない場合はタイトルからとってくる
+                            $tittle_seq =  explode('/', $input_data->input_data["input_title"]);
+
+
+                            $video_month = $tittle_seq[0] . "-" .$tittle_seq[1];
+                        }
+                    
+                    
+                    ?>
+
+
+                    <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
+                        <input type="hidden" name="video_month" value="<?php echo $video_month;?>">
+                        <input type="hidden" name="category_id" value="7">
+                        <input type="hidden" name="viewing_category" value="viewing_category">
+                        <input type="submit" value="ザラ場　動画一覧へ"   class="">
+                    </form>
+
+                 <?php }else{ ?>
+                    <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
+                        <input type="hidden" name="category_id" value="<?php echo $_POST['category_id'];?>">
+                        <input type="hidden" name="viewing_category" value="viewing_category">
+                        <input type="submit" value="<?php echo $title_name;?>　動画一覧へ"   class="">
+                    </form>
+                 <?php } ?>
+
+
+
+                 </div>
+
+                 <div class="video-next-button-right">
+
+                    <?php if( $vimeo_key > 0 ){?>
+
+                        <?php $next_video = $video_array[ $vimeo_key - 1 ]; ?>
+
+                        <?php if( $input_data->input_data["input_category"] != 26){ //このIDのものは表示しない?>
+                            <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
+                                <input type="hidden" name="id" value="<?php echo $next_video["input_id"];?>">
+                                <input type="hidden" name="viewing" value="viewing">
+                                <input type="hidden" name="category_id" value="<?php echo  $next_video['input_category']; ?>">
+                                <input type="hidden" name="vimeo-id" value="<?php echo $next_video["input_flame"];?>" >
+                                <input type="submit" value="次の動画へ"   class="">
+                            </form>
+                        <?php } ?>
+
+                    <?php }else{ ?>
+
+                        <?php if( $input_data->input_data["input_category"] != 26){ //このIDのものは表示しない?>
+                            <input type="submit" value="次の動画へ"   style="background-color: darkgrey;">
+                         <?php } ?>
+                    <?php } ?>
+
+                 </div>
+
+             </div>
+
+         
+        </div>
+
+    <?php }else{ ?>
+
+
+        <div style="text-align: center;margin-top: 50px;font-size: 32px;">
+            こちらの動画は存在しません。
+
+            <form action="https://nightchart.jp/" method="post">
+                <input type="submit" value="TOPに戻る"   class="" style="margin-top: 20px;">
+            </form>
+        </div>
+
+
+    <?php } ?>
+
+<?php
+          
+        
+    
+    ?>
+
+
+    <?php /*>
 
     <?php if(isset($_POST['video_month'])){?>
 
@@ -86,20 +378,21 @@ if($input_data->view_row){
             <input type="hidden" name="video_month" value="<?php echo $_POST['video_month'];?>">
             <input type="hidden" name="category_id" value="7">
             <input type="hidden" name="viewing_category" value="viewing_category">
-            <input type="submit" value="動画一覧へ"   class="index_updata_button">
+            <input type="submit" value="ザラ場　動画一覧へ"   class="index_updata_button">
         </form>
 
     <?php }else{ ?>
          <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
             <input type="hidden" name="category_id" value="<?php echo $_POST['category_id'];?>">
             <input type="hidden" name="viewing_category" value="viewing_category">
-            <input type="submit" value="動画一覧へ"   class="index_updata_button">
+            <input type="submit" value="<?php echo $title_name;?>　動画一覧へ"   class="index_updata_button">
         </form>
     <?php } ?>
 
+    */?>
      <?php if(current_user_can('administrator')){ ?>
      <p>
-          <a class="index_updata_button" href="<?php $id = 54; echo get_page_link( $id );?>">動画管理一覧へ</a>
+          <a class="index_video_updata_button" href="<?php $id = 54; echo get_page_link( $id );?>">動画管理一覧へ</a>
      </p>
      <?php } ?>
 <?php
@@ -265,18 +558,28 @@ if($input_data->view_row){
 
 
     </table>
+
+       
     </div>
 
-
+    <div class="vimeo-calendar-button-area">
+        <a href="<?php $id = 134; echo get_page_link( $id );?>">カテゴリ選択に戻る</a>
+    </div>
 
 <?php
     }
     else if(isset($_POST['viewing_category']) &&  $_POST['category_id'] != 7 )
     {
         //カテゴリ表示
+        $open_base_array = $input_data->setOpenData(false);
+        $vide_add_array =  $input_data->getAddVideo( );//追加用のデータ
 
+        //順番に上から入れていく
+        $open_array = $input_data->setSortVideoArray( $open_base_array , $vide_add_array );
 
-        $open_array = $input_data->setOpenData(false);
+         //完了データを取得
+        $complete_array = $input_data->getVideoComplete( $user->ID );
+
 
     //var_dump($open_array);
   
@@ -364,7 +667,9 @@ $(function(){
     </p>
     </div>
 
-
+    <p>
+        <a class="index_button" href="<?php $id = 134; echo get_page_link( $id );?>">カテゴリ選択に戻る</a>
+    </p>
 
     <?php if($disp_type == 0){ //サムネイル形式 ?>
 
@@ -374,14 +679,18 @@ $(function(){
                 <?php if($row["input_category"] == $_POST['category_id'] && $row["input_disp"] == 1){?>
                 
                     <div class="vimeo-thumbnail-list">
-                        <div class="ileUep">
+                        <div class="ileUep"   <?php if($complete_array[  $_POST['category_id'] ][ $row["input_id"] ] == 1){?> style="background-color: blue;" <?php }?>>
                             <div class="vimeo-thumbnail-item">
                                 <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
                                     <input type="hidden" name="id" value="<?php echo $row["input_id"];?>">
                                     <input type="hidden" name="viewing" value="viewing">
                                     <input type="hidden" name="category_id" value="<?php echo  $_POST['category_id']; ?>">
                                     <input type="hidden" name="vimeo-id" value="<?php echo $row["input_flame"];?>" class="js-vimeo-thumbnail-id">
-                                    <input type="image"  src="<?php echo content_url() ."/uploads/"; ?>320x180.png" alt=""  class="vimeo-thumbnail-img js-vimeo-thumbnail-img" />
+                                    <?php if( $row["input_video_type"] == 1  ){ ?>
+                                         <input type="image"  src="https://img.youtube.com/vi/<?php echo $row["input_youtube_id"]; ?>/mqdefault.jpg"  class="vimeo-thumbnail-img js-vimeo-thumbnail-img" >
+                                    <?php }else{ ?>
+                                        <input type="image"  src="<?php echo content_url() ."/uploads/"; ?>320x180.png" alt=""  class="vimeo-thumbnail-img js-vimeo-thumbnail-img" />
+                                    <?php } ?>
                                 </form>
                                <?php /* <div class="js-vimeo-thumbnail-title"><?php echo $row["input_title"]; ?></div>
                                 <div class="js-vimeo-thumbnail-release"><?php echo $row["input_release_date"]; ?></div>*/ ?>
@@ -397,21 +706,61 @@ $(function(){
 
         <table class="video_list_table">
             <?php foreach ($open_array as $row) {?>
-                <?php if($row["input_category"] == $_POST['category_id'] && $row["input_disp"] == 1){?>
+
+                <?php if($row["input_category"] == $_POST['category_id'] && $row["input_disp"] == 1){ ?>
+
+                
                
                 <tr>
                     <td>
-                        <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post" name="cl_list<?php echo $row["input_id"];?>">
-                            <div class="vimeo-thumbnail-item">
-                                <input type="hidden" name="id" value="<?php echo $row["input_id"];?>">
-                                <input type="hidden" name="viewing" value="viewing">
-                                <input type="hidden" name="category_id" value="<?php echo  $_POST['category_id']; ?>">
-                                <input type="hidden" name="vimeo-id" value="<?php echo $row["input_flame"];?>" class="js-vimeo-thumbnail-id">
-                                <img src="<?php echo content_url() ."/uploads/"; ?>320x180.png"  class="vimeo-thumbnail-list-img js-vimeo-thumbnail-img" >
-                                <a href="javascript:document.cl_list<?php echo $row["input_id"];?>.submit()" class ="calendar-a"><?php echo $row["input_title"]; ?> <?php if($set_category_id != 20){ echo "（".$row["input_release_date"]."）";} ?></a>
-                                
-                            </div>
-                        </form>
+
+                        <div class="video_list_area_flrex">
+
+                            <div class="video_list_area_link">
+
+                                <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post" name="cl_list<?php echo $row["input_id"];?>">
+
+                                    <?php 
+                
+                                        //echo $user->ID;
+
+
+                                        /*if($user->ID == 1)
+                                        {
+                                            echo $row["input_youtube_id"];
+                                        }
+                                        */
+                                    ?>
+
+                                    <div class="vimeo-thumbnail-item">
+                                        <input type="hidden" name="id" value="<?php echo $row["input_id"];?>">
+                                        <input type="hidden" name="viewing" value="viewing">
+                                        <input type="hidden" name="category_id" value="<?php echo  $_POST['category_id']; ?>">
+                                        <input type="hidden" name="vimeo-id" value="<?php echo $row["input_flame"];?>" class="js-vimeo-thumbnail-id">
+                                        <?php if( $row["input_video_type"] == 1  ){ ?>
+                                            <img src="https://img.youtube.com/vi/<?php echo $row["input_youtube_id"]; ?>/mqdefault.jpg"  class="vimeo-thumbnail-list-img js-vimeo-thumbnail-img" >
+                                        <?php }else{ ?>
+                                            <img src="<?php echo content_url() ."/uploads/"; ?>320x180.png"  class="vimeo-thumbnail-list-img js-vimeo-thumbnail-img" >
+                                        <?php } ?>
+                                        <a href="javascript:document.cl_list<?php echo $row["input_id"];?>.submit()" class ="calendar-a"><?php echo $row["input_title"]; ?> <?php if($set_category_id != 20){ echo "（".$row["input_release_date"]."）";} ?></a>
+                                    </div>
+                                </form>
+
+                             </div>
+
+
+                             <?php if($complete_array[  $_POST['category_id'] ][ $row["input_id"] ] == 1){?>
+                                 <div class="video_list_area_complete_button">
+
+                                    <button class="video-youtube-complete-list-button" type="button">視聴完了</button>
+
+                                 </div>
+
+                             <?php } ?>
+
+                        </div>
+
+
                     </td>
                 </tr>
                 
@@ -419,9 +768,9 @@ $(function(){
             <?php } ?>
         </table>
     <?php } ?>
-    <p>
-        <a class="index_button" href="<?php $id = 134; echo get_page_link( $id );?>">カテゴリ選択に戻る</a>
-    </p>
+
+
+    
 <?php 
     } else{
         
@@ -436,7 +785,7 @@ $(function(){
             <th>本数</th>
         </tr>
        <?php foreach ($input_data->view_category_row as $row) { ?>
-            <?php if($input_data->view_category_number[$row->ID] > 0){?>
+            <?php if($input_data->view_category_number[$row->ID] > 0 && $row->ID != 1 ){?>
                 <tr>
                     <td>
                         <form action="<?php  $id = 134; echo get_page_link( $id );?>" method="post">
@@ -451,11 +800,11 @@ $(function(){
             <?php } ?>
         <?php } ?>
     </table>
-
+    <?php /*
      <p>
         <a class="index_button" href="<?php $id = 134; echo get_page_link( $id );?>">カテゴリ選択に戻る</a>
     </p>
-
+    */?>
  <?php 
     }
  ?>

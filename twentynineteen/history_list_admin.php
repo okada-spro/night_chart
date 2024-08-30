@@ -317,6 +317,14 @@ $(function(){
             <?php  
                 $member_level = get_the_author_meta('member_level',$key);
                 $member_type = get_the_author_meta('member_type',$key);
+
+                //リスト削除
+                $list_delete =  get_the_author_meta('list_delete',$key);
+                
+                if($list_delete == 1)
+                {
+                    continue;
+                }
             ?>
             <?php  if($member_level == "" || $member_level == NULL){$member_level = 0;}?>
 

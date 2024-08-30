@@ -37,8 +37,8 @@
 
 /* ページ移動 */
 .pager{
-    position: absolute;
-    margin-left: 35%;
+   /* position: absolute;
+    margin-left: 35%;*/
 }
 @media screen and (max-width: 1024px){
     /* 12/6 tab対応 */

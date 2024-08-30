@@ -366,7 +366,7 @@ function my_row_wrapper( $rows, $tag ) {
 // ログアウト時にトップページに
  
 function redirect_logout_page(){
-  $url = site_url('', 'http');
+  $url = site_url('', 'https');
   wp_safe_redirect($url);
   exit();
 }
@@ -405,7 +405,39 @@ function wpb_lastlogin() {
 	$last_login = get_the_author_meta('last_login');
         $the_login_date = date('Y年n月j日', $last_login);
 	return $the_login_date; 
-} 
+}
+
+function loggedin_check(){
+    // ログインしていないことを確認
+    if ( !is_user_logged_in() ) {
+        // REQUEST_URIに『lostpassword』『logout』という文字列が含まれていないか判定
+        $dir_name = $_SERVER['REQUEST_URI'];
+        if( preg_match( '/lostpassword|logout/', $dir_name) || $_POST['wp-submit'] == 'ログイン' ) {
+            return;
+        }
+
+		/*if (!is_home()) {
+			wp_redirect(home_url());
+			exit;
+		}
+		*/
+    }
+}
+add_filter('init','loggedin_check');
+
+ 
+// ログイン失敗したら
+function login_fail(){
+    $referrer =$_SERVER['HTTP_REFERER'];
+    if ( !empty($referrer) && !preg_match( '/wp-login|wp-admin/', $referrer) ) {
+        $url = site_url('/?err_code=err', 'https');
+	    wp_safe_redirect($url);
+	    exit();
+       
+    }
+}
+add_action( 'wp_login_failed', 'login_fail' );
+	
 /**
  * SVG Icons class.
  */

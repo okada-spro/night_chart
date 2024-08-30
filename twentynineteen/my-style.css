@@ -1,4 +1,31 @@
-﻿.logn-ban-area {
+﻿html, body {
+  
+}
+
+
+
+a:link {
+    color: #0073aa;
+}
+
+a:visited {
+    color: #0073aa;
+}
+
+a:hover {
+    color: #0073aa;
+}
+
+a:active {
+    color: #0073aa;
+}
+
+
+.body-container {
+   
+}
+
+.logn-ban-area {
 }
 
 .logn-ban-str {
@@ -23,6 +50,7 @@
 
 .index_center {
     text-align: center;
+    padding-top: 20px;
 }
 
 .page_div_box {
@@ -68,7 +96,7 @@
     display: block;
     width: 650px;
     height: 60px;
-    padding: 20px;
+    /*padding: 20px*/
     margin: 0 auto; /* 中央寄せになります。 */
     text-align: center;
     color: #666;
@@ -120,6 +148,147 @@
  * ヘッダー関連
  * 
  * ************************/
+.top_header_area {
+    height: 84px;
+    background: #06236F 0% 0% no-repeat padding-box;
+    opacity: 1;
+    color: white;
+}
+
+.top_header_log {
+    text-align: left;
+    font: normal normal bold 18px/26px Noto Sans JP;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    padding-top: 29px;
+    padding-left: 20px;
+}
+
+
+    .top_header_log a:link {
+       
+        color: white;
+    }
+
+
+    .top_header_log a:visited {
+        color: white;
+    }
+
+
+    .top_header_log a:hover {
+        color: white;
+    }
+
+
+    .top_header_log a:active {
+        color: white;
+    }
+
+
+
+.top_header_flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.top_header_menu_area {
+    display: flex;
+    font-size: 12px;
+    margin-top: 30px;
+}
+
+.top_header_menu_link {
+    margin-left: 15px;
+}
+
+.top_header_menu_else {
+    display: flex;
+}
+
+.top_header_menu_img_news {
+    margin-top: 20px;
+    margin-right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #000C2B;
+}
+
+.top_header_menu_img_user {
+    margin-right: 20px;
+    margin-top: 15px;
+}
+
+
+    .top_header_menu_img_user:hover {
+        
+    }
+
+.tooltip5 {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+}
+
+    .tooltip5 img {
+        width: 100%;
+    }
+
+.description5 {
+    position: absolute;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 1.6em;
+    border-radius: 5px;
+    background: white;
+    width: 300px;
+    color: #ACACAC;
+    display: none;
+    border: 1px solid #ACACAC;
+}
+
+    .description5:before {
+        
+    }
+
+.tooltip5:hover .description5 {
+    display: inline-block;
+    top: 45px;
+    left: -250px;
+}
+
+.description5 ul {
+    padding-left: 0;
+}
+
+.description5 li {
+    list-style: none;
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 20px;
+    border-bottom: 1px dashed #666;
+}
+
+
+.top_header_menu_link a:link {
+    color: white;
+}
+
+.top_header_menu_link a:visited {
+    color: white;
+}
+
+.top_header_menu_link a:hover {
+    color: white;
+}
+
+.top_header_menu_link a:active {
+    color: white;
+}
+
 .heder-disp-username {
     text-align: right;
     font-size: 0.5em;
@@ -135,7 +304,52 @@
         padding: 0;
     }
 
+.header-line-area {
+    height: 50px;
+    background-color: darkblue;
 
+}
+
+.header-contens-area {
+    font-size: 16px;
+    color: white;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.header-contens-area a {
+    color: white;
+    text-decoration: none;
+}
+
+
+    .header-contens-area a:visited {
+        color: white;
+        text-decoration: none;
+    }
+
+
+.header-textarea{
+
+}
+
+.footer-area {
+    text-align: center;
+    height: 250px;
+    color: white;
+    background-color: black;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+.footer-text {
+    font: normal normal normal 18px/32px Hiragino Sans;
+    letter-spacing: -0.36px;
+    color: #FFFFFF;
+    opacity: 1;
+    font-size: 18px;
+    padding-top: 32px;
+}
 /**************************
  * 
  * TOPページのテーブル
@@ -256,7 +470,7 @@ table.top-table {
 .header_div {
     text-align: center;
     letter-spacing: 0.3em;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     margin-bottom: 50px;
 }
 
@@ -426,16 +640,37 @@ table.video-top-table td, th {
     height: 50px;
 }
 
+.video-youtube-flame {
+    margin-top: 150px;
+    margin-bottom: 100px;
+}
+
+.video-youtube-complete-button-area {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+    .video-youtube-complete-button-area input[type="submit"] {
+        width: 203px;
+        background-color: mediumaquamarine;
+    }
+
+
+
+.video-youtube-complete-end-button {
+   
+}
 
 /**************************
  * 
  * 検索
  *
  ****************************/
-.same-user-select {
-    height: 50px;
-    margin-right: 10px;
-}
+    .same-user-select {
+        height: 50px;
+        margin-right: 10px;
+    }
 @media screen and (max-width: 1024px){
     /* 12/3 tab対応 */
     .same-user-select {
@@ -601,6 +836,25 @@ table.news_list_table {
         text-align: left;
     }
 
+.video_list_area_flrex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.video_list_area_link{
+
+}
+
+.video_list_area_complete_button {
+    margin-right: 30px;
+}
+
+.video-youtube-complete-list-button {
+    height: 30px;
+    padding: 0;
+    width: 100px;
+    background-color: blue;
+}
 /***************************************
  * 
  * ユーザーの一覧
@@ -695,6 +949,56 @@ table.lecture-table {
     width: 5000;
 }
 
+
+.admin-list-post-area{
+
+}
+
+.admin-list-post-disp-area{
+
+}
+
+.admin-list-post-search-area {
+    margin-top: 10px;
+}
+
+.user-list-csv-button-area {
+    margin-top: 100px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.user-list-csv-button {
+    margin-right: 10px;
+}
+
+    .user-list-csv-button input[type="submit"] {
+        width: 100%;
+        background-color: blue;
+    }
+
+
+
+.user-list-mail-button-area {
+    margin-top: 50px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.user-list-mail-button {
+    margin-right: 10px;
+}
+
+    .user-list-mail-button input[type="submit"] {
+        width: 100%;
+        background-color: crimson;
+    }
+
 /***************************************
  * 
  * ユーザーの詳細
@@ -703,7 +1007,7 @@ table.lecture-table {
 .user-tabclose-button {
     display: block;
     width: 650px;
-    height: 30px;
+     height: 30px;
     padding: 15px;
     margin: 0 auto; /* 中央寄せになります。 */
     text-align: center;
@@ -815,12 +1119,58 @@ table.videoviewing_input_category_table {
     margin-right: auto;
 }
 
+
+table.videoviewing-input-table {
+    width: 100%;
+}
+
+
+
+    table.videoviewing-input-table th {
+        width: 200px;
+        text-align: center;
+    }
+
+
+
+    table.videoviewing-input-table td {
+    }
+
+.vimeo-input-title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    max-width: 800px;
+    width: 100%;
+    background-color: cadetblue;
+    text-align: center;
+    color: white;
+}
+
+.vimeo-input-title-text{
+
+}
+
+
+.vimeo-input-area {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .vimeo-input-area input[type="text"], input[type="number"] {
+        width: 100%;
+    }
+
+
+    .vimeo-input-area select {
+        width: 100%;
+    }
+
 /**************************
  * 
  * 問い合わせ
  * 
  * ************************/
-
 .contus-css {
     margin-left: 20%;
     margin-right: 20%;
@@ -961,9 +1311,500 @@ table.history-lsit-kougi-table {
    
 }
 
-@media screen and (max-width: 560px) {
 
+
+.login_area {
+    max-width: 514px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login_box {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border: 1px solid #BEBEBE;
+    padding-bottom: 30px;
+}
+
+.login_box_str {
+    text-align: center;
+    margin-top: 30px;
+    font: normal normal normal 35px/32px Hiragino Sans;
+    letter-spacing: -0.7px;
+    color: #000000;
+    opacity: 1;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.login_box_input_area {
+    padding-top: 40px;
+    padding-left: 40px;
+    width: 100%;
+    padding-right: 40px;
+}
+
+.login_box_input {
+}
+
+.login_box_input_title {
+    text-align: left;
+    font: normal normal normal 16px/32px Hiragino Sans;
+    letter-spacing: -0.32px;
+    color: #404040;
+    opacity: 1;
+    margin-top: 20px;
+}
+
+.login_box_input_textbox{
+
+}
+
+    .login_box_input_textbox input[type="text"] {
+        width: 100%;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #D3D3D3;
+        border-radius: 3px;
+        opacity: 1;
+        color: #404040;
+    }
+
+    .login_box_input_textbox input[type="password"] {
+        width: 100%;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #D3D3D3;
+        border-radius: 3px;
+        opacity: 1;
+        color: #404040;
+    }
+
+.login_box_input_checkbox {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: right;
+    margin-right: 40px;
+}
+.login_box_input_label {
+    margin-left: 10px;
+    font-weight: 700;
+    color: #404040;
+}
+
+.login_box_input_submit {
+    padding-left: 40px;
+    width: 100%;
+    padding-right: 40px;
+    margin-top: 20px;
+}
+
+    .login_box_input_submit input[type="submit"] {
+        width: 100%;
+        background: transparent linear-gradient(284deg, #265FAB 0%, #08287F 100%) 0% 0% no-repeat padding-box;
+        box-shadow: 0px 3px 0px #001F6F;
+        border-radius: 5px;
+        opacity: 1;
+        font-size: 18px;
+        font-weight: 300;
+    }
+
+.login_box_input_link_area {
+    text-align: center;
+    text-decoration: underline;
+    letter-spacing: 0px;
+    color: #0C2F84;
+    opacity: 1;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+
+
+
+    .login_box_input_link_area a:link {
+        color: #0C2F84;
+    }
+
+    .login_box_input_link_area a:visited {
+        color: #0C2F84;
+    }
+    .login_box_input_link_area a:hover {
+        color: #0C2F84;
+    }
+    .login_box_input_link_area a:active {
+        color: #0C2F84;
+    }
+
+.login_err {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+    color: red;
+}
+@media screen and (max-width: 560px) {
     .login_top_banner_area {
         max-width: 350px;
     }
+}
+
+.news-list-return {
+    text-align: center;
+}
+
+
+
+
+/**************************
+ * 
+ *　連絡先等
+ *
+ ****************************/
+
+.contact-address-area {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+.contact-address-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    border-bottom: 3px solid #c6c6c6;
+}
+
+.contact-address-contens {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-address-contens-text {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.contact-address-table-area {
+    margin-top: 30px;
+}
+
+table.contact-address-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+
+    table.contact-address-table tr {
+        border-bottom: solid 2px white;
+    }
+
+
+    table.contact-address-table tr:last-child {
+        border-bottom: none;
+    }
+
+
+    table.contact-address-table th {
+        position: relative;
+        text-align: left;
+        width: 30%;
+        background-color: #52c2d0;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 18px;
+    }
+
+
+        table.contact-address-table th:after {
+            display: block;
+            content: "";
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            top: calc(50% - 10px);
+            right: -10px;
+            border-left: 10px solid #52c2d0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+    table.contact-address-table td {
+        text-align: left;
+        width: 70%;
+        text-align: center;
+        background-color: #ffffff;
+        padding: 10px 0;
+        border: 1px solid;
+    }
+
+
+.contact-address-link-contens {
+    margin-top: 100px;
+}
+
+.contact-address-link-area {
+    margin-top: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-address-link-table-area {
+    margin-top: 30px;
+}
+
+
+
+table.contact-address-link-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+
+    table.contact-address-link-table tr {
+        border-bottom: solid 2px white;
+    }
+
+
+        table.contact-address-link-table tr:last-child {
+            border-bottom: none;
+        }
+
+
+    table.contact-address-link-table th {
+        position: relative;
+        text-align: left;
+        width: 30%;
+        background-color: #52c2d0;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 18px;
+    }
+
+
+        table.contact-address-link-table th:after {
+            display: block;
+            content: "";
+            width: 0px;
+            height: 0px;
+            position: absolute;
+            top: calc(50% - 10px);
+            right: -10px;
+            border-left: 10px solid #52c2d0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+
+    table.contact-address-link-table td {
+        text-align: left;
+        width: 70%;
+        text-align: center;
+        background-color: #ffffff;
+        padding: 10px 0;
+        border: 1px solid;
+    }
+
+.contact-form-button-area {
+    margin-top: 50px;
+    text-align: center;
+}
+
+a.btn-style-link {
+    display: inline-block;
+    width: 200px;
+    padding: 16px 24px;
+    text-decoration: none;
+    border: 1px;
+    color: #000000;
+    box-shadow: 0px 2px 4px #575;
+    text-align: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+@media screen and (max-width: 560px) {
+    table .contact-address-table th {
+        
+        font-size: 16px;
+    }
+
+    table.contact-address-table td {
+        font-size: 14px;
+    }
+
+
+    table.contact-address-link-table th {
+        font-size: 16px;
+    }
+
+    table.contact-address-link-table td {
+        font-size: 14px;
+    }
+}
+
+
+
+.top_modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.modal-content {
+    margin: 15% auto;
+    padding: 20px;
+    text-align: center;
+    width: 500px;
+    height: 200px;
+    border: 2px solid #000000;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.top_close {
+    color: #0073aa;
+}
+
+    .top_close:hover,
+    .top_close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+
+
+/**************************
+ * 
+ *　メニュー
+ *
+ ****************************/
+
+.menu-box-area {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+}
+
+.menu-box-title {
+    text-align: center;
+    font-weight: bold;
+    font: normal normal bold 30px/44px Noto Sans JP;
+    letter-spacing: 0px;
+    color: #232323;
+}
+
+.menu-box-table {
+    margin-top: 30px;
+}
+
+.menu-box-logout {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+    .menu-box-logout a {
+        text-decoration: underline;
+    }
+
+
+table.menu-table {
+    width: 100%;
+}
+
+
+table.menu-table tr{
+
+}
+
+    table.menu-table td {
+        border: 1px solid #CECECE;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 50px;
+    }
+
+.menu-box-str-link {
+    text-align: left;
+    text-decoration: underline;
+    font: normal normal bold 20px/29px Noto Sans JP;
+    letter-spacing: 0px;
+    color: #245BA8;
+    opacity: 1;
+}
+
+.mail_send_submit_area {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mail_send_submit_text{
+
+}
+
+
+
+    .mail_send_submit_text input[type="text"] {
+        width: 600px;
+    }
+
+.mail_send_submit_button {
+    margin-left: 10px;
+}
+
+.mail_send_submit_str {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.pager_area {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.pager_button_box {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.pager_number_area {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 10px;
+}
+
+.user_detail_video_area {
+    text-align: left;
+}
+
+.user_detail_video_alert {
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: red;
+    margin-bottom: 10px;
+}
+
+
+.user_detail_video_area input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
 }

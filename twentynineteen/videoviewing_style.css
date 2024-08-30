@@ -11,7 +11,107 @@
 
 
 }
-@media screen and (max-width: 560px){
+
+.index_video_updata_button {
+    display: block;
+    width: 650px;
+    height: 60px;
+    margin: 0 auto;
+    text-align: center;
+    color: #666;
+    line-height: 60px;
+    text-decoration: none;
+    background-color: #efefef;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+
+.video-next-button-area {
+    margin-bottom: 10px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video-next-button-area-constens {
+    
+}
+
+    .video-next-button-area-constens > div {
+       
+    }
+
+.video-next-button-left {
+    
+}
+.video-next-button-center{
+
+}
+.video-next-button-right {
+    
+}
+
+.video-next-button-left input[type="submit"] {
+    background-color: darkblue;
+}
+
+
+.video-next-button-right input[type="submit"] {
+    background-color: darkblue;
+}
+
+
+
+.vimeo-calendar-button-area {
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+    .vimeo-calendar-button-area input[type="submit"] {
+    }
+
+
+@media screen and (min-width: 700px) {
+    .video-next-button-area-constens {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 20px;
+    }
+
+       
+}
+
+
+@media screen and (max-width: 700px) {
+    .video-next-button-area-constens {
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 18px;
+    }
+
+
+    .video-next-button-left {
+        margin-bottom: 10px;
+    }
+
+    .video-next-button-center {
+        margin-bottom: 10px;
+    }
+
+    .video-next-button-right {
+        margin-bottom: 10px;
+    }
+
+    .video-next-button-area-constens input[type="submit"] {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 560px) {
     .page-id-134 .user-table-two{
         /* display: block; */
         overflow-x: scroll;
@@ -43,7 +143,7 @@
         left: 0px;
     }
 
-    .index_updata_button{
+    .index_video_updata_button {
         width: 90%;
     }
 

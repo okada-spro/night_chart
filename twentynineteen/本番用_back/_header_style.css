@@ -77,53 +77,28 @@ ul.header-dropmenu li a.mode-tab{
     display: none;
 }
 
-.home .mode-tab{
-  display:block;
-}
-
-.top_pc {
-    display: block;
-}
-
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px){
     .mode-pc,
-    ul.header-dropmenu li a.mode-pc {
-        display: none;
-    }
-
-    .mode-tab,
-    ul.header-dropmenu li a.mode-tab {
-        display: block;
-    }
+	ul.header-dropmenu li a.mode-pc{
+		display:none;
+	}
+	.mode-tab,
+	ul.header-dropmenu li a.mode-tab{
+		display:block;
+	}
 }
-
-@media screen and (max-width: 560px) {
-
-
-    .top_pc {
-        display: none;
-    }
-
+@media screen and (max-width: 560px){
     /* 通常ヘッダーメニュー非表示 */
-    .mode-pc.mode-tab table.header_table {
+    .mode-pc.mode-tab table.header_table{
         display: none;
     }
-
-    .home .mode-tab {
-        display: none;
+    
+	.mode-sp{
+		display:block;
+	}
+    .mode-sp .header_table tr{
+        height: 50px;
     }
-
-    .mode-tab {
-        display: none;
-    }
-
-    .mode-sp {
-        display: block;
-    }
-
-        .mode-sp .header_table tr {
-            height: 50px;
-        }
 
     /* sp用ハンバーガーメニュー */
     ul.header-dropmenu ul {
@@ -144,7 +119,7 @@ ul.header-dropmenu li a.mode-tab{
         z-index: 1;
     }
 
-    .index_user_button {
+    .index_user_button{
         width: 90%;
     }
 }

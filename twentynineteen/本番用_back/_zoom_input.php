@@ -114,11 +114,6 @@
             //ZOOM座談会
              $input_data->init_zoom_zadankai();
         }
-           else  if($_GET["catagory"] == 8)
-        {
-            //質問会
-             $input_data->init_zoom_question();
-        }
 
     }
 
@@ -184,8 +179,7 @@ function clickBtn1(){
             </tr>
             <tr>
                 <th><font color="red">講義締切時間</font></th>
-                <td><input type="datetime-local" name="input_zoom_deadline"  id="input_zoom_deadline" value="<?php echo $input_data->changeSetData($input_data->getZoomData("input_zoom_deadline"));?>" ></input>
-                <br>*締切時刻です</td>
+                <td><input type="datetime-local" name="input_zoom_deadline"  id="input_zoom_deadline" value="<?php echo $input_data->changeSetData($input_data->getZoomData("input_zoom_deadline"));?>" ></input>*締切時刻です</td>
             </tr>
             <tr>
                 <th>講義開始予定時間</th>
@@ -202,7 +196,7 @@ function clickBtn1(){
                 <td><input type="text"   name="input_zoom_title"  value="<?php echo $input_data->getZoomData("input_zoom_title");?>"   size="40" maxlength="300"></input></td>
             </tr>
             <tr>
-                <th>カテゴリ</th>
+                <th>カテゴリー</th>
                 <td>
                      <select name="input_zoom_category" >
                         <?php foreach ($input_data->zoom_catagory_array_data as $key => $value) {?>
@@ -299,6 +293,7 @@ function clickBtn1(){
                     </tr>
                     <?php foreach ($table_array as $row){?>
                         <?php if($row != ""){?>
+                        <tr>
                             <?php 
                                 if( in_array($row,(array)$table_array) )
                                 { 
@@ -308,18 +303,13 @@ function clickBtn1(){
                                      if($joins_info)
                                      {
                             ?>
-                        <tr class="mode-pc">
                                 <td><?php echo $row;?></td>
                                 <td><?php echo get_the_author_meta('last_name',$row);?>　<?php echo get_the_author_meta('first_name',$row);?>(<?php echo get_the_author_meta('user_login',$row);?>)</td>
-                        </tr>
-                        <tr class="mode-sp">
-                                <td><?php echo $row;?></td>
-                                <td><?php echo get_the_author_meta('last_name',$row);?>　<?php echo get_the_author_meta('first_name',$row);?></td>
-                        </tr>
                             <?php    
                                     }
                                  }
                             ?>
+                        </tr>
                         <?php } ?>
                     <?php } ?>
                  </table>

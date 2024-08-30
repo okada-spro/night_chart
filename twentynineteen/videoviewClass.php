@@ -39,6 +39,8 @@ class VideoViewClass
         $this->input_data["input_disp"] = 1;
         $this->input_data["input_category"] = 0;
         $this->input_data["input_category_name"] = "";
+        $this->input_data["input_video_type"] = 0;
+        $this->input_data["input_youtube_id"] = "";
         
     }
 
@@ -56,6 +58,8 @@ class VideoViewClass
         $this->input_data["input_disp"] = 1;
         $this->input_data["input_category"] = 0;
         $this->input_data["input_category_name"] = "";
+        $this->input_data["input_video_type"] = 0;
+        $this->input_data["input_youtube_id"] = "";
     }
 
     //DBデータの入力用の情報を取得(全データ取得でOK)
@@ -205,6 +209,8 @@ class VideoViewClass
                 $this->input_data["input_flame_height"] =$rows->post_flame_height;
                 $this->input_data["input_disp"] = $rows->post_disp;
                 $this->input_data["input_category"] = $rows->post_categorys;
+                $this->input_data["input_video_type"] = $rows->post_video_type;
+                $this->input_data["input_youtube_id"] = $rows->post_youtube_id;
             }
         }
         else {
@@ -263,6 +269,8 @@ class VideoViewClass
         $this->input_data["input_title"] = $postData["input_title"];
         $this->input_data["input_disp"] =$postData["input_disp"];
         $this->input_data["input_category"] =$postData["input_category"];
+        $this->input_data["input_youtube_id"] =$postData["input_youtube_id"];
+        $this->input_data["input_video_type"] =$postData["input_video_type"];
 
        // var_dump($this->input_data);
     }
@@ -309,6 +317,8 @@ class VideoViewClass
                 $this->input_data["input_flame_height"] =$row->post_flame_height;
                 $this->input_data["input_disp"] = $row->post_disp;
                 $this->input_data["input_category"] = $row->post_categorys;
+                $this->input_data["input_video_type"] = $row->post_video_type;
+                $this->input_data["input_youtube_id"] = $row->post_youtube_id;
                 break;
             }
         }
@@ -330,13 +340,15 @@ class VideoViewClass
        $change_array["input_flame_height"] =$row->post_flame_height;
        $change_array["input_disp"] = $row->post_disp;
        $change_array["input_category"] = $row->post_categorys;
+       $change_array["input_video_type"] = $row->post_video_type;
+       $change_array["input_youtube_id"] = $row->post_youtube_id;
         
         return $change_array;
     }
 
 
     //公開のものを取得する
-    public function setOpenData($all_data)
+    public function setOpenData($all_data,$key_id = false)
     {
         $open_array = array();
 
@@ -359,8 +371,7 @@ class VideoViewClass
 
 
                 if($data_array["input_url"] != ""){
-                    $data_array["input_private"] = str_replace("https://vimeo.com/".$data_array["input_flame"] ."/" , '', $data_array["input_url"]);;
-
+                    $data_array["input_private"] = str_replace("https://vimeo.com/".$data_array["input_flame"] ."/" , '', $data_array["input_url"]);
                 }
 
                 $data_array["input_title"] = $row->post_title;
@@ -368,6 +379,8 @@ class VideoViewClass
                 $data_array["input_flame_height"] =$row->post_flame_height;
                 $data_array["input_disp"] = $row->post_disp;
                 $data_array["input_category"] = $row->post_categorys;
+                $data_array["input_video_type"] = $row->post_video_type;
+                $data_array["input_youtube_id"] = $row->post_youtube_id;
 
                 //カテゴリがない場合をセットする
                  if(!isset($this->view_category_array[$data_array["input_category"]]["name"]))
@@ -376,7 +389,13 @@ class VideoViewClass
                  }
                 
 
-                 array_push($open_array,$data_array);
+                 if($key_id == false)
+                 {
+                    array_push($open_array,$data_array);
+                 }
+                 else{
+                     $open_array[$row->ID] = $data_array;
+                 }
             }
 
             
@@ -424,11 +443,14 @@ class VideoViewClass
             'post_disp' =>  $this->input_data["input_disp"], 
             'post_categorys' =>  $this->input_data["input_category"], 
 
+            'post_video_type' =>  $this->input_data["input_video_type"], 
+            'post_youtube_id' =>  $this->input_data["input_youtube_id"], 
+
          );
 
         // var_dump($insert);
 
-         $dataFormat = array('%d','%s','%s','%s','%s','%d','%s','%d','%d','%d','%d');
+         $dataFormat = array('%d','%s','%s','%s','%s','%d','%s','%d','%d','%d','%d','%d','%s');
 
          $sql_rsl = $wpdb->insert('wp_videoviewing_data', $insert, $dataFormat); 
 
@@ -438,7 +460,7 @@ class VideoViewClass
          }
          else {
             //登録成功
-            return true;
+            return $wpdb->insert_id;
          }
     }
 
@@ -447,7 +469,6 @@ class VideoViewClass
     {
         // wpdbオブジェクト
         global $wpdb;
-
 
          $release_date = str_replace('T', ' ', $this->input_data["input_release_date"]);
 
@@ -464,6 +485,8 @@ class VideoViewClass
             'post_flame_height'=> $this->input_data["input_flame_height"], 
             'post_disp' =>  $this->input_data["input_disp"], 
             'post_categorys' =>  $this->input_data["input_category"], 
+            'post_video_type' =>  $this->input_data["input_video_type"], 
+            'post_youtube_id' =>  $this->input_data["input_youtube_id"], 
          );
 
          //更新したい行の条件
@@ -471,7 +494,7 @@ class VideoViewClass
               'ID' => $this->input_data["input_id"],
            );
 
-           $dataFormat = array('%d','%s','%s','%s','%s','%d','%s','%d','%d','%d','%d');
+           $dataFormat = array('%s','%s','%s','%s','%s','%d','%d','%d','%d','%d','%s');
            $conditionsFormat = array('%d');
            $sql_rsl = $wpdb->update('wp_videoviewing_data', $updata, $condition,$dataFormat,$conditionsFormat); 
 
@@ -571,8 +594,8 @@ class VideoViewClass
      }
 
 
-     //各動画の本数を調べる
-     public function checkCategoryNum( $level,$member_type )
+     //各動画の本数を調べる(必ず会員別チェックの項目を参照する事)
+     public function checkCategoryNum( $level,$member_type ,$user_id)
      {
         $this->view_category_number = array(); 
 
@@ -587,7 +610,12 @@ class VideoViewClass
          {
              $this->view_category_number[1]++;
          }
-         
+
+         //ユーザー別動画追加情報を取得
+         $users_data= new UserClass();
+
+         $uder_vide_add_data = $users_data->GetUserVideoAdd(  $user_id   );
+
         
 
         //本数をカウント(1以外は削除する)
@@ -597,7 +625,21 @@ class VideoViewClass
             {
                  $is_disp = true;
 
-                if( $level  == UserClass::KUNRENSEI){//訓練生
+                 // *マスターマインド会員は全部見れる
+
+
+                 if( $level  == UserClass::MONKASEI){//門下生
+
+                    $type =  $this->view_category_array[$rows->post_categorys]["type"];
+
+                    //マスターマインド講義は見れない
+                    if($rows->post_categorys == 26 )
+                    {
+                        $is_disp = false;
+                    }
+
+                }
+                else if( $level  == UserClass::KUNRENSEI){//訓練生
 
                     $type =  $this->view_category_array[$rows->post_categorys]["type"];
 
@@ -611,20 +653,35 @@ class VideoViewClass
 
                      $type =  $this->view_category_array[$rows->post_categorys]["type"];
 
-                    if($type != 0 && $member_type != $type)
+                    if($type != 0 && $member_type != $type && $rows->post_categorys != 24)
                     {
                         $is_disp = false;
                     }
                 }
+                else if( $level  == UserClass::NEW_DOGA){//新動画
+                    //知らない方が幸せな話とピーなしすべらない話と質問会のみ
+                    if($rows->post_categorys != 21 && $rows->post_categorys != 22 && $rows->post_categorys != 24 )
+                    {
+                        $is_disp = false;
+                    }
+                }
+
                 else if( $level  == UserClass::SPECIAL_SEMINAR){//特別セミナー
 
-                  
 
-                    if($rows->post_categorys != 21)
+                    if($rows->post_categorys != 21 && $rows->post_categorys != 22 )
                     {
                         $is_disp = false;
                     }
                 }
+
+
+                //ユーザー別の追加情報を取得
+                if(isset($uder_vide_add_data[$rows->post_categorys]))
+                {
+                    $is_disp = true;
+                }
+
 
                 //非表示は入らない
                 if($rows->post_disp > 0 && $is_disp)
@@ -637,6 +694,80 @@ class VideoViewClass
 
          //var_dump($this->view_category_number);
      }
+
+
+     //会員レベルとタイプから何が見れるかだけの配列を返す
+     public function checkMemberEnableVideo( $level,$member_type )
+     {
+
+        $video_enable_array = array();
+
+        //本数をカウント(1以外は削除する)
+        foreach ($this->view_row as $rows) 
+        {
+            if($rows->post_categorys > 1)
+            {
+                 $is_disp = true;
+
+
+                 if( $level  == UserClass::MONKASEI){//門下生
+
+                    $type =  $this->view_category_array[$rows->post_categorys]["type"];
+
+                    //マスターマインド講義は見れない
+                    if($rows->post_categorys == 26 )
+                    {
+                        $is_disp = false;
+                    }
+                }
+                else if( $level  == UserClass::KUNRENSEI){//訓練生
+
+                    $type =  $this->view_category_array[$rows->post_categorys]["type"];
+
+                    if($type != 0 && $member_type != $type)
+                    {
+                        $is_disp = false;
+                    }
+
+                }
+                else if( $level  == UserClass::DOGA){//動画
+
+                     $type =  $this->view_category_array[$rows->post_categorys]["type"];
+
+                    if($type != 0 && $member_type != $type && $rows->post_categorys != 24) //直接指定している
+                    {
+                        $is_disp = false;
+                    }
+                }
+                else if( $level  == UserClass::NEW_DOGA){//新動画
+                    //知らない方が幸せな話とピーなしすべらない話と質問会のみ
+                    if($rows->post_categorys != 21 && $rows->post_categorys != 22 && $rows->post_categorys != 24 )
+                    {
+                        $is_disp = false;
+                    }
+                }
+
+                else if( $level  == UserClass::SPECIAL_SEMINAR){//特別セミナー
+
+
+                    if($rows->post_categorys != 21 && $rows->post_categorys != 22 )
+                    {
+                        $is_disp = false;
+                    }
+                }
+
+                //非表示は入らない
+                if($rows->post_disp > 0 && $is_disp)
+                {
+                    $video_enable_array[$rows->post_categorys] = 1;
+                }
+            }
+        }
+
+        
+        return $video_enable_array;
+     }
+
 
 
     //丸数字とリンクを取得
@@ -690,6 +821,378 @@ class VideoViewClass
 
     }
 
+
+    /****************************************************
+    **  動画の追加データを取得
+    ******************************************************/
+    public function getAddVideo( )
+    {
+        $wp_query = new WP_Query();
+        
+         $param = array(
+            'posts_per_page' => '-1', //表示件数。-1なら全件表示
+            'post_type' => 'cpt_add_video_data', //カスタム投稿タイプの名称を入れる
+            'post_status' => 'publish', //取得するステータス。publishなら一般公開のもののみ
+            'orderby' => 'ID', //ID順に並び替え
+            'order' => 'DESC'
+        );
+
+        $wp_query->query($param);
+
+       
+        //保存配列
+        $video_data_array = "";
+
+        //データを入れる
+        if($wp_query->have_posts()): while($wp_query->have_posts()) : $wp_query->the_post();
+
+
+            if($video_data_array == "")
+            {
+                $video_data_array = array();
+            }
+
+
+            $vide_id = get_field( 'item_afc_video_id');
+
+            $video_data_array[  $vide_id ] = get_the_ID();
+
+          
+        endwhile; endif;
+
+
+        return $video_data_array;
+
+    }
+
+    /***********************************************************************
+    ** 動画の追加データを登録 
+    ************************************************************************/
+    public function setAddVideo( $video_id , $video_title )
+    {
+        
+       $user = wp_get_current_user();
+
+
+       $my_post = array(
+            'post_title' => $video_title,
+            'post_type' => 'cpt_add_video_data', //カスタム投稿タイプの名称を入れる
+            'post_status' => 'publish',
+            'post_author' => $user->ID,
+        );
+
+        $program_id = wp_insert_post($my_post);
+
+        if($program_id)
+        {
+            update_field( "item_afc_video_id", $video_id , $program_id);//内容
+            update_field( "item_add_vdeo_title", $video_title , $program_id);//タイトル
+            update_field( "item_afc_video_new_num", 0 , $program_id);//回数
+        }
+
+
+        return $program_id;
+
+    }
+
+    /***********************************************************************
+    ** お知らせの回数とタイトルを変更する
+    ************************************************************************/
+    public function plusAddVideoNew( $video_add_id , $video_title )
+    {
+        
+       $video_news_num =  get_field( 'item_afc_video_new_num',$video_add_id);
+
+       if($video_news_num == "")
+       {
+           $video_news_num = 0;
+       }
+
+       $video_news_num++;
+
+       update_field( "item_afc_video_new_num", $video_news_num , $video_add_id);//お知らせ更新
+
+       //タイトル名更新
+       update_field( "item_add_vdeo_title", $video_title , $video_add_id);//タイトル
+
+    }
+
+
+    /***********************************************************************
+    ** ユーザーの動画完了をセット
+    ************************************************************************/
+    public function setVideoComplete( $user_id ,  $video_id , $video_categoy_id  )
+    {
+        
+        if($video_id == "" || $video_categoy_id == "")
+        {
+            return;
+        }
+
+       $video_complete =  get_field( 'user_video_upload_check_array',$user_id);
+
+       if($video_complete == "")
+       {
+           $video_complete = array();
+       }
+       else{
+           $video_complete = json_decode($video_complete, true);
+       }
+
+
+       //カテゴリーを作成
+       if(!isset($video_complete[$video_categoy_id]))
+       {
+           $video_complete[$video_categoy_id] = array();
+       }
+
+       //動画番号をセット
+       if(!isset($video_complete[$video_categoy_id][ $video_id ]))
+       {
+           $video_complete[$video_categoy_id][ $video_id ] = 1;
+       }
+
+
+       $json_data = json_encode($video_complete, JSON_UNESCAPED_UNICODE);
+
+       update_field( "user_video_upload_check_array", $json_data , $user_id);//保存
+
+
+    }
+
+
+    /***********************************************************************
+    ** ユーザーの動画完了を取得
+    ************************************************************************/
+    public function getVideoComplete( $user_id )
+    {
+        
+       $video_complete =  get_field( 'user_video_upload_check_array',$user_id);
+
+       if($video_complete == "")
+       {
+           $video_complete = array();
+       }
+       else{
+           $video_complete = json_decode($video_complete, true);
+       }
+
+       
+       return $video_complete;
+
+    }
+
+
+
+    /***********************************************************************
+    ** 新着情報を送信
+    ************************************************************************/
+    public function setNewVideo( $video_id , $video_title , $video_category )
+    {
+          //var_dump($_POST);
+        $add_vide_data = $this->getAddVideo();
+
+        //データがない
+        if(!isset($add_vide_data[ $video_id ]))
+        {
+            $this->setAddVideo( $video_id , $video_title );
+
+            //再取得
+            $add_vide_data = $this->getAddVideo();
+        }
+
+        //回数をあげる
+        $this->plusAddVideoNew($add_vide_data[ $video_id ]  , $video_title );
+
+        //全ユーザーに新規動画を保存
+        $users = get_users( array('orderby'=>'ID','order'=>'ASC') );
+
+
+        //動画データを取得
+        $this->getCategoryDataRow();
+
+
+      //  echo $this->view_category_array[ $_POST["video_category"]]["type"];
+     
+        foreach ($users as $row)
+        {
+
+
+            //ユーザーの視聴完了リスト
+            $complete_array = $this->getVideoComplete( $row->ID );
+
+            //すでに見ている場合は飛ばす
+            if( isset($complete_array[ $video_category ][$video_id ]))
+            {
+                continue;
+            }
+
+      
+            $member_level = get_the_author_meta('member_level',$row->ID);//メンバーレベルを取得
+            $member_type = get_the_author_meta('member_type',$row->ID);
+
+            
+            if($this->view_category_array[ $video_category ]["type"] == 0) //なし
+            {
+
+                if($member_level ==  UserClass::NEW_DOGA) //新動画会員はなしでも投資系は見れない
+                {
+                    //知らない方が幸せな話とピーなしすべらない話と質問会のみ
+                    if($video_category == 21 || $video_category == 22 || $video_category == 24)
+                    {
+                        update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]); //なしの場合はほぼ全員見れる
+                        update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+                    }
+                }
+                else{
+                    update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]); //なしの場合はほぼ全員見れる
+                    update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+                }
+            }
+            else if($this->view_category_array[ $video_category ]["type"] == 1) //株
+            {
+                if($member_level ==  UserClass::MONKASEI) //門下生は全部見れる
+                {
+                    update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]);
+                    update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+                }
+                else if($member_level ==  UserClass::KUNRENSEI && $member_type == 1) //訓練生では株は見れる
+                {
+                    update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]);
+                    update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+                }
+                /*else if($member_level ==  UserClass::DOGA && $member_type == 1) //動画会員では株は見れる
+                {
+                    update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]);
+                    update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+                }
+                */
+                else{
+
+                }
+
+            }
+            else if($this->view_category_array[ $video_category ]["type"] == 2) //FX
+            {
+                 if($member_level ==  UserClass::MONKASEI) //門下生は全部見れる
+                {
+                    update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]);
+                    update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+                }
+                else if($member_level ==  UserClass::KUNRENSEI && $member_type == 2) //訓練生ではFXは見れる
+                {
+                    update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]);
+                    update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+                }
+                /*else if($member_level ==  UserClass::DOGA && $member_type == 2) //動画会員ではFXは見れる
+                {
+                    update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]);
+                    update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+                }
+                */
+                else{
+
+                }
+            }
+            else if($this->view_category_array[ $video_category ]["type"] == 3) //ダイジェスト
+            {
+                update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]);
+                update_user_meta($row->ID,'user_video_upload_category',$video_category ); //なしの場合はほぼ全員見れる
+            }
+            else if($this->view_category_array[ $video_category ]["type"] == 4) //動画会員
+            {
+                update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]);
+                update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+            }
+            else if($this->view_category_array[ $video_category ]["type"] == 5) //新動画会員
+            {
+                update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]);
+                update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+            }
+            else if($this->view_category_array[ $video_category ]["type"] == 6) //マスターマインド
+            {
+                if($member_level ==  UserClass::MASTER_MIND) //マスターマインドのみ
+                {
+                    update_user_meta($row->ID,'user_video_upload_id',$add_vide_data[ $video_id ]);
+                    update_user_meta($row->ID,'user_video_upload_category', $video_category ); //なしの場合はほぼ全員見れる
+                }
+            }
+            else
+            {
+                update_user_meta($row->ID,'user_video_upload_id',"");
+            }
+
+            
+        }
+
+
+       
+
+
+
+    }
+
+    /***********************************************************************
+    **  表示する動画を入れて、ソート順に並べなおす
+    ************************************************************************/
+    public function setSortVideoArray( $open_array , $vide_add_array )
+    {
+        
+          $sort_array = array();
+
+          //順番を確認する
+          foreach ($open_array as $row) {
+
+            if(isset( $vide_add_array[$row["input_id"]])){
+
+
+                $sort_num = get_field( 'item_add_vdeo_sort_num',$vide_add_array[  $row["input_id"] ]);
+
+                if( $sort_num != "")
+                {
+                    if( !isset($sort_array[ $sort_num ] ) )
+                    {
+                        $sort_array[ $sort_num ] = array();
+                    }
+
+
+                    $sort_array[ $sort_num ][  $row["input_id"] ] = $row;
+                }
+            }
+          }
+          ksort($sort_array);
+          //var_dump($sort_array);
+
+
+
+          //順番に上から入れていく
+          $sort_open_array = array();
+
+          foreach ($sort_array as $key => $row) {
+
+            
+             foreach ($row as  $id_key => $value ) {
+
+                $sort_open_array[ $id_key ] = $value;
+
+             }
+
+          }
+
+          foreach ($open_array as $key => $row) {
+
+
+            if( !isset($sort_open_array[ $row["input_id"] ] ))
+            {
+                $sort_open_array[ $row["input_id"] ] = $row;
+            }
+
+          }
+
+
+          return $sort_open_array;
+
+    }
 }
 
 ?>

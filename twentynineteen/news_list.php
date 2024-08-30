@@ -11,6 +11,9 @@
     //初期化
     $input_data->init();
 
+    //ニュースを取得
+    $disp_post_array = $input_data->getNewsPost($user->ID);
+
 	 //保存したお知らせを取得
 	 $new_id = get_user_meta($user->ID, 'news-new-check',true );
 
@@ -19,30 +22,32 @@
 	 }
 
 	 //最後の記事
-	 $save_id = get_the_latest_ID();
+	 $save_id = $disp_post_array[0]["ID"];
 
     if( $new_id != $save_id)
     {
         update_user_meta($user->ID, 'news-new-check', $save_id);
     }
+
 ?>
 
 <table class="news_list_table">
 <?php
-    query_posts("&posts_per_page=30&paged=$paged");
-    if (have_posts()) :
-    while ( have_posts() ) : the_post();
+     foreach ($disp_post_array as  $key => $value){
 ?>
  
 
+
+
 <tr>
-    <td width="200"><?php echo get_post_time( 'Y年n月j日', false, null, true ); ?></td>
-    <td><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></td>
+    
+    <td width="200"><?php echo $value["day"]; ?></td>
+    <td><a href="<?php echo $value["permalink"]; ?>"><?php echo $value["title"]; ?></a></td>
 </tr> 
 
 
 <?php
-    endwhile; endif;
+     }
 ?>
 
 </table>

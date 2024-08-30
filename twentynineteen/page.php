@@ -43,7 +43,15 @@ get_header();
 					"22"=>  array("mail_menu",true,true),
 					"23"=>  array("mail_list",true,true),
 					"24"=>  array("trainee_list",true,true),
+					"25"=>  array("video_member_list",true,true),
+					"26"=>  array("test_page",true,false),
+					"27"=>  array("mail_make_all",true,false),
+					"28"=>  array("contact_address",true,false),
+					"29"=>  array("updata_list",true,true),
+					"30"=>  array("mail_send_list",true,true),
+					"31"=>  array("videosort",true,true),
 
+					
 				);
 
 			// Start the Loop.
@@ -94,11 +102,22 @@ get_header();
 								$login_ban = false;
 							}
 
+
+							require_once("pageFunction.php");//ページ用
+
+							//期限切れ
+							$updata_page_base = getUserUpdataDayPage($user->ID);
+
 							//echo $login;
 
 							if($login_ban && !is_page("contact") )
 							{
 								include("logn-ban.php");
+								
+							}
+							else if(strtotime($updata_page_base) <= strtotime( date('Y-m-d H:i:s') ) && !is_page("contact"))
+							{
+								include("logn-limit.php");
 								break;
 							}
 							else
@@ -155,4 +174,46 @@ function checkMakePage( $my_custom_page )
 	return false;
 }
 
+/*
+  function getUserUpdataDayPage(  $user_id  )
+    {
+        $updata_day = get_the_author_meta('user_updata_day',$user_id);
 
+        if($updata_day == "")
+        {
+            $str_day = strtotime(get_the_author_meta('user_registered',$user_id));
+
+            $year=date('Y', $str_day);
+            $month=date('n', $str_day);
+
+            $updata_num = 0;
+
+            //2021年はすでに１度終えていると判定する
+            if($year == 2021)
+            {
+                $updata_num += 1;
+            }
+            //2022年5月までは１度終えていると判定
+            else if($year == 2022 && $month <= 5 )
+            {
+                $updata_num += 1;
+            }
+
+            $year_num += (int)$year +  $updata_num + 1;
+
+
+            $updata_day =  date('Y-m-d H:i:s', strtotime($year_num .'-' .$month .'-01 00:00:00'));
+
+        }
+
+        //更新無し
+        if(get_the_author_meta('user_is_updata',$user_id) == 1)
+        {
+            return  date("Y-m-d H:i:s",strtotime("+1 year"));
+        }
+
+
+
+        return $updata_day;
+    }
+	*/

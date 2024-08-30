@@ -2466,7 +2466,7 @@ a {
 }
 
 a:hover {
-  text-decoration: none;
+  
 }
 
 a:focus {
@@ -2503,9 +2503,7 @@ a {
 
 a:hover,
 a:active {
-  color: #005177;
-  outline: 0;
-  text-decoration: none;
+  
 }
 
 a:focus {
@@ -2743,25 +2741,19 @@ form p {
 ## Links
 --------------------------------------------------------------*/
 a {
-  transition: color 110ms ease-in-out;
-  color: #0073aa;
+  
 }
 
 a:visited {
-  color: #0073aa;
+  
 }
 
-a:hover,
-a:active {
-  color: #005177;
-  outline: 0;
-  text-decoration: none;
-}
-
-a:focus {
-  outline: thin dotted;
-  text-decoration: underline;
-}
+    a:hover,
+    a:active {
+    }
+    a:focus {
+        
+    }
 
 /*--------------------------------------------------------------
 ## Menus

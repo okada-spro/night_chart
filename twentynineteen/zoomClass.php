@@ -21,7 +21,8 @@ class ZoomClass
             4=>"株 作業会",
             5=>"FX 作業会",
             6=>"特別セミナー",
-            7=>"ZOOM座談会",
+            //7=>"ZOOM座談会",
+            8=>"質問会",
      );
 
      
@@ -33,6 +34,7 @@ class ZoomClass
             3=>"訓練生と動画会員は参加不可",
             4=>"動画会員は参加不可",
             5=>"動画会員と特別セミナーは参加不可",
+            6=>"動画会員のみ",
      );
 
      //定義(会議の種類)
@@ -44,7 +46,7 @@ class ZoomClass
      public const ZOOM_FX_SAGYOU_CATEGORY = 5;
      public const ZOOM_SPECIAL_SEMINAR = 6;
      public const ZOOM_ZADANKAI = 7;
-
+     public const ZOOM_QUESTION = 8;
 
 
      public const ZOOM_ALL_CATEGORY = 99;
@@ -57,7 +59,9 @@ class ZoomClass
      public const ZOOM_JOIN_NO_KUNRENSEI_DOUGA = 3;
      public const ZOOM_JOIN_NO_DOUGA = 4;
      public const ZOOM_JOIN_NO_DOUGA_SEMINAR = 5;
+     public const ZOOM_JOIN_DOUGA_ONLY = 6;
      
+
 
     public function __construct()
     {
@@ -79,7 +83,7 @@ class ZoomClass
         $this->input_data["input_id"] = 0;
         $this->input_data["input_zoom_day"] = $this->changeSetData(date('Y-M-d 08:00', strtotime('+9hour')));
         $this->input_data["input_zoom_start_day"] = $this->changeSetData(date('Y-M-d 08:00', strtotime('+9hour')));
-        $this->input_data["input_zoom_deadline"] =$this->changeSetData(date('Y-M-d 10:00', strtotime('+9hour')));
+        $this->input_data["input_zoom_deadline"] =$this->changeSetData(date('Y-M-d 11:30', strtotime('+9hour')));
         $this->input_data["input_zoom_url"] = "";
         $this->input_data["input_zoom_title"] = "";
         $this->input_data["input_plans"] = "";
@@ -95,7 +99,7 @@ class ZoomClass
         $this->input_data["input_id"] = 0;
         $this->input_data["input_zoom_day"] = $this->changeSetData(date('Y-M-d 08:00', strtotime('+9hour')));
         $this->input_data["input_zoom_start_day"] = $this->changeSetData(date('Y-M-d 08:00', strtotime('+9hour')));
-        $this->input_data["input_zoom_deadline"] =$this->changeSetData(date('Y-M-d 10:00', strtotime('+9hour')));
+        $this->input_data["input_zoom_deadline"] =$this->changeSetData(date('Y-M-d 11:30', strtotime('+9hour')));
         $this->input_data["input_zoom_url"] = "";
         $this->input_data["input_zoom_title"] = date('Y/m/d', strtotime('+9hour')) ." ザラ場";
         $this->input_data["input_plans"] = "";
@@ -108,8 +112,8 @@ class ZoomClass
     public  function init_kabu_kougi()
     {
         $this->input_data["input_id"] = 0;
-        $this->input_data["input_zoom_day"] = $this->changeSetData(date('Y-M-d 21:00', strtotime('+9hour')));
-        $this->input_data["input_zoom_start_day"] = $this->changeSetData(date('Y-M-d 22:00', strtotime('+9hour')));
+        $this->input_data["input_zoom_day"] = $this->changeSetData(date('Y-M-d 20:45', strtotime('+9hour')));
+        $this->input_data["input_zoom_start_day"] = $this->changeSetData(date('Y-M-d 21:00', strtotime('+9hour')));
         $this->input_data["input_zoom_deadline"] =$this->changeSetData(date('Y-M-d 23:59', strtotime('+9hour')));
         $this->input_data["input_zoom_url"] = "";
         $this->input_data["input_zoom_title"] =  date('Y/m/d', strtotime('+9hour')) ." 株講義";
@@ -123,8 +127,8 @@ class ZoomClass
     public  function init_fx_kougi()
     {
         $this->input_data["input_id"] = 0;
-        $this->input_data["input_zoom_day"] = $this->changeSetData(date('Y-M-d 21:00', strtotime('+9hour')));
-        $this->input_data["input_zoom_start_day"] = $this->changeSetData(date('Y-M-d 22:00', strtotime('+9hour')));
+        $this->input_data["input_zoom_day"] = $this->changeSetData(date('Y-M-d 20:45', strtotime('+9hour')));
+        $this->input_data["input_zoom_start_day"] = $this->changeSetData(date('Y-M-d 21:00', strtotime('+9hour')));
         $this->input_data["input_zoom_deadline"] =$this->changeSetData(date('Y-M-d 23:59', strtotime('+9hour')));
         $this->input_data["input_zoom_url"] = "";
         $this->input_data["input_zoom_title"] =  date('Y/m/d', strtotime('+9hour')) ." FX講義";
@@ -193,6 +197,23 @@ class ZoomClass
         $this->input_data["post_author"] = 0;
         $this->input_data["input_zoom_category"] = ZoomClass::ZOOM_ZADANKAI;
         $this->input_data["input_zoom_joinType"]= ZoomClass::ZOOM_JOIN_NO_DOUGA;
+    }
+
+
+    
+    //初期化(質問会)
+    public  function init_zoom_question()
+    {
+        $this->input_data["input_id"] = 0;
+        $this->input_data["input_zoom_day"] = $this->changeSetData(date('Y-M-d 20:00', strtotime('+9hour')));
+        $this->input_data["input_zoom_start_day"] = $this->changeSetData(date('Y-M-d 21:00', strtotime('+9hour')));
+        $this->input_data["input_zoom_deadline"] =$this->changeSetData(date('Y-M-d 23:00', strtotime('+9hour')));
+        $this->input_data["input_zoom_url"] = "";
+        $this->input_data["input_zoom_title"] =  date('Y/m/d', strtotime('+9hour')) ." 質問会";
+        $this->input_data["input_plans"] = "";
+        $this->input_data["post_author"] = 0;
+        $this->input_data["input_zoom_category"] = ZoomClass::ZOOM_QUESTION;
+        $this->input_data["input_zoom_joinType"]= ZoomClass::ZOOM_JOIN_DOUGA_ONLY;
     }
 
 

@@ -23,6 +23,8 @@ class UserClass
             1=>"門下生だけを表示",
             2=>"動画会員だけを表示",
             3=>"特別セミナーだけを表示",
+            4=>"マスターマインドだけを表示",
+
             99=>"全てを表示",
      );
 
@@ -37,8 +39,13 @@ class UserClass
             3=>"門下生だけを表示",
             4=>"動画会員だけを表示",
             5=>"動画会員だけを非表示",
+           10=>"新動画会員だけを表示",
+           11=>"新動画会員だけを非表示",
             8=>"特別セミナーだけを表示",
             9=>"特別セミナーだけを非表示",
+           12=>"マスターマインドだけを表示",
+           13=>"マスターマインドだけを非表示",
+
            99=>"全てを表示",
      );
 
@@ -48,6 +55,14 @@ class UserClass
             0=>"全てを表示",
             1=>"株 訓練生だけを表示",
             2=>"FX 訓練生だけを表示",
+     );
+
+      //一覧リスト用(訓練生用)
+      public  $disp_only_douga_member_level_array_data = array(
+            0=>"全てを表示",
+            1=>"株 動画会員だけを表示",
+            2=>"FX 動画会員だけを表示",
+            3=>"新動画会員だけを表示",
      );
 
       //成績一覧用
@@ -67,7 +82,14 @@ class UserClass
             1=>"訓練生",
             2=>"門下生",
             3=>"特別セミナー",
+            4=>"新動画会員",
+            5=>"マスターマインド",
            
+     );
+
+     public  $kunren_type_data = array(
+            0=>"全ZOOM参加",
+            1=>"ザラ場の不参加",
      );
 
 
@@ -83,6 +105,9 @@ class UserClass
             1=>"株",
             2=>"FX",
             3=>"ダイジェスト",
+            4=>"動画会員",
+            5=>"新動画会員",
+            6=>"マスターマインド",
      );
 
 
@@ -91,10 +116,16 @@ class UserClass
      public const MONKASEI = 2;//門下生
      public const DOGA = 0;//動画会員
      public const SPECIAL_SEMINAR = 3;//特別セミナー
+     public const NEW_DOGA = 4;//動画会員
+     public const MASTER_MIND = 5;//マスターマインド
 
       /*定義*/
      public const KABU = 1;//株
      public const FX = 2;//FX
+
+      /*訓練生タイプ*/
+     public const KUNREN_TYPE_ALL = 0;//ザラ場も参加できる
+     public const KUNREN_TYPE_KOUGI = 1;//講義のみ
 
      public const ALL_DISP_CONST = 99;//全員
 
@@ -341,8 +372,225 @@ class UserClass
     }
 
 
+    //////////////////////////////////////////////////
+    //      次回更新日を取得
+    ///////////////////////////////////////////////////
+    public function getUserUpdataDay(  $user_id  )
+    {
+        $updata_day = get_the_author_meta('user_updata_day',$user_id);
+       
+      //echo $updata_day ." " .$user_id;
+
+        if($updata_day == "")
+        {
+            $str_day = strtotime(get_the_author_meta('user_registered',$user_id));
+
+            $year=date('Y', $str_day);
+            $month=date('m', $str_day);
+
+            $updata_num = 0;
+
+            //2021年はすでに１度終えていると判定する
+            if($year == 2021)
+            {
+                $updata_num += 1;
+            }
+            //2022年5月までは１度終えていると判定
+            else if($year == 2022 && $month <= 5 )
+            {
+                $updata_num += 1;
+            }
+
+            $year_num += (int)$year +  $updata_num + 1;
 
 
+            $updata_day =  date('Y-m-t H:i:s', strtotime($year_num .'-' .$month .'-01 00:00:00'));
+
+        }
+
+        //更新無し
+        if(get_the_author_meta('user_is_updata',$user_id) == 1)
+        {
+            return  date("Y-m-t H:i:s",strtotime("+1 year"));
+        }
+       
+
+
+        $date = new DateTime( date("Y-m-t H:i:s",strtotime($updata_day)) );
+
+       // echo $date->format("Y-m-t H:i:s");
+
+       // $date->modify('-1 month');
+
+        $check_date = strtotime($date->format("Y-m-t H:i:s"));
+
+         
+        //$lastDay = date('Y-m-d H:i:s', strtotime('last day of previous month', $check_date));
+        $lastDay = date('Y-m-d H:i:s', strtotime('last day of', $check_date));
+        $prev = date('Y-m-d H:i:s', strtotime('-1 month', $check_date)); //2016-03-02
+ 
+         // echo "bbbbbb";
+       // echo $updata_day;
+
+       // return $date->format("Y-m-t H:i:s");
+
+        if ($lastDay < $prev) {
+            
+            return $lastDay;
+        } else {
+          //  echo "aaaaaa";
+           $date->modify('-1 month');
+           return $date->format("Y-m-t H:i:s");
+        }
+       
+    }
+
+    //////////////////////////////////////////////////
+    //      次回更新日を更新
+    ///////////////////////////////////////////////////
+    public function upDataUserUpdataDay(  $user_id   )
+    {
+        $updata_day = get_the_author_meta('user_updata_day',$user_id);
+
+      
+        $updata_interval = 0;
+                
+        if(get_the_author_meta('user_updata_interval',$user_id) != ""){
+            $updata_interval = get_the_author_meta('user_updata_interval',$user_id);
+        }
+        
+      
+
+
+        if($updata_day == "")
+        {
+            $str_day = strtotime(get_the_author_meta('user_registered',$user_id));
+
+            $year=date('Y', $str_day);
+            $month=date('m', $str_day);
+            $day=date('d', $str_day);
+
+            $updata_num = 0;
+
+            //2021年はすでに１度終えていると判定する
+            if($year == 2021)
+            {
+                $updata_num += 1;
+            }
+            //2022年5月までは１度終えていると判定
+            else if($year == 2022 && $month <= 5 )
+            {
+                $updata_num += 1;
+                
+            }
+
+            $year_num += (int)$year +  $updata_num + 1;
+
+            $updata_day =  date('Y-m-d H:i:s', strtotime($year_num .'-' .$month .'-' . $day .' 00:00:00'));
+
+        }
+
+
+        //今日の日付の方が多い場合は今日にする
+        if(strtotime($updata_day) < strtotime(date('Y-m-d H:i:s')))
+        {
+            $updata_day = date('Y-m-d H:i:s');
+        }
+
+
+        $date = new DateTime($updata_day);
+
+        if($updata_interval == 0){ //一年更新
+            $date->modify('+1 year');
+        }
+        else if($updata_interval == 1){ //一ヶ月更新
+
+          
+            $nextMonth = clone $date;
+            $nextMonth->modify('+1 month')->format('n');
+
+            if ($date->format('n') != $nextMonth) {
+                $date->modify('last day of next month');
+            } else {
+                $date->modify('+1 month');
+           }
+
+          // echo $date->format("Y-m-t H:i:s"); 
+
+           //$date->modify('+1 month');
+        }
+
+        $year=date('Y', strtotime($date->format("Y-m-d H:i:s")));
+        $month=date('m', strtotime($date->format("Y-m-d H:i:s")));
+
+        if($year == 2023 && $month == 6 )
+        {
+            $date->modify('+1 month');
+        }
+
+
+
+        update_user_meta($user_id,'user_updata_day',$date->format("Y-m-d H:i:s"));
+
+        //return $date->format("Y-m-t H:i:s");
+
+
+        //更新無し
+       /* if(get_the_author_meta('user_is_updata',$user_id) == 1)
+        {
+            return;
+        }
+        */
+       
+    }
+
+    //////////////////////////////////////////////////
+    //      動画追加を保存
+    ///////////////////////////////////////////////////
+    public function UpdataUserVideoAdd(  $user_id , $video_data   )
+    {
+
+        if($video_data != "")
+        {
+            $json_data = json_encode($video_data, JSON_UNESCAPED_UNICODE);
+
+            update_user_meta($user_id,'user_video_add',$json_data);
+        }
+        else{
+
+            update_user_meta($user_id,'user_video_add',"");
+        }
+    }
+
+     //////////////////////////////////////////////////
+    //      動画追加を取得
+    ///////////////////////////////////////////////////
+    public function GetUserVideoAdd(  $user_id   )
+    {
+
+        $array_data =  get_user_meta($user_id, 'user_video_add',true );
+
+        $data_array =  json_decode($array_data, true);
+
+
+        if($data_array != "")
+        {
+            $datas = array();
+
+            foreach ($data_array as $rows) 
+            {
+                $datas[$rows] = $rows;
+            }
+
+            return $datas;
+        }
+        else{
+
+            return array();
+        }
+
+        
+    }
 }
 
 ?>
