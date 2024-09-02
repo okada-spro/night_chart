@@ -77,6 +77,7 @@ get_header();
 
 			//生徒タイプ
 			$member_level = get_the_author_meta('member_level',$user->ID);
+			$member_type = get_the_author_meta('member_type',$user->ID);
 		
 			
 		?>
@@ -288,15 +289,15 @@ get_header();
 		
 			<?php if($member_level ==  UserClass::DOGA || $member_level ==  UserClass::NEW_DOGA ){ //動画会員?>
 
+				
+				<div class="menu-box-area">
 
-
-				<div class="menu-box-area" style="margin-top: 30px;">
-
-					<div class="menu-box-title">動画について</div>
+					<div class="menu-box-title" style="margin-top: 30px;">動画について</div>
 
 					<div class="menu-box-table">
 					
 						<table class="menu-table">
+
 
 							<tr>
 								<td>
@@ -317,6 +318,25 @@ get_header();
 					
 					
 					</div>
+
+					<div class="menu-box-title"  style="margin-top: 30px;">成績について</div>
+	
+						<div class="menu-box-table">
+
+							<table class="menu-table">
+								<tr>
+									<td>
+										<div class="menu-box-str-link">
+											<a href="https://rakurakunikki.com/easy_trade_diary/top/">内田博史トレード説教部屋へ</a>
+										</div>
+									</td>
+
+								</tr>
+
+							</table>
+						
+						
+						</div>
 
 				</div>
 
@@ -438,6 +458,20 @@ get_header();
 					<div class="menu-box-table">
 					
 						<table class="menu-table">
+							<?php 
+								//門下生、株訓練生、動画会員
+								if(	$member_level ==  UserClass::MONKASEI || ($member_level ==  UserClass::KUNRENSEI && $member_type == UserClass::KABU) ){
+							?>
+								<tr>
+									<td>
+										<div class="menu-box-str-link">
+											<a href="https://rakurakunikki.com/easy_trade_diary/top/">内田博史トレード説教部屋へ</a>
+										</div>
+									</td>
+
+								</tr>
+
+							<?php } ?>
 
 							<tr>
 								<td>
