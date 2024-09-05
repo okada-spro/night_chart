@@ -128,7 +128,7 @@ get_header();
 					</tr>
 					<tr>
 						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 209; echo get_page_link( $id );?>">動画カテゴリ作成・編集</a></td>
-						<td></td>
+						<td><a class="index_top_button index_top_button_report_color" href="https://rakurakunikki.com/easy_trade_diary/top/">トレード説教部屋</a></td>
 					</tr>
 					<tr>
 						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
@@ -495,6 +495,7 @@ get_header();
 									</div>
 								</td>
 							</tr>
+
 						</table>
 					
 					
