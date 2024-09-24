@@ -47,9 +47,17 @@
 		</div>
 
 
-		<div class="login_box_input_link_area">	
+		<div class="login_box_input_link_area" style="font-size:20px">	
 			<a href="<?php echo home_url();?>/register/">新規登録</a>
 		</div>
+		
+			<div class="login_box_input_link_area">
+
+				<a class="" href="https://rakurakunikki.com/easy_trade_diary/wp-content/themes/easy_trade_diary/manual/裏歴史研究会新規登録方法.mp4" target="_blank" >
+				<!-- <a class="watch-btn" href="https://rakurakunikki.com/easy_trade_diary/wp-content/themes/easy_trade_diary/manual/裏歴史研究会新規登録方法.mp4" target="_blank"> -->
+					新規会員登録方法を動画で見る
+				</a>
+			</div>
 		
 
 		<div class="login_box_input_link_area">	
@@ -59,3 +67,20 @@
 		
 	</div>
 </div>
+
+<style>
+	a.watch-btn{
+		background: transparent linear-gradient(284deg, #265FAB 0%, #08287F 100%) 0% 0% no-repeat padding-box;
+		box-shadow: 0px 3px 0px #001F6F;
+		border-radius: 5px;
+		opacity: 1;
+		font-size: 18px;
+		font-weight: 300;
+		padding: 20px;
+		margin: 20px 40px;
+		color: #fff;
+		text-align: center;
+		display: block;
+
+	}
+</style>
