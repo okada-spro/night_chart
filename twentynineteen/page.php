@@ -50,6 +50,7 @@ get_header();
 					"29"=>  array("updata_list",true,true),
 					"30"=>  array("mail_send_list",true,true),
 					"31"=>  array("videosort",true,true),
+					"32"=>  array("movie_manual",true,false),
 
 					
 				);
@@ -74,7 +75,7 @@ get_header();
 
 			?>
 
-			<!-- ¥¥¥—š—ğ“ü—Í¥¥¥ -->
+			<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íï¿½ï¿½ï¿½ï¿½ï¿½ -->
 				<?php if (is_page('user')) : ?>
 
 					<?php 
@@ -83,17 +84,17 @@ get_header();
 						}
 					?>
 				<?php endif; ?>
-			<!-- £££—š—ğ“ü—Í£££ -->
+			<!-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íï¿½ï¿½ï¿½ï¿½ï¿½ -->
 
 			<?php
 
 				foreach (  $custom_page_array as  $page_key => $page_value)
 				{		
-					if($page_value[1]) //ƒƒOƒCƒ“‚ª•K—v‚Èƒy[ƒW
+					if($page_value[1]) //ï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½Èƒyï¿½[ï¿½W
 					{
 						if (  is_user_logged_in() )
 						{
-							//ƒƒOƒCƒ“Œã
+							//ï¿½ï¿½ï¿½Oï¿½Cï¿½ï¿½ï¿½ï¿½
 							$user = wp_get_current_user();
 
 							$login_ban = get_the_author_meta('login_ban',$user->ID);
@@ -103,9 +104,9 @@ get_header();
 							}
 
 
-							require_once("pageFunction.php");//ƒy[ƒW—p
+							require_once("pageFunction.php");//ï¿½yï¿½[ï¿½Wï¿½p
 
-							//ŠúŒÀØ‚ê
+							//ï¿½ï¿½ï¿½ï¿½ï¿½Ø‚ï¿½
 							$updata_page_base = getUserUpdataDayPage($user->ID);
 
 							//echo $login;
@@ -155,7 +156,7 @@ get_header();
 get_footer();
 
 
-//Œ»İ‚Ìƒy[ƒW‚±‚¿‚ç‚Åì‚Á‚Ä‚¢‚éƒy[ƒW‚©‚Ç‚¤‚©
+//ï¿½ï¿½ï¿½İ‚Ìƒyï¿½[ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½yï¿½[ï¿½Wï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½
 function checkMakePage( $my_custom_page )
 {
 	foreach (  $my_custom_page as  $page_key => $page_value)
@@ -188,12 +189,12 @@ function checkMakePage( $my_custom_page )
 
             $updata_num = 0;
 
-            //2021”N‚Í‚·‚Å‚É‚P“xI‚¦‚Ä‚¢‚é‚Æ”»’è‚·‚é
+            //2021ï¿½Nï¿½Í‚ï¿½ï¿½Å‚É‚Pï¿½xï¿½Iï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Æ”ï¿½ï¿½è‚·ï¿½ï¿½
             if($year == 2021)
             {
                 $updata_num += 1;
             }
-            //2022”N5Œ‚Ü‚Å‚Í‚P“xI‚¦‚Ä‚¢‚é‚Æ”»’è
+            //2022ï¿½N5ï¿½ï¿½ï¿½Ü‚Å‚Í‚Pï¿½xï¿½Iï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Æ”ï¿½ï¿½ï¿½
             else if($year == 2022 && $month <= 5 )
             {
                 $updata_num += 1;
@@ -206,7 +207,7 @@ function checkMakePage( $my_custom_page )
 
         }
 
-        //XV–³‚µ
+        //ï¿½Xï¿½Vï¿½ï¿½ï¿½ï¿½
         if(get_the_author_meta('user_is_updata',$user_id) == 1)
         {
             return  date("Y-m-d H:i:s",strtotime("+1 year"));

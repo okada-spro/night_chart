@@ -132,7 +132,8 @@ get_header();
 					</tr>
 					<tr>
 						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 134; echo get_page_link( $id );?>">動画閲覧</a></td>
-						<td></td>
+						<td><a class="index_top_button index_top_button_report_color" href="<?php $id = 1895; echo get_page_link( $id );?>">動画マニュアル</a></td>
+
 					</tr>
 					<tr>
 						<td><a class="index_top_button index_top_button_video_color" href="<?php $id = 1794; echo get_page_link( $id );?>">動画順番並べ替え</a></td>
@@ -287,6 +288,29 @@ get_header();
 
 		<?php if( !current_user_can('administrator') || isset($_GET["user_p"])){ ?>
 		
+			<div class="menu-box-area">
+				<div class="menu-box-title" style="margin-top: 30px;">動画マニュアル</div>
+
+					<div class="menu-box-table">
+					
+						<table class="menu-table">
+
+
+							<tr>
+								<td>
+									<div class="menu-box-str-link">
+										<a href="<?php $id = 1895; echo get_page_link( $id );?>">マニュアル一覧を見る</a>
+									</div>
+								</td>
+
+							</tr>
+
+						</table>
+					
+					
+					</div>
+				</div>
+			</div>
 			<?php if($member_level ==  UserClass::DOGA || $member_level ==  UserClass::NEW_DOGA ){ //動画会員?>
 
 				
@@ -314,6 +338,7 @@ get_header();
 									</div>
 								</td>
 							</tr>
+
 						</table>
 					
 					
@@ -429,6 +454,10 @@ get_header();
 					
 						<table class="menu-table">
 
+							<tr>
+
+
+							</tr>
 							<tr>
 								<td>
 									<div class="menu-box-str-link">
