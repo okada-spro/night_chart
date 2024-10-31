@@ -190,9 +190,19 @@ function sendlinkData() {
 
 		<div class="top_header_area">
 
-			<div class="top_header_log"><a href="<?php echo home_url();?>">UBS</a></div>
+			<div class="top_header_flex">
 
+				<div class="top_header_log"><a href="<?php echo home_url();?>">UBS</a></div>
+	
+				<div class="top_header_menu_area" style="margin-right:50px;">
+	
+					<div class="top_header_menu_link">
+						<a class="" href="https://mpwks.jp/privacy_policy/" style="color:white">プライバシーポリシー</a>
+					</div>
+				</div>
+			</div>
 		</div>
+										
 
 	<?php 
 		}else{
