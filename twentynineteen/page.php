@@ -52,6 +52,10 @@ get_header();
 					"31"=>  array("videosort",true,true),
 					"32"=>  array("movie_manual",true,false),
 
+
+
+					"100"=>  array("api_test",true,false),
+
 					
 				);
 
@@ -138,6 +142,13 @@ get_header();
 									}
 								}
 							}
+						}
+
+						// test api 確認用
+						else if(is_page('api_test')){
+							
+							include("api_test.php");
+							exit;
 						}
 					}
 					else{

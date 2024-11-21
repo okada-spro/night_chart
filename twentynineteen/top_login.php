@@ -63,6 +63,10 @@
 		<div class="login_box_input_link_area">	
 			<a href="<?php echo home_url();?>/%e3%83%97%e3%83%ad%e3%83%95%e3%82%a3%e3%83%bc%e3%83%ab%e3%83%9a%e3%83%bc%e3%82%b8/?a=pwdreset">パスワードを忘れた場合</a>
 		</div>
+		<div class="login_box_input_link_area">	
+			
+			<a class="" href="https://mpwks.jp/privacy_policy/">特商法・プライバシーポリシー</a>
+		</div>
 		
 		
 	</div>
